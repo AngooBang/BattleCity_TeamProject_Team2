@@ -6,14 +6,9 @@ class Image;
 class GameScene : public GameEntity
 {
 private:
-
 	Image* m_backGround;
 
 	UIManager* m_uiManager;
-
-
-
-
 public:
 	HRESULT Init();
 	void Update();
