@@ -31,6 +31,9 @@
     <Filter Include="MainGame\Scene">
       <UniqueIdentifier>{c2ddbfdc-83e0-43d4-8845-06e4f4254b26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\UIManager">
+      <UniqueIdentifier>{10a23819-a1dc-4f16-88ba-b057564f17b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -65,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>MainGame\UIManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +115,12 @@
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>MainGame\UIManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

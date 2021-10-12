@@ -13,8 +13,8 @@ using namespace std;
 
 #define WIN_START_POS_X	10
 #define WIN_START_POS_Y	10
-#define WIN_SIZE_X	960
-#define WIN_SIZE_Y	720
+#define WIN_SIZE_X	800
+#define WIN_SIZE_Y	600
 #define TILEMAPTOOL_SIZE_X 1500
 #define TILEMAPTOOL_SIZE_Y 800
 #define PIXELMAP_SIZE_X 800
