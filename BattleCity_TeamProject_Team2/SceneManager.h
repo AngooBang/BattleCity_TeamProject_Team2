@@ -24,6 +24,6 @@ public:
 	void AddLoadingScene(string key, GameEntity* scene);
 
 	HRESULT ChangeScene(string sceneName);
-	HRESULT ChangeScene(string sceneName, string loadingSceneName);
+	//HRESULT ChangeScene(string sceneName, string loadingSceneName);
 };
 
