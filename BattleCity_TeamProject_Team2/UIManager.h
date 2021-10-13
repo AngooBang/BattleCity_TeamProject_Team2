@@ -2,7 +2,7 @@
 #include "GameEntity.h"
 
 
-#define ENEMY_LEFT_POS_X 700
+#define ENEMY_LEFT_POS_X 900
 #define ENEMY_LEFT_POS_Y 100
 
 
