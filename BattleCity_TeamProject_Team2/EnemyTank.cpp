@@ -93,8 +93,8 @@ void EnemyTank::Update()
 
 void EnemyTank::Render(HDC hdc)
 {
-    if (m_backGround)
-        m_backGround->Render(hdc);
+    //if (m_backGround)
+    //    m_backGround->Render(hdc);
 
     Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 
