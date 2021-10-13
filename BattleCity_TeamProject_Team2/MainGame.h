@@ -9,6 +9,7 @@ class Image;
 class MainGame : public GameEntity
 {
 private:
+
 	// ≈∏¿Ã∏”
 	HANDLE hTimer;
 
