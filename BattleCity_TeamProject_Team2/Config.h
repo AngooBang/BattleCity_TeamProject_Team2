@@ -30,7 +30,7 @@ using namespace std;
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } } 
 #define SAFE_DELETE(p)	{ if (p) { delete p; p = nullptr; } }
 
-enum MoveDir { Left, Right, Up, Down };
+enum MoveDir { Up, Left, Down, Right, End };
 enum class TankType { Player, Enemy };
 
 typedef struct ArgumentFuncPtr

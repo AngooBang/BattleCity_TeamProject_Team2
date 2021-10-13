@@ -5,20 +5,20 @@ class Image;
 class GameObject : public GameEntity
 {
 protected:
-	POINTFLOAT pos;
-	RECT shape;
-	float moveSpeed;
-	int bodySize;
+	POINTFLOAT m_pos;
+	int m_bodySize;
+	RECT m_shape;
+	float m_moveSpeed;
 
-	Image* img;
+	Image* m_img;
 
 public:
 	void Move();
 
-	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
-	inline POINTFLOAT GetPos() { return this->pos; }
-	inline void SetMoveSpeed(float speed) { this->moveSpeed = speed; }
-	inline int GetBodySize() { return this->bodySize; }
+	inline void SetPos(POINTFLOAT m_pos) { this->m_pos = m_pos; }
+	inline POINTFLOAT GetPos() { return this->m_pos; }
+	inline void SetMoveSpeed(float m_moveSpeed) { this->m_moveSpeed = m_moveSpeed; }
+	inline int GetBodySize() { return this->m_bodySize; }
 
 	GameObject();
 	~GameObject();
