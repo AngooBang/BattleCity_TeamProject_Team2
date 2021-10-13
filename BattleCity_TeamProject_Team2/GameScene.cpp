@@ -24,5 +24,5 @@ void GameScene::Render(HDC hdc)
 
 void GameScene::Release()
 {
-	enemyTank->Release();
+	SAFE_RELEASE(enemyTank);
 }
