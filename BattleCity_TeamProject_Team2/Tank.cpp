@@ -66,13 +66,13 @@ void Tank::Update()
 	SetImage();
 
 #pragma endregion
-
-#pragma region 포신방향 설정부
-		
 	SetBarrel(m_BarrelPosX[(int)m_moveDir], m_BarrelPosY[(int)m_moveDir]);
 
 #pragma endregion
 
+
+#pragma region 포신방향 설정부
+		
 	m_shape.left = m_pos.x - 32;
 	m_shape.right = m_pos.x + 32;
 	m_shape.top = m_pos.y - 32;
