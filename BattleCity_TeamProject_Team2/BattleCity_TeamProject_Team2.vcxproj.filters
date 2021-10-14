@@ -119,7 +119,6 @@
     </ClCompile>
     <ClCompile Include="ArmorTank.cpp">
       <Filter>MainGame\Enemy</Filter>
-      <Filter>MainGame\Tanks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,7 +199,6 @@
     </ClInclude>
     <ClInclude Include="ArmorTank.h">
       <Filter>MainGame\Enemy</Filter>
-      <Filter>MainGame\Tanks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
