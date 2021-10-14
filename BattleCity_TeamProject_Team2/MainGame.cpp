@@ -1,6 +1,7 @@
 #include "MainGame.h"
 #include "Image.h"
 #include "GameScene.h"
+#include "ResultScene.h"
 #include "Tank.h"
 
 HRESULT MainGame::Init()
@@ -11,6 +12,7 @@ HRESULT MainGame::Init()
 	SceneManager::GetSingleton()->Init();
 
 	SceneManager::GetSingleton()->AddScene("°ÔÀÓ¾À", new GameScene());
+	SceneManager::GetSingleton()->AddScene("°á°ú¾À", new ResultScene());
 
 
 	SceneManager::GetSingleton()->ChangeScene("°ÔÀÓ¾À");
@@ -39,6 +41,8 @@ void MainGame::Update()
 void MainGame::Render(HDC hdc)
 {
 	HDC hBackBufferDC = backBuffer->GetMemDC();
+
+	PatBlt(hBackBufferDC, 0, 0, WIN_SIZE_X, WIN_SIZE_Y, WHITENESS);
 
 	SceneManager::GetSingleton()->Render(hBackBufferDC);
 

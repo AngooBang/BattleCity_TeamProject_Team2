@@ -53,31 +53,37 @@ HRESULT TileMap::Init()
 
 
 	LoadMapData();
-	return S_OK;
-}
-
-void TileMap::Update()
-{
-	//m_elapsedCount++;
 
 	for (int i = 0; i < TILE_COUNT_Y; i++)
 	{
 		for (int j = 0; j < TILE_COUNT_X; j++)
 		{
 			SetTileFrame(&m_tileInfo[i][j]);
-			//if (m_tileInfo[i][j].terrain == Terrain::Water)
-			//{
-			//	if(m_elapsedCount > 100)
-			//	{
-			//		if (m_tileInfo[i][j].frameY == 2)
-			//			m_tileInfo[i][j].frameY = 3;
-			//		else
-			//			m_tileInfo[i][j].frameY = 2;
-			//		m_elapsedCount = 0;
-			//	}
-			//}
 		}
 	}
+	return S_OK;
+}
+
+void TileMap::Update()
+{
+	m_elapsedCount++;
+	if (m_elapsedCount > 40)
+	{
+		for (int i = 0; i < TILE_COUNT_Y; i++)
+		{
+			for (int j = 0; j < TILE_COUNT_X; j++)
+			{
+				if (m_tileInfo[i][j].terrain == Terrain::Water)
+				{
+					m_tileInfo[i][j].frameY == 2 ? m_tileInfo[i][j].frameY = 3 : m_tileInfo[i][j].frameY = 2;
+				}
+			}
+		}
+		m_elapsedCount = 0;
+	}
+
+
+
 
 	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_SPACE))
 	{

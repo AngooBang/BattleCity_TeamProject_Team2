@@ -1,8 +1,9 @@
 #include "ArmorTank.h"
 #include "Image.h"
 
-HRESULT ArmorTank::Init(POINTFLOAT pos)
+HRESULT ArmorTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
+    m_manager = manager;
     ImageManager::GetSingleton()->AddImage("Image/Enemy.bmp", 512, 384, 8, 6, true, RGB(255, 0, 255));
     m_img = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
 
@@ -95,5 +96,4 @@ void ArmorTank::Render(HDC hdc)
 
 void ArmorTank::Release()
 {
-    if (m_img)    SAFE_RELEASE(m_img);
 }

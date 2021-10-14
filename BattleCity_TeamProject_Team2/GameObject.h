@@ -1,7 +1,6 @@
 #pragma once
 #include "GameEntity.h"
 
-class Image;
 class GameObject : public GameEntity
 {
 protected:
@@ -10,7 +9,6 @@ protected:
 	RECT m_shape;
 	float m_moveSpeed;
 
-	Image* m_img;
 
 public:
 
@@ -18,6 +16,8 @@ public:
 	inline POINTFLOAT GetPos() { return this->m_pos; }
 	inline void SetMoveSpeed(float m_moveSpeed) { this->m_moveSpeed = m_moveSpeed; }
 	inline int GetBodySize() { return this->m_bodySize; }
+
+	inline RECT GetShape() { return this->m_shape; }
 
 	GameObject();
 	~GameObject();

@@ -1,8 +1,9 @@
 #include "PowerTank.h"
 #include "Image.h"
 
-HRESULT PowerTank::Init(POINTFLOAT pos)
+HRESULT PowerTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
+    m_manager = manager;
     ImageManager::GetSingleton()->AddImage("Image/Enemy.bmp", 512, 384, 8, 6, true, RGB(255, 0, 255));
     m_img = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
 
@@ -95,5 +96,4 @@ void PowerTank::Render(HDC hdc)
 
 void PowerTank::Release()
 {
-    if (m_img)  SAFE_RELEASE(m_img);
 }

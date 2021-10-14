@@ -30,6 +30,10 @@ HRESULT GameScene::Init()
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
+
+	m_enemyMgr->SetTileMapShape(m_tileMap->GetShape());
+
+
 	m_enemyMgr->AddEnemy(new BasicTank, POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y / 5 });
 	m_enemyMgr->AddEnemy(new SpeedTank, POINTFLOAT{ WIN_SIZE_X * 4 / 5, WIN_SIZE_Y * 4 / 5 });
 	m_enemyMgr->AddEnemy(new PowerTank, POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y * 4 / 5 });
@@ -46,6 +50,11 @@ void GameScene::Update()
 	m_player->Update();
 	//m_enemyMgr->AddEnemy(new BasicTank, POINTFLOAT{WIN_SIZE_X / 5, WIN_SIZE_Y / 5});
 	m_enemyMgr->Update();
+
+
+	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F2))
+		SceneManager::GetSingleton()->ChangeScene("°á°ú¾À");
+
 }
 
 void GameScene::Render(HDC hdc)

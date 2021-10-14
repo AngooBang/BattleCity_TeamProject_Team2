@@ -33,8 +33,8 @@ void EnemyManager::Release()
     }
 }
 
-void EnemyManager::AddEnemy(EnemyTank* EnemyTank, POINTFLOAT pos)
+void EnemyManager::AddEnemy(EnemyTank* enemyTank, POINTFLOAT pos)
 {
-    EnemyTank->Init(pos);
-    vecEnemyTank.push_back(EnemyTank);
+    enemyTank->Init(pos, this);
+    vecEnemyTank.push_back(enemyTank);
 }

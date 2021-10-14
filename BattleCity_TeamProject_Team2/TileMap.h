@@ -5,7 +5,7 @@
 
 #define TILE_MAP_START_POS_X 20
 #define TILE_MAP_START_POS_Y 20
-#define TILE_MAP_SIZE 768 + 64
+#define TILE_MAP_SIZE TILE_SIZE * TILE_COUNT_X
 
 enum class Terrain { None, Wall, HardWall, Water, Grass, End };
 
@@ -52,6 +52,7 @@ public:
 	void SetTileFrame(TILE_INFO* tileInfo);
 
 	void SetInTileType(TILE_INFO* tileInfo);
+
 
 	void LoadMapData();
 
