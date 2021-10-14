@@ -4,12 +4,12 @@
 class UIManager;
 class Image;
 
-class EnemyTank;
+class EnemyManager;
 class GameScene : public GameEntity
 {
 private:
 	Image* m_backGround;
-	EnemyTank* enemyTank;
+	EnemyManager* m_enemyMgr;
 
 
 	UIManager* m_uiManager;
