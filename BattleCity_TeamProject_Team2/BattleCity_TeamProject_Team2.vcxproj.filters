@@ -100,7 +100,7 @@
       <Filter>MainGame\TileMap</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTank.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>MainGame\Tanks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +165,7 @@
       <Filter>MainGame\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTank.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>MainGame\Tanks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

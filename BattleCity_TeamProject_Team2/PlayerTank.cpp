@@ -14,16 +14,16 @@ HRESULT PlayerTank::Init()
 
 	m_ImageData = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Player/Player.bmp", 512, 256,false,RGB(255,0,255));
 
-	pos.x = WIN_SIZE_X / 2;
-	pos.y = WIN_SIZE_Y / 2;
+	m_pos.x = WIN_SIZE_X / 2;
+	m_pos.y = WIN_SIZE_Y / 2;
 
 	m_moveDir = MoveDir::Up;
-	m_Barrelend.x = pos.x;
-	m_Barrelend.y = pos.y - 32;
+	m_Barrelend.x = m_pos.x;
+	m_Barrelend.y = m_pos.y - 32;
 
-	bodySize = 64;
+	m_bodySize = 64;
 
-	moveSpeed = 10;
+	m_moveSpeed = 10;
 
 	return S_OK;
 }
@@ -62,5 +62,5 @@ void PlayerTank::KeyUpdate()
 
 void PlayerTank::Render(HDC hdc)
 {
-	Rectangle(hdc, shape.left, shape.top, shape.right, shape.bottom);
+	Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 }

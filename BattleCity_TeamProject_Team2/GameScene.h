@@ -6,15 +6,20 @@ class UIManager;
 class TileMap;
 class Image;
 class EnemyTank;
+class PlayerTank;
 class GameScene : public GameEntity
 {
 private:
 	Image* m_backGround;
-	EnemyTank* enemyTank;
 
+	UIManager* m_uiManager;
+
+	PlayerTank* m_player;
+	EnemyTank* m_enemyTank;
 
 	TileMap* m_tileMap;
-	UIManager* m_uiManager;
+
+
 public:
 	HRESULT Init();
 	void Update();

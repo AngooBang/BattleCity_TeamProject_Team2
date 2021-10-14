@@ -8,6 +8,7 @@ HRESULT Tank::Init()
 void Tank::Update()
 {
 #pragma region ÀÔ·ÂºÎ
+	KeyUpdate();
 	//
 	//	if ((KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT)))
 	//	{
@@ -72,10 +73,10 @@ void Tank::Update()
 
 #pragma endregion
 
-	shape.left = pos.x - 32;
-	shape.right = pos.x + 32;
-	shape.top = pos.y - 32;
-	shape.bottom = pos.y + 32;
+	m_shape.left = m_pos.x - 32;
+	m_shape.right = m_pos.x + 32;
+	m_shape.top = m_pos.y - 32;
+	m_shape.bottom = m_pos.y + 32;
 }
 
 void Tank::Render(HDC hdc)
@@ -88,14 +89,14 @@ void Tank::Release()
 
 void Tank::SetBarrel(int x, int y)
 {
-	m_Barrelend.x = pos.x + x;
-	m_Barrelend.y = pos.y + y;
+	m_Barrelend.x = m_pos.x + x;
+	m_Barrelend.y = m_pos.y + y;
 }
 
 void Tank::SetMove(int x, int y)
 {
-	pos.x += x * moveSpeed;
-	pos.y += y * moveSpeed;
+	m_pos.x += x * m_moveSpeed;
+	m_pos.y += y * m_moveSpeed;
 }
 
 void Tank::SetImage()
