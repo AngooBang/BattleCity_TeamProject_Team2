@@ -5,15 +5,15 @@
 class Image;
 class EnemyTank : public GameObject
 {
-private:
+protected:
 	MoveDir m_moveDir;
 
-	int m_elapsedCount;
-	int m_moveDelay;
+	int m_elapsedCount = 0;
+	int m_moveDelay = 70;
 
 	int m_enemyFrame[MoveDir::End];
 
-	int m_imgDelay;
+	int m_imgDelay = 5;
 	int m_frameX;
 	int m_maxFrameX;
 	int m_frameY;
@@ -21,10 +21,10 @@ private:
 	Image* m_backGround;
 	
 public:
-	virtual HRESULT Init() override;
-	virtual void Update() override;
-	virtual void Render(HDC hdc) override;
-	virtual void Release() override;
+	virtual HRESULT Init(POINTFLOAT pos);
+	virtual void Update() = 0;
+	virtual void Render(HDC hdc) = 0;
+	virtual void Release() = 0;
 
 	void AutoMove();
 };

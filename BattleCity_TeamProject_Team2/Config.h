@@ -31,6 +31,7 @@ using namespace std;
 #define SAFE_DELETE(p)	{ if (p) { delete p; p = nullptr; } }
 
 enum MoveDir { Up, Left, Down, Right, End };
+enum class EnemyType { Basic, Speed, Power, Armor, End };
 enum class TankType { Player, Enemy };
 
 typedef struct ArgumentFuncPtr

@@ -5,6 +5,8 @@ class Image;
 class UIManager;
 class TileMap;
 class Image;
+
+class EnemyManager;
 class EnemyTank;
 class PlayerTank;
 class GameScene : public GameEntity
@@ -18,6 +20,7 @@ private:
 	EnemyTank* m_enemyTank;
 
 	TileMap* m_tileMap;
+	EnemyManager* m_enemyMgr;
 
 
 public:
