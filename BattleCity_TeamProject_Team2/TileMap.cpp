@@ -5,12 +5,12 @@
 
 HRESULT TileMap::Init()
 {
-	bodySize = TILE_MAP_SIZE;
+	m_bodySize = TILE_MAP_SIZE;
 
-	shape.left = TILE_MAP_START_POS_X;
-	shape.top = shape.left = TILE_MAP_START_POS_Y;	;
-	shape.right = shape.left + bodySize;
-	shape.bottom = shape.top + bodySize;
+	m_shape.left = TILE_MAP_START_POS_X;
+	m_shape.top = m_shape.left = TILE_MAP_START_POS_Y;	;
+	m_shape.right = m_shape.left + m_bodySize;
+	m_shape.bottom = m_shape.top + m_bodySize;
 
 
 	m_tileImage = ImageManager::GetSingleton()->AddImage("Image/BattleCity/SamlpTile.bmp", 96, 64, 6, 4, true, RGB(255, 0, 255));

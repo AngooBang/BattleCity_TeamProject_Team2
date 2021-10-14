@@ -4,9 +4,7 @@
 class Image;
 class UIManager;
 class TileMap;
-
 class Image;
-
 class EnemyTank;
 class GameScene : public GameEntity
 {
