@@ -1,8 +1,7 @@
 #include "MainGame.h"
 #include "Image.h"
 #include "GameScene.h"
-
-
+#include "Tank.h"
 
 HRESULT MainGame::Init()
 {
@@ -31,12 +30,10 @@ HRESULT MainGame::Init()
 
 void MainGame::Update()
 {
-
 	TimerManager::GetSingleton()->Update();
 	SceneManager::GetSingleton()->Update();
 
 	InvalidateRect(g_hWnd, NULL, false);
-
 }
 
 void MainGame::Render(HDC hdc)
@@ -45,9 +42,8 @@ void MainGame::Render(HDC hdc)
 
 	SceneManager::GetSingleton()->Render(hBackBufferDC);
 
-
 	TimerManager::GetSingleton()->Render(hBackBufferDC);
-
+	
 	backBuffer->Render(hdc);
 }
 

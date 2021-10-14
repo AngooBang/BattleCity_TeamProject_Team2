@@ -34,6 +34,12 @@
     <Filter Include="MainGame\UIManager">
       <UniqueIdentifier>{10a23819-a1dc-4f16-88ba-b057564f17b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Tanks">
+      <UniqueIdentifier>{cf22d5c9-12ed-4e94-9c72-9c0cc797e8fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\UIManager">
+      <UniqueIdentifier>{10a23819-a1dc-4f16-88ba-b057564f17b1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="MainGame\TileMap">
       <UniqueIdentifier>{52711b73-e269-4e4b-a8b5-dbcb15900c74}</UniqueIdentifier>
     </Filter>
@@ -71,6 +77,18 @@
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>MainGame\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTank.cpp">
+      <Filter>MainGame\Tanks</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>MainGame\Tanks</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>MainGame\Scene</Filter>
@@ -124,6 +142,18 @@
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>MainGame\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTank.h">
+      <Filter>MainGame\Tanks</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>MainGame\Tanks</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>MainGame\Scene</Filter>
