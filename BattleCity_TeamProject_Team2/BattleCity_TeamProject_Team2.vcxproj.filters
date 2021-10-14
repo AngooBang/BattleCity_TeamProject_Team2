@@ -34,6 +34,9 @@
     <Filter Include="MainGame\UIManager">
       <UniqueIdentifier>{10a23819-a1dc-4f16-88ba-b057564f17b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\TileMap">
+      <UniqueIdentifier>{52711b73-e269-4e4b-a8b5-dbcb15900c74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>MainGame\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>MainGame\TileMap</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTank.cpp">
       <Filter>소스 파일</Filter>
@@ -124,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>MainGame\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>MainGame\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTank.h">
       <Filter>헤더 파일</Filter>

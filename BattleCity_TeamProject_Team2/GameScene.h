@@ -1,7 +1,10 @@
 #pragma once
 #include "GameEntity.h"
 
+class Image;
 class UIManager;
+class TileMap;
+
 class Image;
 
 class EnemyTank;
@@ -12,6 +15,7 @@ private:
 	EnemyTank* enemyTank;
 
 
+	TileMap* m_tileMap;
 	UIManager* m_uiManager;
 public:
 	HRESULT Init();
