@@ -13,7 +13,6 @@ protected:
 	Image* img;
 
 public:
-	void Move();
 
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	inline POINTFLOAT GetPos() { return this->pos; }

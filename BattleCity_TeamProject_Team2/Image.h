@@ -77,9 +77,11 @@ public:
 
 	void Render(HDC hdc);
 	void Render(HDC hdc, int destX, int destY);	// 이미지 데이터를 화면에 복사
-	void Render(HDC hdc, int destX, int destY, int frameX, int frameY);	// 이미지 데이터를 화면에 복사
+	void Render(HDC hdc, int destX, int destY, int frameX, int frameY, float scale = 1.0f);	// 이미지 데이터를 화면에 복사
 
 	HDC GetMemDC() { if (imageInfo) return imageInfo->hMemDc; return NULL; }
+
+	LPIMAGE_INFO GetImageInfo() { return imageInfo; }
 
 	int GetCurrFrameX() { return imageInfo->currFrameX; }
 	void SetCurrFrameX(int frame) { imageInfo->currFrameX = frame; }
@@ -87,5 +89,11 @@ public:
 	void SetCurrFrameY(int frame) { imageInfo->currFrameY = frame; }
 
 	int GetMaxFrameX() { return imageInfo->maxFrameX; }
+
+	int GetFrameWidth() { return imageInfo->frameWidth; }
+	int GetFrameHeight() { return imageInfo->frameHeight; }
+
+	int GetWidth() { return imageInfo->width; }
+	int GetHeight() { return imageInfo->height; }
 };
 

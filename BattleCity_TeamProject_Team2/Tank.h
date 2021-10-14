@@ -28,7 +28,6 @@ protected:
 public:
 	virtual HRESULT Init();
 	virtual void KeyUpdate() {};
-	virtual inline void GetMoveSpeed() {};
 	void Update();
 	void Render(HDC hdc);
 	void Release();
