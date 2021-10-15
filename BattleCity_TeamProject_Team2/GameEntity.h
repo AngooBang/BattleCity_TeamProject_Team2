@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include "Config.h"
+#include "CommonFunction.h"
 
 class GameEntity
 {

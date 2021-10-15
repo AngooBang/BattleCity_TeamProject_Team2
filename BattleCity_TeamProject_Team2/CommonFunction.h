@@ -23,3 +23,20 @@ inline void SetWindowSize(int startX, int startY, int sizeX, int sizeY)
 	MoveWindow(g_hWnd, startX, startY,
 		rc.right - rc.left, rc.bottom - rc.top, true);
 }
+inline bool CheckInRect(RECT a, RECT b)
+{
+	if (a.top <= b.top || a.left <= b.left || a.bottom >= b.bottom || a.right >= b.right)
+		return true;
+	else
+		return false;
+}
+
+
+inline bool CheckCollision(RECT a, RECT b)
+{
+	if (a.left < b.right && a.top < b.bottom && a.right > b.left && a.bottom > b.top)
+		return true;
+	else
+		return false;
+}
+

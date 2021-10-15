@@ -22,9 +22,7 @@ HRESULT MainGame::Init()
 
 	// ¹é¹öÆÛ
 	backBuffer = new Image;
-	int maxSizeX = WIN_SIZE_X > TILEMAPTOOL_SIZE_X ? WIN_SIZE_X : TILEMAPTOOL_SIZE_X;
-	int maxSizeY = WIN_SIZE_Y > TILEMAPTOOL_SIZE_Y ? WIN_SIZE_Y : TILEMAPTOOL_SIZE_Y;
-	backBuffer->Init("Image/mapImage.bmp", maxSizeX, maxSizeY);
+	backBuffer->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
 	return S_OK;
 }

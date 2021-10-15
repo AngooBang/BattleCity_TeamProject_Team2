@@ -1,7 +1,6 @@
 #include "GameScene.h"
 #include "CommonFunction.h"
 #include "Tank.h"
-#include "PlayerTank.h"
 #include "Image.h"
 #include "TileMap.h"
 #include "UIManager.h"
@@ -25,8 +24,10 @@ HRESULT GameScene::Init()
 	m_uiManager = new UIManager;
 	m_uiManager->Init();
 
-	m_player = new PlayerTank;
+	m_player = new Tank;
 	m_player->Init();
+
+	m_player->SetTileMap(m_tileMap);
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();

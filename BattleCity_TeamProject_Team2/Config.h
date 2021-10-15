@@ -15,11 +15,6 @@ using namespace std;
 #define WIN_START_POS_Y	10
 #define WIN_SIZE_X	1200
 #define WIN_SIZE_Y	900
-#define TILEMAPTOOL_SIZE_X 1500
-#define TILEMAPTOOL_SIZE_Y 800
-#define PIXELMAP_SIZE_X 800
-#define PIXELMAP_SIZE_Y 600
-
 #define PI 3.14159265357989
 #define PI2 (3.14159265357989 * 2)
 
@@ -29,6 +24,7 @@ using namespace std;
 #define SAFE_DELETE(p)	{ if (p) { delete p; p = nullptr; } }
 
 enum MoveDir { Up, Left, Down, Right, End };
+
 enum class EnemyType { Basic, Speed, Power, Armor, End };
 enum class TankType { Player, Enemy };
 
