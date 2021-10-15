@@ -10,5 +10,8 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
+
+	SpeedTank(RECT mapShape) { m_mapShape = mapShape; }
+	~SpeedTank() {}
 };
 

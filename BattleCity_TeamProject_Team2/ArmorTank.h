@@ -10,5 +10,8 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
+
+	ArmorTank(RECT mapShape) { m_mapShape = mapShape; }
+	~ArmorTank() {}
 };
 

@@ -28,6 +28,8 @@ typedef struct Tile
 	INSIDE_TILE_INFO inTile[INSIDE_TILE_COUNT_Y][INSIDE_TILE_COUNT_X];
 } TILE_INFO;
 
+typedef TILE_INFO(*Temp)/*[TILE_COUNT_Y]*/[TILE_COUNT_X];
+
 class Image;
 class TileMap : public GameObject
 {
@@ -55,5 +57,8 @@ public:
 
 	void LoadMapData();
 
+	inline Temp GetMapTileInfo() { return this->m_tileInfo; }
+	TileMap() {}
+	~TileMap() {}
 };
 

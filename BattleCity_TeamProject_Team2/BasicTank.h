@@ -11,5 +11,7 @@ public:
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
 
+	BasicTank(RECT mapShape) {m_mapShape = mapShape; }
+	~BasicTank() {}
 };
 

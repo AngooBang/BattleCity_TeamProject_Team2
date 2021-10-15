@@ -20,6 +20,8 @@ protected:
 
 	Image* m_backGround;
 	
+	RECT m_mapShape;
+
 public:
 	virtual HRESULT Init(POINTFLOAT pos);
 	virtual void Update() = 0;
@@ -27,5 +29,8 @@ public:
 	virtual void Release() = 0;
 
 	void AutoMove();
+
+	EnemyTank(/*int a, RECT b*/) { /*m_mapBodySize = a; m_mapShape = b;*/ }
+	~EnemyTank() {};
 };
 

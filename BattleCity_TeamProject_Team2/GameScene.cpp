@@ -27,13 +27,19 @@ HRESULT GameScene::Init()
 
 	m_player = new PlayerTank;
 	m_player->Init();
-
+	
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
-	m_enemyMgr->AddEnemy(new BasicTank, POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y / 5 });
-	m_enemyMgr->AddEnemy(new SpeedTank, POINTFLOAT{ WIN_SIZE_X * 4 / 5, WIN_SIZE_Y * 4 / 5 });
-	m_enemyMgr->AddEnemy(new PowerTank, POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y * 4 / 5 });
-	m_enemyMgr->AddEnemy(new ArmorTank, POINTFLOAT{ WIN_SIZE_X * 4 / 5, WIN_SIZE_Y / 5 });
+
+	//m_tileMap->GetMapTileInfo();
+	m_enemyMgr->SetTileMap(m_tileMap);
+	m_enemyMgr->CollisionWithTile();
+
+	RECT mapShape = m_tileMap->GetShape();
+	m_enemyMgr->AddEnemy(new BasicTank(mapShape), POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y / 5 });
+	m_enemyMgr->AddEnemy(new SpeedTank(mapShape), POINTFLOAT{ WIN_SIZE_X * 4 / 5, WIN_SIZE_Y * 4 / 5 });
+	m_enemyMgr->AddEnemy(new PowerTank(mapShape), POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y * 4 / 5 });
+	m_enemyMgr->AddEnemy(new ArmorTank(mapShape), POINTFLOAT{ WIN_SIZE_X * 4 / 5, WIN_SIZE_Y / 5 });
 
 	return S_OK;
 }
