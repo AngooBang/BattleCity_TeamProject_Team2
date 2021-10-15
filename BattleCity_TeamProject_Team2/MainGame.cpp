@@ -2,7 +2,6 @@
 #include "Image.h"
 #include "GameScene.h"
 #include "ResultScene.h"
-#include "Tank.h"
 
 HRESULT MainGame::Init()
 {

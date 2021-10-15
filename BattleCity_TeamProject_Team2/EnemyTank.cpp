@@ -18,7 +18,8 @@ void EnemyTank::Render(HDC hdc)
 
 void EnemyTank::Release()
 {
-    SAFE_RELEASE(m_img);
+    if(m_img)
+        SAFE_RELEASE(m_img);
 }
 
 void EnemyTank::AutoMove()

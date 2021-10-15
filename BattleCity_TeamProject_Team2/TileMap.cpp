@@ -26,28 +26,28 @@ HRESULT TileMap::Init()
 	{
 		for (int j = 0; j < TILE_COUNT_X; j++)
 		{
-			SetRect(&(m_tileInfo[i][j].rc),
+			SetRect(&(m_tileInfo[i * TILE_COUNT_Y + j].rc),
 				TILE_MAP_START_POS_X + (j * TILE_SIZE),
 				TILE_MAP_START_POS_Y + (i * TILE_SIZE),
 				TILE_MAP_START_POS_X + (j * TILE_SIZE + TILE_SIZE),
 				TILE_MAP_START_POS_Y + (i * TILE_SIZE + TILE_SIZE));
 
-			m_tileInfo[i][j].terrain = Terrain::None;
+			m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::None;
 
 			for (int k = 0; k < INSIDE_TILE_COUNT_Y; k++)
 			{
 				for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 				{
-					SetRect(&(m_tileInfo[i][j].inTile[k][l].rc),
+					SetRect(&(m_tileInfo[i * TILE_COUNT_Y + j].inTile[k * INSIDE_TILE_COUNT_Y + l].rc),
 						TILE_MAP_START_POS_X + (j * TILE_SIZE + l * (TILE_SIZE / 4)),
 						TILE_MAP_START_POS_Y + (i * TILE_SIZE + k * (TILE_SIZE / 4)),
 						TILE_MAP_START_POS_X + (j * TILE_SIZE + l * (TILE_SIZE / 4) + (TILE_SIZE / 4)),
 						TILE_MAP_START_POS_Y + (i * TILE_SIZE + k * (TILE_SIZE / 4) + (TILE_SIZE / 4)));
-					SetInTileType(&(m_tileInfo[i][j]));
+					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
 				}
 			}
 
-			SetTileFrame(&m_tileInfo[i][j]);
+			SetTileFrame(&m_tileInfo[i * TILE_COUNT_Y + j]);
 		}
 	}
 
@@ -58,7 +58,7 @@ HRESULT TileMap::Init()
 	{
 		for (int j = 0; j < TILE_COUNT_X; j++)
 		{
-			SetTileFrame(&m_tileInfo[i][j]);
+			SetTileFrame(&m_tileInfo[i * TILE_COUNT_Y + j]);
 		}
 	}
 	return S_OK;
@@ -73,9 +73,9 @@ void TileMap::Update()
 		{
 			for (int j = 0; j < TILE_COUNT_X; j++)
 			{
-				if (m_tileInfo[i][j].terrain == Terrain::Water)
+				if (m_tileInfo[i * TILE_COUNT_Y + j].terrain == Terrain::Water)
 				{
-					m_tileInfo[i][j].frameY == 2 ? m_tileInfo[i][j].frameY = 3 : m_tileInfo[i][j].frameY = 2;
+					m_tileInfo[i * TILE_COUNT_Y + j].frameY == 2 ? m_tileInfo[i * TILE_COUNT_Y + j].frameY = 3 : m_tileInfo[i * TILE_COUNT_Y + j].frameY = 2;
 				}
 			}
 		}
@@ -89,7 +89,7 @@ void TileMap::Update()
 	{
 		for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 		{
-			m_tileInfo[1][1].inTile[testY][l].terrain = Terrain::None;
+			m_tileInfo[1 * TILE_COUNT_Y + 1].inTile[testY * INSIDE_TILE_COUNT_Y + l].terrain = Terrain::None;
 		}
 		testY++;
 		if (testY > 3)
@@ -105,13 +105,14 @@ void TileMap::Render(HDC hdc)
 	{
 		for (int j = 0; j < TILE_COUNT_X; j++)
 		{
-			m_tileImage->Render(hdc, m_tileInfo[i][j].rc.left, m_tileInfo[i][j].rc.top, m_tileInfo[i][j].frameX, m_tileInfo[i][j].frameY, 4.0f);
+			m_tileImage->Render(hdc, m_tileInfo[i * TILE_COUNT_Y + j].rc.left, m_tileInfo[i * TILE_COUNT_Y + j].rc.top,
+				m_tileInfo[i * TILE_COUNT_Y + j].frameX, m_tileInfo[i * TILE_COUNT_Y + j].frameY, 4.0f);
 			for (int k = 0; k < INSIDE_TILE_COUNT_Y; k++)
 			{
 				for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 				{
-					if(m_tileInfo[i][j].inTile[k][l].terrain == Terrain::None)
-						m_tileImage->Render(hdc, m_tileInfo[i][j].inTile[k][l].rc.left, m_tileInfo[i][j].inTile[k][l].rc.top, 5, 0);
+					if(m_tileInfo[i * TILE_COUNT_Y + j].inTile[k * INSIDE_TILE_COUNT_Y + l].terrain == Terrain::None)
+						m_tileImage->Render(hdc, m_tileInfo[i * TILE_COUNT_Y + j].inTile[k * INSIDE_TILE_COUNT_Y + l].rc.left, m_tileInfo[i * TILE_COUNT_Y + j].inTile[k * INSIDE_TILE_COUNT_Y + l].rc.top, 5, 0);
 				}
 			}
 		}
@@ -158,7 +159,7 @@ void TileMap::SetInTileType(TILE_INFO* tileInfo)
 	{
 		for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 		{
-			tileInfo->inTile[k][l].terrain = tileInfo->terrain;
+			tileInfo->inTile[k * INSIDE_TILE_COUNT_Y + l].terrain = tileInfo->terrain;
 		}
 	}
 
@@ -182,24 +183,24 @@ void TileMap::LoadMapData()
 				switch (tileType)
 				{
 				case 0:
-					m_tileInfo[i][j].terrain = Terrain::None;
-					SetInTileType(&(m_tileInfo[i][j]));
+					m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::None;
+					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
 					break;
 				case 1:
-					m_tileInfo[i][j].terrain = Terrain::Wall;
-					SetInTileType(&(m_tileInfo[i][j]));
+					m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::Wall;
+					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
 					break;
 				case 2:
-					m_tileInfo[i][j].terrain = Terrain::HardWall;
-					SetInTileType(&(m_tileInfo[i][j]));
+					m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::HardWall;
+					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
 					break;
 				case 3:
-					m_tileInfo[i][j].terrain = Terrain::Water;
-					SetInTileType(&(m_tileInfo[i][j]));
+					m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::Water;
+					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
 					break;
 				case 4:
-					m_tileInfo[i][j].terrain = Terrain::Grass;
-					SetInTileType(&(m_tileInfo[i][j]));
+					m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::Grass;
+					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
 					break;
 				default:
 					break;

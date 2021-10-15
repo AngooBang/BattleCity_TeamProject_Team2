@@ -25,14 +25,14 @@ typedef struct Tile
 	RECT rc;
 	Terrain terrain;
 	int frameX, frameY;
-	INSIDE_TILE_INFO inTile[INSIDE_TILE_COUNT_Y][INSIDE_TILE_COUNT_X];
-} TILE_INFO;
+	INSIDE_TILE_INFO inTile[INSIDE_TILE_COUNT_Y * INSIDE_TILE_COUNT_X];
+} TILE_INFO, *LPTILE_INFO;
 
 class Image;
 class TileMap : public GameObject
 {
 private:
-	TILE_INFO m_tileInfo[TILE_COUNT_Y][TILE_COUNT_X];
+	TILE_INFO m_tileInfo[TILE_COUNT_Y * TILE_COUNT_X];
 
 	Image* m_tileImage;		
 
@@ -52,6 +52,8 @@ public:
 	void SetTileFrame(TILE_INFO* tileInfo);
 
 	void SetInTileType(TILE_INFO* tileInfo);
+
+	inline LPTILE_INFO GetTileInfo() { return this->m_tileInfo; }
 
 
 	void LoadMapData();

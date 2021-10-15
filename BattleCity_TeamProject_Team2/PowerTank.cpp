@@ -94,6 +94,3 @@ void PowerTank::Render(HDC hdc)
         m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY);
 }
 
-void PowerTank::Release()
-{
-}
