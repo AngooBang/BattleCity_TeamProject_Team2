@@ -11,7 +11,7 @@ HRESULT EnemyTank::Init(POINTFLOAT pos)
 
 void EnemyTank::Update()
 {
-  
+    
 }
 
 void EnemyTank::Render(HDC hdc)

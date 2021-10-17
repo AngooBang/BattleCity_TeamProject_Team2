@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "TileMap.h"
 
-typedef TILE_INFO(*Temp)/*[TILE_COUNT_Y]*/[13];
+//typedef TILE_INFO(*Temp)/*[TILE_COUNT_Y]*/[13];
 
 class TileMap;
 class EnemyTank;
@@ -19,14 +19,13 @@ private:
 	//Temp p;
 
 public:
-	virtual HRESULT Init();
-	virtual void Update();
-	virtual void Render(HDC hdc);
-	virtual void Release();
+	HRESULT Init();
+	void Update();
+	void Render(HDC hdc);
+	void Release();
 
 	void AddEnemy(EnemyTank* EnemyTank, POINTFLOAT pos);
 
 	void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
-
 	bool CollisionWithTile();
 };

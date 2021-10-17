@@ -18,7 +18,6 @@ HRESULT GameScene::Init()
 
 	m_backGround = ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
-
 	m_tileMap = new TileMap;
 	m_tileMap->Init();
 
@@ -31,15 +30,28 @@ HRESULT GameScene::Init()
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
 
-	//m_tileMap->GetMapTileInfo();
-	m_enemyMgr->SetTileMap(m_tileMap);
-	m_enemyMgr->CollisionWithTile();
+	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
+	//m_enemyMgr->CollisionWithTile();
 
-	RECT mapShape = m_tileMap->GetShape();
-	m_enemyMgr->AddEnemy(new BasicTank(mapShape), POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y / 5 });
-	m_enemyMgr->AddEnemy(new SpeedTank(mapShape), POINTFLOAT{ WIN_SIZE_X * 4 / 5, WIN_SIZE_Y * 4 / 5 });
-	m_enemyMgr->AddEnemy(new PowerTank(mapShape), POINTFLOAT{ WIN_SIZE_X / 5, WIN_SIZE_Y * 4 / 5 });
-	m_enemyMgr->AddEnemy(new ArmorTank(mapShape), POINTFLOAT{ WIN_SIZE_X * 4 / 5, WIN_SIZE_Y / 5 });
+	m_mapShape = m_tileMap->GetShape();
+
+	m_spawnPlaceX1 = (m_mapShape.right - m_mapShape.left) / 2;
+	m_spawnPlaceX2 = m_mapShape.right - 32;
+	m_spawnPlaceX3 = m_mapShape.left + 32;
+	m_spawnPlaceY = m_mapShape.top + 32;
+	
+	m_stageNum = m_tileMap->GetStageNum();
+	
+	switch (m_stageNum)
+	{
+	case 1:
+		m_enemyTotNum = 20;
+		m_basicTankNum = 5;
+		m_speedTankNum = 5;
+		m_powerTankNum = 5;
+		m_armorTankNum = 5;
+		break;
+	}
 
 	return S_OK;
 }
@@ -50,7 +62,40 @@ void GameScene::Update()
 	m_uiManager->Update();
 
 	m_player->Update();
-	//m_enemyMgr->AddEnemy(new BasicTank, POINTFLOAT{WIN_SIZE_X / 5, WIN_SIZE_Y / 5});
+
+	// 적 생성 
+	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
+	if (m_elapsedTime > 3.0f && m_enemyNumCount <= m_enemyTotNum)
+	{	
+		if ((m_enemyNumCount % 3) == 0 ) { m_enemySpawnPlaceX = m_spawnPlaceX1; }
+		else if ((m_enemyNumCount % 3) == 1) { m_enemySpawnPlaceX = m_spawnPlaceX2; }
+		else if ((m_enemyNumCount % 3) == 2) { m_enemySpawnPlaceX = m_spawnPlaceX3; }
+
+		switch (m_enemyNumCount % 4)
+		{
+		case 0:
+			m_enemyMgr->AddEnemy(new BasicTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyNumCount++;
+			break;
+		
+		case 1:
+			m_enemyMgr->AddEnemy(new SpeedTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyNumCount++;
+			break;
+
+		case 2:
+			m_enemyMgr->AddEnemy(new PowerTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyNumCount++;
+			break;
+
+		case 3:
+			m_enemyMgr->AddEnemy(new ArmorTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyNumCount++;
+			break;
+		}
+		m_elapsedTime = 0;
+	}
+
 	m_enemyMgr->Update();
 }
 
@@ -73,5 +118,5 @@ void GameScene::Release()
 	SAFE_RELEASE(m_tileMap);
 	SAFE_RELEASE(m_uiManager);
 	SAFE_RELEASE(m_player);
-	SAFE_RELEASE(m_enemyMgr);
+	//SAFE_RELEASE(m_enemyMgr);
 }

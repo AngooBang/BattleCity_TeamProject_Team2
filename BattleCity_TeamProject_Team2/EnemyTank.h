@@ -2,6 +2,8 @@
 #include "Config.h"
 #include "GameObject.h"
 
+enum class EnemyStatus {Create, Alive, Dead, End};
+
 class Image;
 class EnemyTank : public GameObject
 {
@@ -19,8 +21,11 @@ protected:
 	int m_frameY;
 
 	Image* m_backGround;
-	
+
 	RECT m_mapShape;
+
+	float totElapsedCount = 0.0f;
+	EnemyStatus m_enemyStatus;
 
 public:
 	virtual HRESULT Init(POINTFLOAT pos);
