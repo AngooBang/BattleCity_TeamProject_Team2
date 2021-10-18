@@ -13,7 +13,7 @@ using namespace std;
 
 #define WIN_START_POS_X	10
 #define WIN_START_POS_Y	10
-#define WIN_SIZE_X	1200
+#define WIN_SIZE_X	1000
 #define WIN_SIZE_Y	900
 #define PI 3.14159265357989
 #define PI2 (3.14159265357989 * 2)

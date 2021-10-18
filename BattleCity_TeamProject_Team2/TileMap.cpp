@@ -12,8 +12,9 @@ HRESULT TileMap::Init()
 	m_shape.right = m_shape.left + TILE_MAP_SIZE_X;
 	m_shape.bottom = m_shape.top + TILE_MAP_SIZE_Y;
 
+	m_backGround = ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", TILE_MAP_SIZE_X, TILE_MAP_SIZE_Y);
 
-	m_tileImage = ImageManager::GetSingleton()->AddImage("Image/BattleCity/SamlpTile.bmp", 384, 256, 6, 4, true, RGB(255, 0, 255));
+	m_tileImage = ImageManager::GetSingleton()->AddImage("Image/BattleCity/SamlpTile1.bmp", 320, 320, 10, 10, true, RGB(255, 0, 255));
 
 	m_smallTileImage = ImageManager::GetSingleton()->AddImage("Image/BattleCity/SmallSamlpTile.bmp", 96, 64, 6, 4, true, RGB(255, 0, 255));
 
@@ -41,10 +42,10 @@ HRESULT TileMap::Init()
 				for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 				{
 					SetRect(&(m_tileInfo[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].rc),
-						TILE_MAP_START_POS_X + (j * TILE_SIZE + l * (TILE_SIZE / 4)),
-						TILE_MAP_START_POS_Y + (i * TILE_SIZE + k * (TILE_SIZE / 4)),
-						TILE_MAP_START_POS_X + (j * TILE_SIZE + l * (TILE_SIZE / 4) + (TILE_SIZE / 4)),
-						TILE_MAP_START_POS_Y + (i * TILE_SIZE + k * (TILE_SIZE / 4) + (TILE_SIZE / 4)));
+						TILE_MAP_START_POS_X + (j * TILE_SIZE + l * (TILE_SIZE / 2)),
+						TILE_MAP_START_POS_Y + (i * TILE_SIZE + k * (TILE_SIZE / 2)),
+						TILE_MAP_START_POS_X + (j * TILE_SIZE + l * (TILE_SIZE / 2) + (TILE_SIZE / 2)),
+						TILE_MAP_START_POS_Y + (i * TILE_SIZE + k * (TILE_SIZE / 2) + (TILE_SIZE / 2)));
 					SetInTileType(&(m_tileInfo[i * TILE_COUNT_X + j]));
 				}
 			}
@@ -63,6 +64,7 @@ HRESULT TileMap::Init()
 			SetTileFrame(&m_tileInfo[i * TILE_COUNT_X + j]);
 		}
 	}
+
 	return S_OK;
 }
 
@@ -103,6 +105,8 @@ void TileMap::Update()
 
 void TileMap::Render(HDC hdc)
 {
+	m_backGround->Render(hdc, TILE_MAP_START_POS_X+TILE_MAP_SIZE_X/2, TILE_MAP_START_POS_Y+TILE_MAP_SIZE_Y/2);
+
 	for (int i = 0; i < TILE_COUNT_Y; i++)
 	{
 		for (int j = 0; j < TILE_COUNT_X; j++)
@@ -127,7 +131,7 @@ void TileMap::Render(HDC hdc)
 			}
 		}
 	}
-
+	SetBaseData();
 	//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 }
 
@@ -142,8 +146,8 @@ void TileMap::SetTileFrame(TILE_INFO* tileInfo)
 	switch (tileInfo->terrain)
 	{
 	case Terrain::None :
-		tileInfo->frameX = 5;
-		tileInfo->frameY = 0;
+		tileInfo->frameX = 10;
+		tileInfo->frameY = 10;
 		break;
 	case Terrain::Wall :
 		tileInfo->frameX = 0;
@@ -151,15 +155,19 @@ void TileMap::SetTileFrame(TILE_INFO* tileInfo)
 		break;
 	case Terrain::HardWall:
 		tileInfo->frameX = 0;
-		tileInfo->frameY = 1;
+		tileInfo->frameY = 2;
 		break;
 	case Terrain::Water:
 		tileInfo->frameX = 0;
-		tileInfo->frameY = 2;
+		tileInfo->frameY = 6;
 		break;
 	case Terrain::Grass:
-		tileInfo->frameX = 1;
-		tileInfo->frameY = 2;
+		tileInfo->frameX = 2;
+		tileInfo->frameY = 4;
+		break;
+	case Terrain::Base:
+		tileInfo->frameX = 6;
+		tileInfo->frameY = 4;
 		break;
 	default:
 		break;
@@ -173,6 +181,51 @@ void TileMap::SetInTileType(TILE_INFO* tileInfo)
 		for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 		{
 			tileInfo->inTile[k * INSIDE_TILE_COUNT_Y + l].terrain = tileInfo->terrain;
+		}
+	}
+
+}
+
+void TileMap::SetBaseData()
+{
+	for (int i = 0; i < TILE_COUNT_Y; i++)
+	{
+		for (int j = 0; j < TILE_COUNT_X; j++)
+		{
+			if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::Base)
+			{
+				// 베이스 시작타일
+				m_tileInfo[i * TILE_COUNT_X + j].frameX = 6;
+				m_tileInfo[i * TILE_COUNT_X + j].frameY = 4;
+				// 베이스 시작타일 기준 우측타일
+				m_tileInfo[i * TILE_COUNT_X + j + 1].frameX = 7;
+				m_tileInfo[i * TILE_COUNT_X + j + 1].frameY = 4;
+				// 베이스 시작타일 기준 아래타일
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameX = 6;
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameY = 5;
+				// 베이스 시작타일 기준 아래타일에서 우측타일
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameX = 7;
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameY = 5;
+
+				break;
+			}
+			else if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)
+			{
+				// 베이스 시작타일
+				m_tileInfo[i * TILE_COUNT_X + j].frameX = 8;
+				m_tileInfo[i * TILE_COUNT_X + j].frameY = 4;
+				// 베이스 시작타일 기준 우측타일
+				m_tileInfo[i * TILE_COUNT_X + j + 1].frameX = 9;
+				m_tileInfo[i * TILE_COUNT_X + j + 1].frameY = 4;
+				// 베이스 시작타일 기준 아래타일
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameX = 8;
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameY = 5;
+				// 베이스 시작타일 기준 아래타일에서 우측타일
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameX = 9;
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameY = 5;
+
+				break;
+			}
 		}
 	}
 
@@ -213,6 +266,10 @@ void TileMap::LoadMapData()
 					break;
 				case 4:
 					m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::Grass;
+					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
+					break;
+				case 5:
+					m_tileInfo[i * TILE_COUNT_Y + j].terrain = Terrain::Base;
 					SetInTileType(&(m_tileInfo[i * TILE_COUNT_Y + j]));
 					break;
 				default:
