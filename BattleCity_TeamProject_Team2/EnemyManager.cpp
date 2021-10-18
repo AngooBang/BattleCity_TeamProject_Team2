@@ -1,8 +1,10 @@
 #include "EnemyManager.h"
 #include "EnemyTank.h"
+#include "TileMap.h"
 
 HRESULT EnemyManager::Init()
 {
+
     return S_OK;
 }
 
@@ -37,4 +39,14 @@ void EnemyManager::AddEnemy(EnemyTank* enemyTank, POINTFLOAT pos)
 {
     enemyTank->Init(pos, this);
     vecEnemyTank.push_back(enemyTank);
+}
+
+bool EnemyManager::CollisionWithTile()
+{
+    /*p = m_tileMap->GetMapTileInfo();
+    cout << p[0][0].rc.left << endl;*/
+    /*cout << map[0][0].rc.left << endl;
+    cout << map[0][0].rc.right << endl;*/
+
+    return true;
 }
