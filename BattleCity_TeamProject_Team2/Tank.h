@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+#define MOVE_CORRECTION_VALUE 10
 
 class Image;
 class TileMap;
@@ -18,6 +19,7 @@ protected:
 	TileMap* m_tileMap;
 
 
+
 	int m_frameX;
 	int m_maxFrameX;
 
@@ -25,6 +27,7 @@ protected:
 
 	int m_elapsedCount;
 
+	RECT m_tempRC;
 
 	POINTFLOAT m_Barrelend;
 	bool mb_isAlive;
@@ -58,6 +61,7 @@ public:
 
 	void SetShape();
 
+	void MoveCorrection();
 
 	//inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
 	//inline RECT GetTileMapShape() { return this->m_tileMapShape; }
