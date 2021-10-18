@@ -130,44 +130,50 @@ void Tank::Update()
 	{
 		for (int j = 0; j < TILE_COUNT_X; j++)
 		{
-			if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].terrain != Terrain::None)
+			for (int k = 0; k < INSIDE_TILE_COUNT_Y; k++)
 			{
-				if(IntersectRect(&m_tempRC, &m_shape, &m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].rc))
-				//if (CheckCollision(m_shape, m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].rc))
+				for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 				{
-					if (m_tempRC.bottom < ((m_shape.top + m_shape.bottom) / 2))
+					if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::None)
 					{
-						m_isCollide[MoveDir::Up] = true;
-					}						
-					else
-					{
-						m_isCollide[MoveDir::Up] = false;
+						if (IntersectRect(&m_tempRC, &m_shape, &m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].rc))
+							//if (CheckCollision(m_shape, m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].rc))
+						{
+							if (m_tempRC.bottom < ((m_shape.top + m_shape.bottom) / 2))
+							{
+								m_isCollide[MoveDir::Up] = true;
+							}
+							else
+							{
+								m_isCollide[MoveDir::Up] = false;
+							}
+							if (m_tempRC.right < ((m_shape.left + m_shape.right) / 2))
+							{
+								m_isCollide[MoveDir::Left] = true;
+							}
+							else
+							{
+								m_isCollide[MoveDir::Left] = false;
+							}
+							if (m_tempRC.top > ((m_shape.top + m_shape.bottom) / 2))
+							{
+								m_isCollide[MoveDir::Down] = true;
+							}
+							else
+							{
+								m_isCollide[MoveDir::Down] = false;
+							}
+							if (m_tempRC.left > ((m_shape.left + m_shape.right) / 2))
+							{
+								m_isCollide[MoveDir::Right] = true;
+							}
+							else
+							{
+								m_isCollide[MoveDir::Right] = false;
+							}
+							MoveCorrection();
+						}
 					}
-					if (m_tempRC.right < ((m_shape.left + m_shape.right) / 2))
-					{
-						m_isCollide[MoveDir::Left] = true;
-					}
-					else
-					{
-						m_isCollide[MoveDir::Left] = false;
-					}
-					if (m_tempRC.top > ((m_shape.top + m_shape.bottom) / 2))
-					{
-						m_isCollide[MoveDir::Down] = true;
-					}
-					else
-					{
-						m_isCollide[MoveDir::Down] = false;
-					}
-					if (m_tempRC.left > ((m_shape.left + m_shape.right) / 2))
-					{
-						m_isCollide[MoveDir::Right] = true;
-					}
-					else
-					{
-						m_isCollide[MoveDir::Right] = false;
-					}
-					MoveCorrection();
 				}
 			}
 				
