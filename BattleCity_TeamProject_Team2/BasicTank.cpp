@@ -21,8 +21,16 @@ HRESULT BasicTank::Init(POINTFLOAT pos)
     m_shape.right = m_shape.left + m_bodySize;
     m_shape.bottom = m_shape.top + m_bodySize;
 
-    m_moveSpeed = 1;
-    m_moveDir = MoveDir::Left;
+    m_moveSpeed = 10;
+
+	mb_dirCheck[m_moveDir] = true;
+    m_beforeMoveDir = m_moveDir;
+    for (int i = 0; i < 4; i++)
+    {
+        if (mb_dirCheck[m_moveDir] == true) break;
+        mb_dirCheck[i] = false;
+    }
+
 
     for (int i = 0; i < MoveDir::End; i++)
     {
@@ -49,28 +57,18 @@ void BasicTank::Update()
         ++m_elapsedCount;
         if (m_elapsedCount > 3)
         {
-            switch (m_maxFrameX == 3)
+            m_frameX += m_frameCount;
+            if (m_frameX >= m_maxFrameX)
             {
-            case 0:
-                --m_frameX;
-                if (m_frameX < m_maxFrameX)
-                {
-                    m_frameX = 0;
-                    m_maxFrameX = 3;
-                }
-                m_elapsedCount = 0;
-                break;
-
-            case 1:
-                ++m_frameX;
-                if (m_frameX > m_maxFrameX)
-                {
-                    m_frameX = 3;
-                    m_maxFrameX = 0;
-                }
-                m_elapsedCount = 0;
-                break;
+                m_frameCount = -1;
+                m_maxFrameX = 0;
             }
+            else if (m_frameX <= m_maxFrameX)
+            {
+                m_frameCount = 1;
+                m_maxFrameX = 3;
+            }
+            m_elapsedCount = 0;
         }
 
         if (totElapsedCount >= 2.0f)
@@ -78,9 +76,9 @@ void BasicTank::Update()
             m_enemyStatus = EnemyStatus::Alive;
             m_img = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
             m_bodySize = m_img->GetFrameWidth();
-			m_frameX = m_enemyFrame[MoveDir::Left];
+			m_frameX = m_enemyFrame[MoveDir::Down];
 			m_frameY = (int)EnemyType::Basic;
-			m_maxFrameX = m_enemyFrame[MoveDir::Left] + 1;
+			m_maxFrameX = m_enemyFrame[MoveDir::Down] + 1;
             m_elapsedCount = 0;
         }
     }
@@ -97,6 +95,57 @@ void BasicTank::Update()
                 m_frameX -= 2;
             }
         }
+
+        // 탱크 위치 좌표 업데이트
+		AutoMove();
+        
+        // 충돌했을시 방향 전환
+        if (IsCollisionMap())
+        {
+            switch (m_moveDir)
+            {
+            case MoveDir::Left:		m_pos.x = m_pos.x + (m_mapShape.left - m_shape.left); break;
+            case MoveDir::Right:	m_pos.x = m_pos.x - (m_shape.right - m_mapShape.right); break;
+            case MoveDir::Up:	    m_pos.y = m_pos.y + (m_mapShape.top - m_shape.top); break;
+            case MoveDir::Down:	    m_pos.y = m_pos.y - (m_shape.bottom - m_mapShape.bottom); break;
+            }
+
+            while (true)
+            {
+				int RandomValue = rand() % 100 + 1;
+				if (RandomValue > 0 && RandomValue <= 25) 
+                { 
+                    m_moveDir = MoveDir::Up; 
+                    m_frameX = m_enemyFrame[MoveDir::Up];
+                    m_maxFrameX = m_enemyFrame[MoveDir::Up] + 1;
+                }
+				else if (RandomValue > 25 && RandomValue <= 50) 
+                {
+                    m_moveDir = MoveDir::Left; 
+                    m_frameX = m_enemyFrame[MoveDir::Left];
+                    m_maxFrameX = m_enemyFrame[MoveDir::Left] + 1;
+                }
+				else if (RandomValue > 50 && RandomValue <= 75) 
+                {
+                    m_moveDir = MoveDir::Down; 
+                    m_frameX = m_enemyFrame[MoveDir::Down];
+                    m_maxFrameX = m_enemyFrame[MoveDir::Down] + 1;
+                }
+				else 
+                { 
+                    m_moveDir = MoveDir::Right; 
+                    m_frameX = m_enemyFrame[MoveDir::Right];
+                    m_maxFrameX = m_enemyFrame[MoveDir::Right] + 1;
+                }
+
+				if (mb_dirCheck[m_moveDir] != true) break;
+            }
+            
+			mb_dirCheck[m_beforeMoveDir] = false;
+            mb_dirCheck[m_moveDir] = true;
+            m_beforeMoveDir = m_moveDir;
+        }
+
         // 시간에 따른 탱크 이동방향 전환
         if (m_elapsedCount > m_moveDelay)
         {
@@ -105,24 +154,40 @@ void BasicTank::Update()
             {
             case 0:
                 m_moveDir = MoveDir::Left;
+                mb_dirCheck[m_beforeMoveDir] = false;
+                mb_dirCheck[m_moveDir] = true;
+                m_beforeMoveDir = m_moveDir;
+
                 m_frameX = m_enemyFrame[MoveDir::Left];
                 m_maxFrameX = m_enemyFrame[MoveDir::Left] + 1;
                 break;
 
             case 1:
                 m_moveDir = MoveDir::Right;
+                mb_dirCheck[m_beforeMoveDir] = false;
+                mb_dirCheck[m_moveDir] = true;
+                m_beforeMoveDir = m_moveDir;
+
                 m_frameX = m_enemyFrame[MoveDir::Right];
                 m_maxFrameX = m_enemyFrame[MoveDir::Right] + 1;
                 break;
 
             case 2:
                 m_moveDir = MoveDir::Up;
+                mb_dirCheck[m_beforeMoveDir] = false;
+                mb_dirCheck[m_moveDir] = true;
+                m_beforeMoveDir = m_moveDir;
+
                 m_frameX = m_enemyFrame[MoveDir::Up];
                 m_maxFrameX = m_enemyFrame[MoveDir::Up] + 1;
                 break;
 
             case 3:
                 m_moveDir = MoveDir::Down;
+                mb_dirCheck[m_beforeMoveDir] = false;
+                mb_dirCheck[m_moveDir] = true;
+                m_beforeMoveDir = m_moveDir;
+
                 m_frameX = m_enemyFrame[MoveDir::Down];
                 m_maxFrameX = m_enemyFrame[MoveDir::Down] + 1;
                 break;
@@ -130,13 +195,6 @@ void BasicTank::Update()
             m_elapsedCount = 0;
         }
 
-        // 탱크 위치 좌표 업데이트와 화면과 탱크 충돌 처리
-        AutoMove();
-
-        m_shape.left = m_pos.x - (m_bodySize / 2);
-        m_shape.top = m_pos.y - (m_bodySize / 2);
-        m_shape.right = m_shape.left + m_bodySize;
-		m_shape.bottom = m_shape.top + m_bodySize;
     }
     
 }

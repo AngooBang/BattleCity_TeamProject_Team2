@@ -4,7 +4,7 @@
 class BasicTank : public EnemyTank
 {
 private:
-	
+
 public:
 	virtual HRESULT Init(POINTFLOAT pos) override;
 	virtual void Update() override;

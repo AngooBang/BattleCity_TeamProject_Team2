@@ -27,8 +27,7 @@ void EnemyTank::Release()
 
 void EnemyTank::AutoMove()
 {
-    // 탱크가 화면과 충돌시 방향전환
-    if (m_shape.right >= m_mapShape.right)
+    /*if (m_shape.right >= m_mapShape.right)
     {
         m_moveDir = MoveDir::Left;
         m_frameX = m_enemyFrame[MoveDir::Left];
@@ -51,7 +50,7 @@ void EnemyTank::AutoMove()
         m_moveDir = MoveDir::Up;
         m_frameX = m_enemyFrame[MoveDir::Up];
         m_maxFrameX = m_enemyFrame[MoveDir::Up] + 1;
-    }
+    }*/
 
     switch (m_moveDir)
     {
@@ -60,4 +59,21 @@ void EnemyTank::AutoMove()
     case MoveDir::Up:	    m_pos.y -= m_moveSpeed; break;
     case MoveDir::Down:	    m_pos.y += m_moveSpeed; break;
     }
+
+    m_shape.left = m_pos.x - (m_bodySize / 2);
+    m_shape.top = m_pos.y - (m_bodySize / 2);
+    m_shape.right = m_shape.left + m_bodySize;
+    m_shape.bottom = m_shape.top + m_bodySize;
+}
+
+bool EnemyTank::IsCollisionMap()
+{
+    // 탱크가 화면과 충돌시 방향전환
+    if (m_shape.right > m_mapShape.right || m_shape.left < m_mapShape.left
+        || m_shape.top < m_mapShape.top || m_shape.bottom > m_mapShape.bottom)
+    {
+        return true;
+    }
+
+    return false;
 }
