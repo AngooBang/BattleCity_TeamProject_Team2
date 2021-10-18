@@ -22,8 +22,8 @@ HRESULT ResultScene::Init()
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/TotalScore.bmp", 360, 40, true, RGB(255, 0, 255));
 	m_TotalScore = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/TotalScore.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Stage_W.bmp", 111, 21, true, RGB(255, 0, 255));
-	m_Stage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Stage_W.bmp");
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Stage_w.bmp", 111, 21, true, RGB(255, 0, 255));
+	m_Stage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Stage_w.bmp");
 
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Number_w.bmp", 120, 42, 5, 2, true, RGB(255, 0, 255));
 	m_StageNumber = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
