@@ -1,17 +1,18 @@
 #include "UIManager.h"
 #include "Image.h"
 
-HRESULT UIManager::Init()
+HRESULT UIManager::Init(int m_enemyTotNum)
 {
 	m_enemyLeft = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/Icon_Enemy.bmp", 15, 15);
-	m_enemyLeftNum = 20;
+	m_enemyLeftNum = m_enemyTotNum;
 	return S_OK;
 }
 
-void UIManager::Update()
+void UIManager::Update(int m_enemyTotNum, int m_enemyNumCount)
 {
-
-	if (KeyManager::GetSingleton()->IsOnceKeyDown('I'))
+	m_enemyLeftNum = m_enemyTotNum;
+	m_enemyLeftNum -= m_enemyNumCount;
+	/*if (KeyManager::GetSingleton()->IsOnceKeyDown('I'))
 	{
 		m_enemyLeftNum--;
 
@@ -19,7 +20,7 @@ void UIManager::Update()
 		{
 			m_enemyLeftNum = 20;
 		}
-	}
+	}*/
 }
 
 void UIManager::Render(HDC hdc)

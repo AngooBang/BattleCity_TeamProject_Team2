@@ -20,9 +20,6 @@ HRESULT GameScene::Init()
 	m_tileMap = new TileMap;
 	m_tileMap->Init();
 
-	m_uiManager = new UIManager;
-	m_uiManager->Init();
-
 	m_player = new Tank;
 	m_player->Init();
 
@@ -44,13 +41,16 @@ HRESULT GameScene::Init()
 	switch (m_stageNum)
 	{
 	case 1:
-		m_enemyTotNum = 20;
-		m_basicTankNum = 5;
-		m_speedTankNum = 5;
-		m_powerTankNum = 5;
-		m_armorTankNum = 5;
+		m_enemyTotNum = 12;
+		m_basicTankNum = 3;
+		m_speedTankNum = 3;
+		m_powerTankNum = 3;
+		m_armorTankNum = 3;
 		break;
 	}
+
+	m_uiManager = new UIManager;
+	m_uiManager->Init(m_enemyTotNum);
 
 	return S_OK;
 }
@@ -58,7 +58,6 @@ HRESULT GameScene::Init()
 void GameScene::Update()
 {
 	m_tileMap->Update();
-	m_uiManager->Update();
 
 	m_player->Update();
 
@@ -95,6 +94,7 @@ void GameScene::Update()
 		m_elapsedTime = 0;
 	}
 
+	m_uiManager->Update(m_enemyTotNum, m_enemyNumCount);
 	m_enemyMgr->Update();
 
 

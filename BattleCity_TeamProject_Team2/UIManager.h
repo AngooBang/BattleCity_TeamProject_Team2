@@ -19,8 +19,8 @@ private:
 
 
 public:
-	virtual HRESULT Init();
-	virtual void Update();
+	virtual HRESULT Init(int m_enemyTotNum);
+	virtual void Update(int m_enemyTotNum, int m_enemyNumCount);
 	virtual void Render(HDC hdc);
 	virtual void Release();
 };
