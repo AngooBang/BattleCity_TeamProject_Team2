@@ -4,20 +4,20 @@
 HRESULT UIManager::Init()
 {
 	m_enemyLeft = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/Icon_Enemy.bmp", 15, 15);
-	m_enemyLeftNum = 10;
+	m_enemyLeftNum = 20;
 	return S_OK;
 }
 
 void UIManager::Update()
 {
 
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_SPACE))
+	if (KeyManager::GetSingleton()->IsOnceKeyDown('I'))
 	{
 		m_enemyLeftNum--;
 
 		if (m_enemyLeftNum < 0)
 		{
-			m_enemyLeftNum = 10;
+			m_enemyLeftNum = 20;
 		}
 	}
 }

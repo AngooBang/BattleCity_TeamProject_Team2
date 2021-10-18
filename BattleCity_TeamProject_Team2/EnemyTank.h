@@ -2,9 +2,12 @@
 #include "Config.h"
 #include "GameObject.h"
 
+#define MOVE_CORRECTION_VALUE 10
+
 enum class EnemyStatus {Create, Alive, Dead, End};
 
 class Image;
+class TileMap;
 class EnemyManager;
 class EnemyTank : public GameObject
 {
@@ -27,13 +30,16 @@ protected:
 
 	Image* m_backGround;
 
-	RECT m_mapShape;
-
 	float totElapsedCount = 0.0f;
 	EnemyStatus m_enemyStatus;
 
 	MoveDir m_beforeMoveDir;
 	bool mb_dirCheck[4];
+
+	TileMap* m_tileMap;
+
+	RECT m_tempRC;
+	bool m_isCollide[MoveDir::End];
 
 public:
 	virtual HRESULT Init(POINTFLOAT pos, EnemyManager* manager);
@@ -42,9 +48,13 @@ public:
 	virtual void Release();
 
 	void AutoMove();
-	bool IsCollisionMap();
+	void RandomDirChange();
 
-	EnemyTank(/*int a, RECT b*/) { /*m_mapBodySize = a; m_mapShape = b;*/ }
+	bool IsCollisionMap();
+	bool IsCollisionTile();
+	void MoveCorrection();
+
+	EnemyTank() {}
 	~EnemyTank() {};
 };
 

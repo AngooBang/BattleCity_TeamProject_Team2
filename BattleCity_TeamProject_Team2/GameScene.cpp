@@ -34,12 +34,10 @@ HRESULT GameScene::Init()
 	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
 	//m_enemyMgr->CollisionWithTile();
 
-	m_mapShape = m_tileMap->GetShape();
-
-	m_spawnPlaceX1 = (m_mapShape.right - m_mapShape.left) / 2;
-	m_spawnPlaceX2 = m_mapShape.right - 32;
-	m_spawnPlaceX3 = m_mapShape.left + 32;
-	m_spawnPlaceY = m_mapShape.top + 32;
+	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2;
+	m_spawnPlaceX2 = m_tileMap->GetShape().right - 32;
+	m_spawnPlaceX3 = m_tileMap->GetShape().left + 32;
+	m_spawnPlaceY = m_tileMap->GetShape().top + 32;
 	
 	m_stageNum = m_tileMap->GetStageNum();
 	
@@ -75,22 +73,22 @@ void GameScene::Update()
 		switch (m_enemyNumCount % 4)
 		{
 		case 0:
-			m_enemyMgr->AddEnemy(new BasicTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyMgr->AddEnemy(new BasicTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
 			m_enemyNumCount++;
 			break;
 		
 		case 1:
-			m_enemyMgr->AddEnemy(new SpeedTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyMgr->AddEnemy(new SpeedTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
 			m_enemyNumCount++;
 			break;
 
 		case 2:
-			m_enemyMgr->AddEnemy(new PowerTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyMgr->AddEnemy(new PowerTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
 			m_enemyNumCount++;
 			break;
 
 		case 3:
-			m_enemyMgr->AddEnemy(new ArmorTank(m_mapShape), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+			m_enemyMgr->AddEnemy(new ArmorTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
 			m_enemyNumCount++;
 			break;
 		}

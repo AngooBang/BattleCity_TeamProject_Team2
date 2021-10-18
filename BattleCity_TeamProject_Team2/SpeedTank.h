@@ -10,7 +10,7 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
-	SpeedTank(RECT mapShape) { m_mapShape = mapShape; }
+	SpeedTank(TileMap* tileMap) { m_tileMap = tileMap; }
 	~SpeedTank() {}
 };
 
