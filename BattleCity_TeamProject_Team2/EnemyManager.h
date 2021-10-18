@@ -24,8 +24,8 @@ public:
 	void Render(HDC hdc);
 	void Release();
 
-	inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
-	inline RECT GetTileMapShape() { return this->m_tileMapShape; }
+	//inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
+	//inline RECT GetTileMapShape() { return this->m_tileMapShape; }
 
 	void AddEnemy(EnemyTank* EnemyTank, POINTFLOAT pos);
 

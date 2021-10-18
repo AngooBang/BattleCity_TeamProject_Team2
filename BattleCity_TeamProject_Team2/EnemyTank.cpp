@@ -68,6 +68,7 @@ void EnemyTank::AutoMove()
 bool EnemyTank::IsCollisionMap()
 {
     // 탱크가 화면과 충돌시 방향전환
+
     if (m_shape.right > m_mapShape.right || m_shape.left < m_mapShape.left
         || m_shape.top < m_mapShape.top || m_shape.bottom > m_mapShape.bottom)
     {

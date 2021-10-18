@@ -23,8 +23,6 @@ public:
 	inline void SetShape(RECT shape) { this->m_shape = shape; }
 
 
-	inline RECT GetShape() { return this->m_shape; }
-
 	GameObject();
 	~GameObject();
 };

@@ -65,7 +65,7 @@ public:
 
 	void LoadMapData();
 
-	inline Temp GetMapTileInfo() { return this->m_tileInfo; }
+	//inline Temp GetMapTileInfo() { return this->m_tileInfo; }
 	inline int GetStageNum() { return this->m_stageNum; }
 
 	TileMap() {}
