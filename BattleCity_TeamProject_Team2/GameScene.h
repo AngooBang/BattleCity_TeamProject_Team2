@@ -5,7 +5,7 @@ class Image;
 class UIManager;
 class TileMap;
 class EnemyManager;
-class PlayerTank;
+class Tank;
 class GameScene : public GameEntity
 {
 private:
@@ -15,10 +15,11 @@ private:
 
 	UIManager* m_uiManager;
 
-	PlayerTank* m_player;
+	Tank* m_player;
 
 	EnemyManager* m_enemyMgr;
 
+	AmmoManager* m_ammoMgr;
 
 public:
 	HRESULT Init();
