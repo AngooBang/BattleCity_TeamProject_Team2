@@ -27,6 +27,9 @@ HRESULT GameScene::Init()
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
+	
+	// 탱크 충돌 테스트용
+	m_enemyMgr->SetPlayerTank(m_player);
 
 	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
 	//m_enemyMgr->CollisionWithTile();
@@ -63,7 +66,7 @@ void GameScene::Update()
 
 	// 적 생성 
 	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
-	if (m_elapsedTime > 3.0f && m_enemyNumCount <= m_enemyTotNum)
+	if (m_elapsedTime > 3.0f && m_enemyNumCount < m_enemyTotNum)
 	{	
 		if ((m_enemyNumCount % 3) == 0 ) { m_enemySpawnPlaceX = m_spawnPlaceX1; }
 		else if ((m_enemyNumCount % 3) == 1) { m_enemySpawnPlaceX = m_spawnPlaceX2; }
