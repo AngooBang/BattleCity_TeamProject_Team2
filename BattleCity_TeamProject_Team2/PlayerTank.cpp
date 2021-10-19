@@ -61,7 +61,7 @@ void PlayerTank::KeyUpdate()
 		mb_Move = false;
 	}
 
-	if ((KeyManager::GetSingleton()->IsStayKeyDown(VK_SPACE)))
+	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_SPACE))
 	{
 		mb_isFire = true;
 	}
