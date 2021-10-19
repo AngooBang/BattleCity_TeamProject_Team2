@@ -3,6 +3,7 @@
 #include "Config.h"
 #include "Image.h"
 
+class Ammo;
 class Tank : public GameObject
 {
 protected:
@@ -13,17 +14,26 @@ protected:
 
 	//POINTFLOAT mDir;
 
+	int m_elapsedCount = 0;
+	int m_frameX;
+	int m_maxFrameX;
+	int m_frameY;
+
 	POINTFLOAT m_Barrelend;
+	int m_HP;
+	int m_ammoSpeed;
+
 	bool mb_isAlive;
 	bool mb_Move;
-		
-	MoveDir m_moveDir;
-	
-	int m_BarrelPosX[4] = { -32,32,0,0 };
-	int m_BarrelPosY[4] = { 0,0,-32,32 };
+	bool mb_isFire;
 
-	float m_movePosX[4] = { -1, 1,0,0 };
-	float m_movePosY[4] = { 0,0 , -1, 1 };
+	MoveDir m_moveDir;
+
+	int m_BarrelPosX[4] = { 0,-32,0,32 };
+	int m_BarrelPosY[4] = { -32,0,32,0 };
+
+	float m_movePosX[4] = { 0, -1,0,1 };
+	float m_movePosY[4] = { -1, 0 ,1, 0 };
 
 public:
 	virtual HRESULT Init();
@@ -33,8 +43,14 @@ public:
 	void Release();
 
 	void SetBarrel(int x, int y);
-	void SetMove(int x, int y);
+	void SetPosMove(int x, int y);
+	void SetMoveDir(MoveDir moveDir);
 	void SetImage();
+	inline void SetisFire() { mb_isFire = false; }
 
+	inline bool GetisFire() { return mb_isFire; }	
+	inline POINTFLOAT GetPos() { return m_pos; }
+	inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
+	inline MoveDir GetmoveDir() { return m_moveDir; }
+	inline int GetammoSpeed() { return m_ammoSpeed; }
 };
-

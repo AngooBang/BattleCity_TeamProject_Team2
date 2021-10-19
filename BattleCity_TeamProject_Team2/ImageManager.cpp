@@ -74,13 +74,12 @@ Image* ImageManager::AddImage(const char* fileName, int width, int height, int m
 
 Image* ImageManager::FindImage(const char* fileName)
 {
-
+	
 	map<string, Image*>::iterator it = mapImages.find(fileName);
 	if (it == mapImages.end())
 	{
 		return nullptr;
 	}
-
 
 	return it->second;
 }

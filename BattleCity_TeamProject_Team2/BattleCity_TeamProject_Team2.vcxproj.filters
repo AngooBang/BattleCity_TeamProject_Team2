@@ -46,6 +46,9 @@
     <Filter Include="MainGame\TileMap">
       <UniqueIdentifier>{52711b73-e269-4e4b-a8b5-dbcb15900c74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Ammo">
+      <UniqueIdentifier>{20400523-d18e-4668-bf1a-d67e24bdbdab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -119,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="ArmorTank.cpp">
       <Filter>MainGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Ammo.cpp">
+      <Filter>MainGame\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="AmmoManager.cpp">
+      <Filter>MainGame\Ammo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="ArmorTank.h">
       <Filter>MainGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Ammo.h">
+      <Filter>MainGame\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="AmmoManager.h">
+      <Filter>MainGame\Ammo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

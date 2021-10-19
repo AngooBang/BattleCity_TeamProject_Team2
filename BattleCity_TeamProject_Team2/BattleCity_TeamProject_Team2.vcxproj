@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ammo.cpp" />
+    <ClCompile Include="AmmoManager.cpp" />
     <ClCompile Include="ArmorTank.cpp" />
     <ClCompile Include="BasicTank.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
@@ -163,6 +165,8 @@
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ammo.h" />
+    <ClInclude Include="AmmoManager.h" />
     <ClInclude Include="ArmorTank.h" />
     <ClInclude Include="BasicTank.h" />
     <ClInclude Include="CommonFunction.h" />

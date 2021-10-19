@@ -20,8 +20,6 @@ using namespace std;
 #define PIXELMAP_SIZE_X 800
 #define PIXELMAP_SIZE_Y 600
 
-
-
 #define PI 3.14159265357989
 #define PI2 (3.14159265357989 * 2)
 
