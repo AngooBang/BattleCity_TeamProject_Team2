@@ -132,5 +132,6 @@ void GameScene::Release()
 	SAFE_RELEASE(m_tileMap);
 	SAFE_RELEASE(m_uiManager);
 	SAFE_RELEASE(m_player);
+	SAFE_RELEASE(m_ammoMgr);
 	//SAFE_RELEASE(m_enemyMgr);
 }

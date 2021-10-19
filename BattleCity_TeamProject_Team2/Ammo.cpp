@@ -1,4 +1,5 @@
 #include "Ammo.h"
+#include "Image.h"
 
 HRESULT Ammo::Init(POINTFLOAT Barrelend, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage[])
 {

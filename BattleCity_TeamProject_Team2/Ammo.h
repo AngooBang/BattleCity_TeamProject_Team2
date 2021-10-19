@@ -1,11 +1,10 @@
 #pragma once
 #include "GameObject.h"
-#include "Config.h"
-#include "Image.h"
 
-class Collider;
+class Image;
 class Ammo : public GameObject
 {
+	Image* m_img;
 	MoveDir m_moveDir;
 
 	float m_movePosX[4] = { 0, -1,0,1 };

@@ -16,6 +16,8 @@ private:
 
 	UIManager* m_uiManager;
 
+	AmmoManager* m_ammoMgr;
+
 	Tank* m_player;
 
 	EnemyManager* m_enemyMgr;

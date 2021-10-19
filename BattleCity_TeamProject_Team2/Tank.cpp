@@ -40,7 +40,7 @@ void Tank::Update()
 {
 #pragma region ÀÔ·ÂºÎ
 
-	if ((KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT)))
+	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
 	{
 		//SetMoveDir(MoveDir::Left);
 
@@ -52,7 +52,7 @@ void Tank::Update()
 		}
 		mb_Move = true;
 	}
-	else if ((KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT)))
+	else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
 	{
 		//SetMoveDir(MoveDir::Right);
 
@@ -64,7 +64,7 @@ void Tank::Update()
 		}
 		mb_Move = true;
 	}
-	else if ((KeyManager::GetSingleton()->IsStayKeyDown(VK_UP)))
+	else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_UP))
 	{
 		//SetMoveDir(MoveDir::Up);
 
@@ -76,7 +76,7 @@ void Tank::Update()
 		}
 		mb_Move = true;
 	}
-	else if ((KeyManager::GetSingleton()->IsStayKeyDown(VK_DOWN)))
+	else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_DOWN))
 	{
 		//SetMoveDir(MoveDir::Down);
 
@@ -91,6 +91,11 @@ void Tank::Update()
 	else
 	{
 		mb_Move = false;
+	}
+
+	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_SPACE))
+	{
+		mb_isFire = true;
 	}
 
 

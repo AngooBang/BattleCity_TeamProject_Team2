@@ -30,11 +30,6 @@ protected:
 
 	RECT m_tempRC;
 
-	int m_elapsedCount = 0;
-	int m_frameX;
-	int m_maxFrameX;
-	int m_frameY;
-
 	POINTFLOAT m_Barrelend;
 	int m_HP;
 	int m_ammoSpeed;
