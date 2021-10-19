@@ -27,7 +27,7 @@ HRESULT GameScene::Init()
 	m_uiManager = new UIManager;
 	m_uiManager->Init();
 
-	m_player = new PlayerTank;
+	m_player = new Tank;
 	m_player->Init();
 
 	m_ammoMgr = new AmmoManager;

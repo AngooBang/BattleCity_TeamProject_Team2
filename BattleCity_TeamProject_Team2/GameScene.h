@@ -6,7 +6,10 @@ class UIManager;
 class TileMap;
 class EnemyManager;
 class Tank;
+<<<<<<< HEAD
 class AmmoManager;
+=======
+>>>>>>> 320c4afa4d706ea9bed618bb2546e8d1fce8ca12
 class GameScene : public GameEntity
 {
 private:
