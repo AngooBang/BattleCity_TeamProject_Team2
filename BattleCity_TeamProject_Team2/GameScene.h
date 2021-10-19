@@ -6,6 +6,7 @@ class UIManager;
 class TileMap;
 class EnemyManager;
 class Tank;
+class AmmoManager;
 class GameScene : public GameEntity
 {
 private:
@@ -19,6 +20,7 @@ private:
 
 	EnemyManager* m_enemyMgr;
 
+	AmmoManager* m_ammoMgr;
 
 public:
 	HRESULT Init();
