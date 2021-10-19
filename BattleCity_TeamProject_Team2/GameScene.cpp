@@ -9,6 +9,8 @@
 #include "SpeedTank.h"
 #include "PowerTank.h"
 #include "ArmorTank.h"
+#include "Ammo.h"
+#include "AmmoManager.h"
 
 
 HRESULT GameScene::Init()
@@ -27,6 +29,9 @@ HRESULT GameScene::Init()
 	m_player->Init();
 
 	m_player->SetTileMap(m_tileMap);
+
+	m_ammoMgr = new AmmoManager;
+	m_ammoMgr->Init();
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
@@ -62,6 +67,7 @@ void GameScene::Update()
 	m_tileMap->Update();
 	m_uiManager->Update();
 
+	m_player->KeyUpdate();
 	m_player->Update();
 
 	// Àû »ý¼º 
@@ -116,6 +122,8 @@ void GameScene::Render(HDC hdc)
 	m_player->Render(hdc);
 
 	m_enemyMgr->Render(hdc);
+
+	m_ammoMgr->Render(hdc);
 }
 
 void GameScene::Release()

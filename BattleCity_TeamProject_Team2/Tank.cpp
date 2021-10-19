@@ -1,4 +1,6 @@
 #include "Tank.h"
+#include "Ammo.h"
+#include "AmmoManager.h"
 #include "Image.h"
 #include "TileMap.h"
 
@@ -183,7 +185,9 @@ void Tank::Update()
 
 
 #pragma region 이동값 처리부
-	
+
+// 충돌처리에 대한 bool 변수 값 받아야함.
+
 	if (mb_Move)
 	{
 	//	SetMove(m_movePosX[(int)m_moveDir], m_movePosY[(int)m_moveDir]);
@@ -246,11 +250,34 @@ void Tank::Update()
 		}
 	}
 
+	//if (mb_Move)
+	//{
+	//	++m_elapsedCount;
+	//	if (m_elapsedCount % 5 == 0)
+	//	{
+	//		++m_frameX;
+	//		if (m_frameX > m_maxFrameX)
+	//		{
+	//			m_frameX -= 2;
+	//		}
+	//		m_elapsedCount = 0;
+	//	}
+	//}
+
+#pragma endregion
+	SetBarrel(m_BarrelPosX[(int)m_moveDir], m_BarrelPosY[(int)m_moveDir]);
+
 #pragma endregion
 
-#pragma region 포신방향 설정부
+
+#pragma endregion
+
+#pragma region 총알 발사
+
+	if (mb_isFire)
+	{
 		
-	SetBarrel(m_BarrelPosX[(int)m_moveDir], m_BarrelPosY[(int)m_moveDir]);
+	}
 
 #pragma endregion
 

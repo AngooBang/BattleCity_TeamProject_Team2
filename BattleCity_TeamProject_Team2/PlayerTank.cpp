@@ -59,3 +59,15 @@ void PlayerTank::KeyUpdate()
 //{
 //	Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 //}
+	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_SPACE))
+	{
+		mb_isFire = true;
+	}
+
+#pragma endregion
+}
+//
+//void PlayerTank::Render(HDC hdc)
+//{
+//	Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
+//}
