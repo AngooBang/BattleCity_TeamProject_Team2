@@ -28,17 +28,10 @@ protected:
 	bool mb_isFire;
 
 	MoveDir m_moveDir;
-<<<<<<< HEAD
 
 	int m_BarrelPosX[4] = { 0,-32,0,32 };
 	int m_BarrelPosY[4] = { -32,0,32,0 };
 
-=======
-	
-	int m_BarrelPosX[4] = { 0,-32,0,32 };
-	int m_BarrelPosY[4] = { -32,0,32,0 };
-
->>>>>>> 320c4afa4d706ea9bed618bb2546e8d1fce8ca12
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
 

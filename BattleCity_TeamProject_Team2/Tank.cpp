@@ -119,21 +119,7 @@ void Tank::Update()
 
 #pragma region 이미지 처리부
 
-	//SetImage();
-
-	//if (mb_Move)
-	//{
-	//	++m_elapsedCount;
-	//	if (m_elapsedCount % 5 == 0)
-	//	{
-	//		++m_frameX;
-	//		if (m_frameX > m_maxFrameX)
-	//		{
-	//			m_frameX -= 2;
-	//		}
-	//		m_elapsedCount = 0;
-	//	}
-	//}
+	SetImage();
 
 	//if (mb_Move)
 	//{
