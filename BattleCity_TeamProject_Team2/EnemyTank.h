@@ -53,7 +53,6 @@ public:
 	bool IsCollisionMap();
 	bool IsCollisionTile();
 	void MoveCorrection();
-	void RandomDirChange();
 
 	EnemyTank() {}
 	~EnemyTank() {};

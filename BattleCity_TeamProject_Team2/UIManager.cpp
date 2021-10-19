@@ -11,7 +11,6 @@ HRESULT UIManager::Init(int m_enemyTotNum)
 	m_stageFlag = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/StageFlag.bmp", 60, 60, true, RGB(255, 0, 255));
 	m_enemyLeftNum = m_enemyTotNum;
 
-	m_enemyLeftNum = 10;
 	m_p1LifeNum = 5;
 	m_stageNum = 1;
 	return S_OK;
@@ -21,15 +20,6 @@ void UIManager::Update(int m_enemyTotNum, int m_enemyNumCount)
 {
 	m_enemyLeftNum = m_enemyTotNum;
 	m_enemyLeftNum -= m_enemyNumCount;
-	/*if (KeyManager::GetSingleton()->IsOnceKeyDown('I'))
-	{
-		m_enemyLeftNum--;
-
-		if (m_enemyLeftNum < 0)
-		{
-			m_enemyLeftNum = 10;
-		}
-	}
 
 	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F5))
 	{
