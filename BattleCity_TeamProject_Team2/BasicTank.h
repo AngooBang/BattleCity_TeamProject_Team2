@@ -12,7 +12,7 @@ public:
 	virtual void Render(HDC hdc) override;
 
 
-	BasicTank(RECT mapShape) {m_mapShape = mapShape; }
+	BasicTank(TileMap* tileMap) {m_tileMap = tileMap;}
 	~BasicTank() {}
 };
 

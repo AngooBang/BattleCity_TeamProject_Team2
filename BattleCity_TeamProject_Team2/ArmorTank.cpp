@@ -1,5 +1,6 @@
 #include "ArmorTank.h"
 #include "Image.h"
+#include "TileMap.h"
 
 HRESULT ArmorTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
@@ -91,51 +92,21 @@ void ArmorTank::Update()
         // 탱크 위치 좌표 업데이트
         AutoMove();
 
+        // 타일과 충돌했을 시
+        IsCollisionTile();
+
         // 충돌했을시 방향 전환
         if (IsCollisionMap())
         {
             switch (m_moveDir)
             {
-            case MoveDir::Left:		m_pos.x = m_pos.x + (m_mapShape.left - m_shape.left); break;
-            case MoveDir::Right:	m_pos.x = m_pos.x - (m_shape.right - m_mapShape.right); break;
-            case MoveDir::Up:	    m_pos.y = m_pos.y + (m_mapShape.top - m_shape.top); break;
-            case MoveDir::Down:	    m_pos.y = m_pos.y - (m_shape.bottom - m_mapShape.bottom); break;
+            case MoveDir::Left:		m_pos.x = m_pos.x + (m_tileMap->GetShape().left - m_shape.left); break;
+            case MoveDir::Right:	m_pos.x = m_pos.x - (m_shape.right - m_tileMap->GetShape().right); break;
+            case MoveDir::Up:	    m_pos.y = m_pos.y + (m_tileMap->GetShape().top - m_shape.top); break;
+            case MoveDir::Down:	    m_pos.y = m_pos.y - (m_shape.bottom - m_tileMap->GetShape().bottom); break;
             }
 
-            while (true)
-            {
-                int RandomValue = rand() % 100 + 1;
-                if (RandomValue > 0 && RandomValue <= 25)
-                {
-                    m_moveDir = MoveDir::Up;
-                    m_frameX = m_enemyFrame[MoveDir::Up];
-                    m_maxFrameX = m_enemyFrame[MoveDir::Up] + 1;
-                }
-                else if (RandomValue > 25 && RandomValue <= 50)
-                {
-                    m_moveDir = MoveDir::Left;
-                    m_frameX = m_enemyFrame[MoveDir::Left];
-                    m_maxFrameX = m_enemyFrame[MoveDir::Left] + 1;
-                }
-                else if (RandomValue > 50 && RandomValue <= 75)
-                {
-                    m_moveDir = MoveDir::Down;
-                    m_frameX = m_enemyFrame[MoveDir::Down];
-                    m_maxFrameX = m_enemyFrame[MoveDir::Down] + 1;
-                }
-                else
-                {
-                    m_moveDir = MoveDir::Right;
-                    m_frameX = m_enemyFrame[MoveDir::Right];
-                    m_maxFrameX = m_enemyFrame[MoveDir::Right] + 1;
-                }
-
-                if (mb_dirCheck[m_moveDir] != true) break;
-            }
-
-            mb_dirCheck[m_beforeMoveDir] = false;
-            mb_dirCheck[m_moveDir] = true;
-            m_beforeMoveDir = m_moveDir;
+            RandomDirChange();
         }
 
         // 시간에 따른 탱크 이동방향 전환

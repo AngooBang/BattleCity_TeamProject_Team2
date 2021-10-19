@@ -5,6 +5,7 @@
 
 //typedef TILE_INFO(*Temp)/*[TILE_COUNT_Y]*/[13];
 
+class Tank;
 class TileMap;
 class EnemyTank;
 class EnemyManager : public GameObject
@@ -12,6 +13,10 @@ class EnemyManager : public GameObject
 private:
 	vector<EnemyTank*> vecEnemyTank;
 	vector<EnemyTank*>::iterator vecEnemyTankIter;
+
+	// 탱크 테스트용
+	Tank* m_player;
+	RECT m_tempRect;
 
 	//RECT m_mapShape;
 	TileMap* m_tileMap;
@@ -29,6 +34,10 @@ public:
 
 	void AddEnemy(EnemyTank* EnemyTank, POINTFLOAT pos);
 
-	void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
+	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
+
+	bool isCollisionPlayer(vector<EnemyTank*>::iterator EnemyTankIter);
+	inline void SetPlayerTank(Tank* playerTank) { this->m_player = playerTank; }
+
 	bool CollisionWithTile();
 };

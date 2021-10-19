@@ -10,7 +10,7 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
-	PowerTank(RECT mapShape) { m_mapShape = mapShape; }
+	PowerTank(TileMap* tileMap) { m_tileMap = tileMap; }
 	~PowerTank() {}
 };
 

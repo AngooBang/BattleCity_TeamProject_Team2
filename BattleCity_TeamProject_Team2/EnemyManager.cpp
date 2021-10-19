@@ -1,6 +1,7 @@
 #include "EnemyManager.h"
 #include "EnemyTank.h"
 #include "TileMap.h"
+#include "Tank.h"
 
 HRESULT EnemyManager::Init()
 {
@@ -13,6 +14,12 @@ void EnemyManager::Update()
     for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end(); 
         ++vecEnemyTankIter)
     {
+        if (isCollisionPlayer(vecEnemyTankIter))
+        {
+            vecEnemyTank.erase(vecEnemyTankIter);
+            break;
+        }
+
         (*vecEnemyTankIter)->Update();
     }
 }
@@ -41,8 +48,29 @@ void EnemyManager::AddEnemy(EnemyTank* enemyTank, POINTFLOAT pos)
     vecEnemyTank.push_back(enemyTank);
 }
 
+bool EnemyManager::isCollisionPlayer(vector<EnemyTank*>::iterator EnemyTankIter)
+{
+    auto r1 = (*EnemyTankIter)->GetShape();
+    auto r2 = m_player->GetShape();
+    if (IntersectRect( &m_tempRect, &r1, &r2) )
+    {
+		return true;
+    }
+
+    return false;
+}
+
 bool EnemyManager::CollisionWithTile()
 {
+    m_tileMap->GetShape();
+    for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end();
+        ++vecEnemyTankIter)
+    {
+        if (CheckInRect((*vecEnemyTankIter)->GetShape(), m_tileMap->GetShape() ) )
+        {
+
+        }
+    }
     /*p = m_tileMap->GetMapTileInfo();
     cout << p[0][0].rc.left << endl;*/
     /*cout << map[0][0].rc.left << endl;
