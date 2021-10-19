@@ -1,7 +1,7 @@
 #include "UIManager.h"
 #include "Image.h"
 
-HRESULT UIManager::Init()
+HRESULT UIManager::Init(int m_enemyTotNum)
 {
 	m_enemyLeft = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/Icon_Enemy.bmp", 30, 30);
 
@@ -9,7 +9,7 @@ HRESULT UIManager::Init()
 	m_numberUI = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Number.bmp", 160, 56, 5, 2);
 
 	m_stageFlag = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/StageFlag.bmp", 60, 60, true, RGB(255, 0, 255));
-
+	m_enemyLeftNum = m_enemyTotNum;
 
 	m_enemyLeftNum = 10;
 	m_p1LifeNum = 5;
@@ -17,10 +17,11 @@ HRESULT UIManager::Init()
 	return S_OK;
 }
 
-void UIManager::Update()
+void UIManager::Update(int m_enemyTotNum, int m_enemyNumCount)
 {
-
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_SPACE))
+	m_enemyLeftNum = m_enemyTotNum;
+	m_enemyLeftNum -= m_enemyNumCount;
+	/*if (KeyManager::GetSingleton()->IsOnceKeyDown('I'))
 	{
 		m_enemyLeftNum--;
 

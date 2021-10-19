@@ -38,8 +38,6 @@ private:
 
 	float m_elapsedTime = 0;
 
-	RECT m_mapShape;
-
 public:
 	HRESULT Init();
 	void Update();

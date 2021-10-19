@@ -10,7 +10,7 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
-	ArmorTank(RECT mapShape) { m_mapShape = mapShape; }
+	ArmorTank(TileMap* tileMap) { m_tileMap = tileMap; }
 	~ArmorTank() {}
 };
 
