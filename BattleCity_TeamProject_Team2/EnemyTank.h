@@ -43,6 +43,9 @@ public:
 
 	void AutoMove();
 	bool IsCollisionMap();
+	bool IsCollisionTile();
+	void MoveCorrection();
+	void RandomDirChange();
 
 	EnemyTank(/*int a, RECT b*/) { /*m_mapBodySize = a; m_mapShape = b;*/ }
 	~EnemyTank() {};
