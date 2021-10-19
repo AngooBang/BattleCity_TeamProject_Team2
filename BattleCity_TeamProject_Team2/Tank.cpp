@@ -6,6 +6,9 @@
 
 HRESULT Tank::Init()
 {
+	m_type = TankType::Player;
+
+
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Player/Player.bmp", 512, 256, 8, 4, true, RGB(255, 0, 255));
 	m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Player/Player.bmp");
 
@@ -19,6 +22,8 @@ HRESULT Tank::Init()
 
 	mb_isAlive = true;
 	mb_Move = false;
+
+	m_ammoSpeed = 10;
 
 
 	for (int i = 0; i < MoveDir::End; i++)
@@ -39,6 +44,11 @@ HRESULT Tank::Init()
 void Tank::Update()
 {
 #pragma region ÀÔ·ÂºÎ
+
+	if (KeyManager::GetSingleton()->IsOnceKeyDown('F'))
+	{
+		mb_isFire = true;
+	}
 
 	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
 	{
@@ -93,10 +103,6 @@ void Tank::Update()
 		mb_Move = false;
 	}
 
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_SPACE))
-	{
-		mb_isFire = true;
-	}
 
 
 #pragma endregion
@@ -182,8 +188,7 @@ void Tank::Update()
 						}
 					}
 				}
-			}
-				
+			}				
 		}
 	}
 
@@ -338,7 +343,7 @@ void Tank::MoveCorrection()
 	if (m_isCollide[MoveDir::Up] && m_moveDir == MoveDir::Up)
 	{
 		if (m_tempRC.right - m_tempRC.left > MOVE_CORRECTION_VALUE)
-			m_moveDir = MoveDir::End;
+			mb_Move = false;
 		else
 		{
 			if ((m_shape.left + m_shape.right) / 2 > m_tempRC.right)
@@ -350,7 +355,7 @@ void Tank::MoveCorrection()
 	if (m_isCollide[MoveDir::Left] && m_moveDir == MoveDir::Left)
 	{
 		if (m_tempRC.bottom - m_tempRC.top > MOVE_CORRECTION_VALUE)
-			m_moveDir = MoveDir::End;
+			mb_Move = false;
 		else
 		{
 			if ((m_shape.top + m_shape.bottom) / 2 > m_tempRC.bottom)
@@ -362,7 +367,7 @@ void Tank::MoveCorrection()
 	if (m_isCollide[MoveDir::Down] && m_moveDir == MoveDir::Down)
 	{
 		if (m_tempRC.right - m_tempRC.left > MOVE_CORRECTION_VALUE)
-			m_moveDir = MoveDir::End;
+			mb_Move = false;
 		else
 		{
 			if ((m_shape.left + m_shape.right) / 2 > m_tempRC.right)
@@ -375,7 +380,7 @@ void Tank::MoveCorrection()
 	if (m_isCollide[MoveDir::Right] && m_moveDir == MoveDir::Right)
 	{
 		if (m_tempRC.bottom - m_tempRC.top > MOVE_CORRECTION_VALUE)
-			m_moveDir = MoveDir::End;
+			mb_Move = false;
 		else
 		{
 			if ((m_shape.top + m_shape.bottom) / 2 > m_tempRC.bottom)

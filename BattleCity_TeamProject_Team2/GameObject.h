@@ -9,6 +9,8 @@ protected:
 	RECT m_shape;
 	float m_moveSpeed;
 
+	TankType m_type;
+
 
 public:
 
@@ -22,6 +24,8 @@ public:
 	inline RECT GetShape() { return this->m_shape; }
 	inline void SetShape(RECT shape) { this->m_shape = shape; }
 
+
+	inline TankType GetTankType() { return m_type; }
 
 	GameObject();
 	~GameObject();

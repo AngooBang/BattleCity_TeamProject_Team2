@@ -20,7 +20,6 @@ protected:
 	TileMap* m_tileMap;
 
 
-
 	int m_frameX;
 	int m_maxFrameX;
 
@@ -53,7 +52,6 @@ protected:
 
 public:
 	virtual HRESULT Init();
-	virtual void KeyUpdate() {};
 	void Update();
 	void Render(HDC hdc);
 	void Release();
@@ -61,7 +59,6 @@ public:
 
 	void SetBarrel(int x, int y);
 	void SetImage();
-	inline void SetisFire() { mb_isFire = false; }
 
 	void SetPosMove(int x, int y);
 	void SetMoveDir(MoveDir moveDir);
@@ -77,7 +74,9 @@ public:
 
 	void CheckCollisionDir(RECT a, RECT b);
 
-	inline bool GetisFire() { return mb_isFire; }	
+	inline bool GetisFire() { return mb_isFire; }
+	inline void SetisFire(bool isFire) { this->mb_isFire = isFire; }
+
 	inline POINTFLOAT GetPos() { return m_pos; }
 	inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
 	inline MoveDir GetmoveDir() { return m_moveDir; }

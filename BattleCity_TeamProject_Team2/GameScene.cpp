@@ -32,10 +32,10 @@ HRESULT GameScene::Init()
 
 	m_ammoMgr = new AmmoManager;
 	m_ammoMgr->Init();
+	m_ammoMgr->SetTileMap(m_tileMap);
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
-
 	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
 	//m_enemyMgr->CollisionWithTile();
 
@@ -67,7 +67,6 @@ void GameScene::Update()
 	m_tileMap->Update();
 	m_uiManager->Update();
 
-	m_player->KeyUpdate();
 	m_player->Update();
 
 	// 적 생성 
@@ -105,6 +104,14 @@ void GameScene::Update()
 
 	m_enemyMgr->Update();
 
+
+	if (m_player->GetisFire())
+	{
+		m_ammoMgr->AddAmmo(new Ammo, m_player);
+		m_player->SetisFire(false);
+	}
+
+	m_ammoMgr->Update();
 
 	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F2))
 		SceneManager::GetSingleton()->ChangeScene("결과씬");
