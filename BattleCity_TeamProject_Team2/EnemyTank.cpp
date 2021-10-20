@@ -7,13 +7,11 @@ HRESULT EnemyTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
     //ImageManager::GetSingleton()->AddImage("Image/Taeyeon.bmp", WIN_SIZE_X, WIN_SIZE_Y);
     //m_backGround = ImageManager::GetSingleton()->FindImage("Image/Taeyeon.bmp");
-
     return S_OK;
 }
 
 void EnemyTank::Update()
-{
-    
+{    
 }
 
 void EnemyTank::Render(HDC hdc)

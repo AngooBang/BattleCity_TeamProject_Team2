@@ -13,7 +13,7 @@ HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_
 	m_pos.x = tankPos.x;
 	m_pos.y = tankPos.y;
 	
-	m_isAlive = true;
+	mb_isAlive = true;
 
 	m_shape.left = m_pos.x - m_img->GetWidth() / 2;
 	m_shape.right = m_pos.x + m_img->GetWidth() / 2;
@@ -25,12 +25,18 @@ HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_
 
 void Ammo::Update()
 {
-	if (!m_isAlive) return;
+	if (!mb_isAlive) return;
 
 	m_pos.x += m_movePosX[m_moveDir] * m_moveSpeed;
 	m_pos.y += m_movePosY[m_moveDir] * m_moveSpeed;
 	
 	SetShape();
+
+	if (CheckInRect(m_shape, m_tileMap->GetShape()))
+	{
+		mb_isAlive = false;
+	}
+
 
 	switch (m_owner->GetTankType())
 	{
@@ -48,7 +54,7 @@ void Ammo::Update()
 
 void Ammo::Render(HDC hdc)
 {
-	if (!m_isAlive) return;
+	if (!mb_isAlive) return;
 
 	//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 	m_img->Render(hdc, m_pos.x, m_pos.y);
@@ -69,9 +75,25 @@ void Ammo::SetShape()
 
 void Ammo::PlayerAmmoCollider()
 {
-	// 적탱크와 충돌을 비교하는 함수
+	EnemyCollider();
 	TileCollider();
 	
+}
+
+void Ammo::EnemyCollider()
+{
+	vector<EnemyTank*>::iterator it;
+	for (it = m_vecEnemys.begin(); it != m_vecEnemys.end();
+		++it)
+	{
+		RECT enemyRC = (*it)->GetShape();
+		if (IntersectRect(&m_tempRC, &m_shape, &enemyRC))
+		{
+			(*it)->SetIsAlive(false);
+			mb_isAlive = false;
+			break;
+		}
+	}
 }
 
 void Ammo::TileCollider()
@@ -90,7 +112,7 @@ void Ammo::TileCollider()
 						{
 							if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain == Terrain::HardWall)
 							{
-								m_isAlive = false;
+								mb_isAlive = false;
 								break;
 							}
 							switch (m_moveDir)
@@ -146,7 +168,7 @@ void Ammo::TileCollider()
 							default:
 								break;
 							}
-							m_isAlive = false;
+							mb_isAlive = false;
 						}
 					}
 				}

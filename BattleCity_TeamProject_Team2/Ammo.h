@@ -3,6 +3,7 @@
 
 class Image;
 class TileMap;
+class EnemyTank;
 class Ammo : public GameObject
 {
 	Image* m_img;
@@ -10,11 +11,13 @@ class Ammo : public GameObject
 
 	GameObject* m_owner;
 
+	vector<EnemyTank*> m_vecEnemys;
+
 	TileMap* m_tileMap;
 
 	RECT m_tempRC;
 
-	bool m_isAlive;
+	bool mb_isAlive;
 
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
@@ -29,10 +32,13 @@ public:
 
 	void PlayerAmmoCollider();
 
+	void EnemyCollider();
 	void TileCollider();
 
 	inline void SetOwner(GameObject* owner) { this->m_owner = owner; }
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
+	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
+
 
 
 };

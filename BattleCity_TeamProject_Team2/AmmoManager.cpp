@@ -24,6 +24,7 @@ void AmmoManager::Update()
     for (m_vecAmmoIter = m_vecAmmo.begin(); m_vecAmmoIter != m_vecAmmo.end();
         ++m_vecAmmoIter)
     {
+        (*m_vecAmmoIter)->SetVecEnemys(m_vecEnemys);
         (*m_vecAmmoIter)->Update();
     }
 }

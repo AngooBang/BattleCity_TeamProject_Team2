@@ -100,11 +100,13 @@ void GameScene::Update()
 			m_enemyNumCount++;
 			break;
 		}
+		// 아모매니저, 아모에 vector<EnemyTank*> 갱신
 		m_elapsedTime = 0;
 	}
 
 	m_uiManager->Update(m_enemyTotNum, m_enemyNumCount);
 	m_enemyMgr->Update();
+	m_ammoMgr->SetVecEnemys(m_enemyMgr->GetVecEnemys());
 
 
 	if (m_player->GetisFire())

@@ -11,6 +11,8 @@ class AmmoManager : public GameObject
 private:
 	Image* m_AmmoImage[MoveDir::End];
 
+	vector<EnemyTank*> m_vecEnemys;
+
 	vector<Ammo*> m_vecAmmo;
 	vector<Ammo*>::iterator m_vecAmmoIter;
 
@@ -25,6 +27,7 @@ public:
 	void AddAmmo(Ammo* Ammo, Tank* tank);
 	void AddAmmo(Ammo* Ammo, EnemyTank* tank);
 
+	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
 
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 };

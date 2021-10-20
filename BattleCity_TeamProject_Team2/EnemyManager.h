@@ -39,5 +39,7 @@ public:
 	bool isCollisionPlayer(vector<EnemyTank*>::iterator EnemyTankIter);
 	inline void SetPlayerTank(Tank* playerTank) { this->m_player = playerTank; }
 
+	inline vector<EnemyTank*> GetVecEnemys() { return vecEnemyTank; }
+
 	bool CollisionWithTile();
 };

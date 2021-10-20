@@ -20,7 +20,13 @@ void EnemyManager::Update()
             break;
         }
 
-        (*vecEnemyTankIter)->Update();
+        if ((*vecEnemyTankIter)->GetIsAlive())
+            (*vecEnemyTankIter)->Update();
+        else
+        {
+            vecEnemyTank.erase(vecEnemyTankIter);
+            break;
+        }
     }
 }
 
@@ -29,7 +35,7 @@ void EnemyManager::Render(HDC hdc)
     for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end();
         ++vecEnemyTankIter)
     {
-        (*vecEnemyTankIter)->Render(hdc);
+       (*vecEnemyTankIter)->Render(hdc);
     }
 }
 
@@ -45,6 +51,7 @@ void EnemyManager::Release()
 void EnemyManager::AddEnemy(EnemyTank* enemyTank, POINTFLOAT pos)
 {
     enemyTank->Init(pos, this);
+    enemyTank->SetIsAlive(true);
     vecEnemyTank.push_back(enemyTank);
 }
 

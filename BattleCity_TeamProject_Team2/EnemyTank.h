@@ -14,6 +14,8 @@ class EnemyTank : public GameObject
 protected:
 	MoveDir m_moveDir = MoveDir::Down;
 
+	bool mb_isAlive;
+
 	Image* m_img;
 	EnemyManager* m_manager;
 
@@ -53,6 +55,10 @@ public:
 	bool IsCollisionMap();
 	bool IsCollisionTile();
 	void MoveCorrection();
+
+
+	inline void SetIsAlive(bool isAlive) { this->mb_isAlive = isAlive; }
+	inline bool GetIsAlive() { return mb_isAlive; }
 
 	EnemyTank() {}
 	~EnemyTank() {};

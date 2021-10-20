@@ -296,7 +296,7 @@ void Tank::Update()
 
 void Tank::Render(HDC hdc)
 {
-	Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
+	//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 
 	if (m_img)
 		m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY);
