@@ -4,6 +4,15 @@
 
 HRESULT ArmorTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
+    m_type = TankType::Enemy;
+    m_HP = 3;
+    m_ammoSpeed = (int)BulletSpeed::Fast;
+    //m_Barrelend = { pos.x, pos.y };
+
+    mb_isAlive = true;
+    //mb_Move = false;
+    mb_isFire = false;
+
     ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Spawn_Effect2.bmp",
         256, 64, 4, 1, true, RGB(255, 0, 255));
     ImageManager::GetSingleton()->AddImage("Image/Enemy.bmp", 512, 384, 8, 6, true, RGB(255, 0, 255));
@@ -70,7 +79,7 @@ void ArmorTank::Update()
             m_img = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
             m_bodySize = m_img->GetFrameWidth();
             m_frameX = m_enemyFrame[MoveDir::Down];
-            m_frameY = (int)EnemyType::Armor;
+            m_frameY = (int)EnemyType::ArmorGreen;
             m_maxFrameX = m_enemyFrame[MoveDir::Down] + 1;
             m_elapsedCount = 0;
         }
@@ -78,6 +87,14 @@ void ArmorTank::Update()
 
     if (m_enemyStatus == EnemyStatus::Alive)
     {
+        // 미사일 딜레이 
+        m_fireElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
+        if (m_fireElapsedCount > 2.0f)
+        {
+            mb_isFire = true;
+            m_fireElapsedCount = 0;
+        }
+
         // 시간에 따른 탱크 이미지(탱크 움직임) 프레임 업데이트
         ++m_elapsedCount;
         if (m_elapsedCount % 5 == 0)

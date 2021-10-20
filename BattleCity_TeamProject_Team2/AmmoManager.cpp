@@ -6,15 +6,15 @@
 
 HRESULT AmmoManager::Init()
 {
-    m_AmmoImage[MoveDir::Up] = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Up.bmp", 9, 12, true, RGB(255, 0, 255));
-    m_AmmoImage[MoveDir::Left] = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Left.bmp", 12, 9, true, RGB(255, 0, 255));
-    m_AmmoImage[MoveDir::Down] = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Down.bmp", 9, 12, true, RGB(255, 0, 255));
-    m_AmmoImage[MoveDir::Right] = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Right.bmp", 12, 9, true, RGB(255, 0, 255));
+    ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Up.bmp", 9, 12, true, RGB(255, 0, 255));
+    ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Left.bmp", 12, 9, true, RGB(255, 0, 255));
+    ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Down.bmp", 9, 12, true, RGB(255, 0, 255));
+    ImageManager::GetSingleton()->AddImage("Image/BattleCity/Bullet/Missile_Right.bmp", 12, 9, true, RGB(255, 0, 255));
 
-    //ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Up.bmp");
-    //ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Left.bmp");
-    //ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Down.bmp");
-    //ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Right.bmp");
+    m_AmmoImage[MoveDir::Up] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Up.bmp");
+    m_AmmoImage[MoveDir::Left] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Left.bmp");
+    m_AmmoImage[MoveDir::Down] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Down.bmp");
+    m_AmmoImage[MoveDir::Right] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Bullet/Missile_Right.bmp");
 
     return S_OK;
 }
@@ -56,11 +56,12 @@ void AmmoManager::AddAmmo(Ammo* Ammo, Tank* tank)
     m_vecAmmo.push_back(Ammo);
 }
 
-void AmmoManager::AddAmmo(Ammo* Ammo, EnemyTank* tank)
+void AmmoManager::AddAmmo(Ammo* Ammo, vector<EnemyTank*>::iterator it, Tank* target)
 {
-    //Ammo->Init(tank->GetPos(), tank->GetmoveDir(), tank->GetammoSpeed(), m_AmmoImage[tank->GetmoveDir()]);
-    Ammo->SetOwner(tank);
+    Ammo->Init((*it)->GetPos(), (*it)->GetmoveDir(), (*it)->GetammoSpeed(), m_AmmoImage[(*it)->GetmoveDir()]);
+    Ammo->SetOwner((*it));
     Ammo->SetTileMap(m_tileMap);
+    Ammo->SetPlayerTank(target);
 
     //Ammo->Init(tank->GetBarrelend(),  tank->GetmoveDir(), tank->GetammoSpeed(), m_AmmoImage);
     m_vecAmmo.push_back(Ammo);

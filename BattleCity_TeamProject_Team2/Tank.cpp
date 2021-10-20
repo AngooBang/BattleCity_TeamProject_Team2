@@ -7,7 +7,7 @@
 HRESULT Tank::Init()
 {
 	m_type = TankType::Player;
-
+	m_HP = 5;
 
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Player/Player.bmp", 512, 256, 8, 4, true, RGB(255, 0, 255));
 	m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Player/Player.bmp");

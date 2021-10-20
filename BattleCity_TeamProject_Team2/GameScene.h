@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEntity.h"
 
+class EnemyTank;
 class Image;
 class UIManager;
 class TileMap;
@@ -17,6 +18,7 @@ private:
 	UIManager* m_uiManager;
 
 	AmmoManager* m_ammoMgr;
+	AmmoManager* m_enemyAmmoMgr;
 
 	Tank* m_player;
 
@@ -37,6 +39,11 @@ private:
 	int m_armorTankNum = 0;
 
 	float m_elapsedTime = 0;
+
+	float m_fireTime = 0;
+
+	vector<EnemyTank*> m_vecEnemyTank;
+	vector<EnemyTank*>::iterator m_it;
 
 public:
 	HRESULT Init();

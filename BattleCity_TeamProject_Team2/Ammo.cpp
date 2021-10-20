@@ -39,6 +39,7 @@ void Ammo::Update()
 		break;
 		
 	case TankType::Enemy:
+		EnemyAmmoCollider();
 		break;
 
 	default:
@@ -72,6 +73,18 @@ void Ammo::PlayerAmmoCollider()
 	// 적탱크와 충돌을 비교하는 함수
 	TileCollider();
 	
+}
+
+void Ammo::EnemyAmmoCollider()
+{
+	RECT r1 = m_playerTank->GetShape();
+	RECT r2;
+	if (IntersectRect(&r2, &m_shape, &r1))
+	{
+		m_playerTank->SetAlive(false);
+	}
+
+	TileCollider();
 }
 
 void Ammo::TileCollider()

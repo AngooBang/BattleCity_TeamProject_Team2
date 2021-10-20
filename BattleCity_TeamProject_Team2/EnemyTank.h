@@ -41,6 +41,15 @@ protected:
 	RECT m_tempRC;
 	bool m_isCollide[MoveDir::End];
 
+	int m_HP;
+	int m_ammoSpeed;
+	POINTFLOAT m_Barrelend;
+
+	bool mb_isAlive = true;
+	bool mb_Move;
+	bool mb_isFire;
+	float m_fireElapsedCount = 0;
+
 public:
 	virtual HRESULT Init(POINTFLOAT pos, EnemyManager* manager);
 	virtual void Update() = 0;
@@ -53,6 +62,13 @@ public:
 	bool IsCollisionMap();
 	bool IsCollisionTile();
 	void MoveCorrection();
+
+	inline bool GetisFire() { return mb_isFire; }
+	inline void SetisFire(bool isFire) { this->mb_isFire = isFire; }
+
+	inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
+	inline MoveDir GetmoveDir() { return m_moveDir; }
+	inline int GetammoSpeed() { return m_ammoSpeed; }
 
 	EnemyTank() {}
 	~EnemyTank() {};

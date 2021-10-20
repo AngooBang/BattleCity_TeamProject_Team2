@@ -16,6 +16,8 @@ private:
 
 	TileMap* m_tileMap;
 
+	GameObject* m_target;
+
 public:
 	virtual HRESULT Init();
 	virtual void Update();
@@ -23,8 +25,10 @@ public:
 	virtual void Release();
 
 	void AddAmmo(Ammo* Ammo, Tank* tank);
-	void AddAmmo(Ammo* Ammo, EnemyTank* tank);
+	void AddAmmo(Ammo* Ammo, vector<EnemyTank*>::iterator it, Tank* target);
 
 
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
+
+	inline void SetTarget(GameObject* target) { this->m_target = target; }
 };

@@ -27,6 +27,9 @@ public:
 
 	inline TankType GetTankType() { return m_type; }
 
+	
+
+
 	GameObject();
 	~GameObject();
 };

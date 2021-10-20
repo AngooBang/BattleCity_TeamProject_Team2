@@ -6,6 +6,7 @@
 class Image;
 class TileMap;
 class Ammo;
+class AmmoManager;
 class Tank : public GameObject
 {
 protected:
@@ -50,6 +51,8 @@ protected:
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
 
+	AmmoManager* m_ammoMgr;
+
 public:
 	virtual HRESULT Init();
 	void Update();
@@ -81,4 +84,9 @@ public:
 	inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
 	inline MoveDir GetmoveDir() { return m_moveDir; }
 	inline int GetammoSpeed() { return m_ammoSpeed; }
+
+	inline void SetAmmoMgr(AmmoManager* ammoMgr) { this->m_ammoMgr = ammoMgr; }
+
+	inline bool GetAlive() { return mb_isAlive; }
+	inline void SetAlive(bool isAlive) { this->mb_isAlive = isAlive; }
 };
