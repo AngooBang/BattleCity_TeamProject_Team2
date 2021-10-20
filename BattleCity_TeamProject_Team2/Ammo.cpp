@@ -45,6 +45,7 @@ void Ammo::Update()
 		break;
 		
 	case TankType::Enemy:
+		EnemyAmmoCollider();
 		break;
 
 	default:
@@ -94,6 +95,18 @@ void Ammo::EnemyCollider()
 			break;
 		}
 	}
+}
+
+void Ammo::EnemyAmmoCollider()
+{
+	RECT r1 = m_playerTank->GetShape();
+	RECT r2;
+	if (IntersectRect(&r2, &m_shape, &r1))
+	{
+		m_playerTank->SetAlive(false);
+	}
+
+	TileCollider();
 }
 
 void Ammo::TileCollider()

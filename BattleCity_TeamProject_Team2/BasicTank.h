@@ -11,7 +11,6 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
-
 	BasicTank(TileMap* tileMap) {m_tileMap = tileMap;}
 	~BasicTank() {}
 };

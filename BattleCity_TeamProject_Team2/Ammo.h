@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+class Tank;
 class Image;
 class TileMap;
 class EnemyTank;
@@ -22,6 +23,8 @@ class Ammo : public GameObject
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
 
+	Tank* m_playerTank;
+
 public:
 	HRESULT Init(POINTFLOAT Barrelend, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage);
 	void Update();
@@ -31,6 +34,7 @@ public:
 	void SetShape();
 
 	void PlayerAmmoCollider();
+	void EnemyAmmoCollider();
 
 	void EnemyCollider();
 	void TileCollider();
@@ -39,6 +43,8 @@ public:
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
 
+
+	inline void SetPlayerTank(Tank* playerTank) { this->m_playerTank = playerTank; }
 
 
 };

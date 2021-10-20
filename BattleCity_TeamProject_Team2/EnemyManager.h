@@ -8,6 +8,7 @@
 class Tank;
 class TileMap;
 class EnemyTank;
+class AmmoManager;
 class EnemyManager : public GameObject
 {
 private:
@@ -18,13 +19,16 @@ private:
 	Tank* m_player;
 	RECT m_tempRect;
 
+	//
+	AmmoManager* m_ammoMgr;
+
 	//RECT m_mapShape;
 	TileMap* m_tileMap;
 	//TILE_INFO *map;
 	//Temp p;
 
 public:
-	HRESULT Init();
+	HRESULT Init(AmmoManager* ammoMgr);
 	void Update();
 	void Render(HDC hdc);
 	void Release();
@@ -42,4 +46,6 @@ public:
 	inline vector<EnemyTank*> GetVecEnemys() { return vecEnemyTank; }
 
 	bool CollisionWithTile();
+
+	inline vector<EnemyTank*> GetEnemyVec() { return vecEnemyTank; }
 };
