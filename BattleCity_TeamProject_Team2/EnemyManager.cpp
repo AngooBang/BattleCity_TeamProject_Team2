@@ -16,11 +16,11 @@ void EnemyManager::Update()
     for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end(); 
         ++vecEnemyTankIter)
     {
-        if (isCollisionPlayer(vecEnemyTankIter))
+        /*if (isCollisionPlayer(vecEnemyTankIter))
         {
             vecEnemyTank.erase(vecEnemyTankIter);
             break;
-        }
+        }*/
 
         (*vecEnemyTankIter)->Update();
     }
