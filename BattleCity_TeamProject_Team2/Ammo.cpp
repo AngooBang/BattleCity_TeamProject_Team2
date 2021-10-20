@@ -104,6 +104,7 @@ void Ammo::EnemyAmmoCollider()
 	if (IntersectRect(&r2, &m_shape, &r1))
 	{
 		m_playerTank->SetAlive(false);
+		mb_isAlive = false;
 	}
 
 	TileCollider();

@@ -14,7 +14,6 @@ class EnemyTank : public GameObject
 protected:
 	MoveDir m_moveDir = MoveDir::Down;
 
-	bool mb_isAlive;
 
 	Image* m_img;
 	EnemyManager* m_manager;
@@ -47,7 +46,7 @@ protected:
 	int m_ammoSpeed;
 	POINTFLOAT m_Barrelend;
 
-	bool mb_isAlive = true;
+	bool mb_isAlive;
 	bool mb_Move;
 	bool mb_isFire;
 	float m_fireElapsedCount = 0;
