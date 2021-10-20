@@ -39,6 +39,8 @@ public:
 	void EnemyCollider();
 	void TileCollider();
 
+	inline bool GetIsAlive() { return this->mb_isAlive; }
+
 	inline void SetOwner(GameObject* owner) { this->m_owner = owner; }
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }

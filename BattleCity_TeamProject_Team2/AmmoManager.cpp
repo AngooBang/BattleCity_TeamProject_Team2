@@ -25,7 +25,13 @@ void AmmoManager::Update()
         ++m_vecAmmoIter)
     {
         (*m_vecAmmoIter)->SetVecEnemys(m_vecEnemys);
-        (*m_vecAmmoIter)->Update();
+        if((*m_vecAmmoIter)->GetIsAlive())
+         (*m_vecAmmoIter)->Update();
+        else
+        {
+            m_vecAmmo.erase(m_vecAmmoIter);
+            break;
+        }
     }
 }
 
