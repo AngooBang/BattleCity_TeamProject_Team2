@@ -34,7 +34,7 @@ public:
 	HRESULT Init(POINTFLOAT Barrelend, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage);
 	void Update();
 	void Render(HDC hdc);
-	void Relese();
+	void Release();
 
 	void SetShape();
 

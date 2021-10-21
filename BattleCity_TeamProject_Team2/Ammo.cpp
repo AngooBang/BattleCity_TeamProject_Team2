@@ -47,32 +47,31 @@ void Ammo::Update()
 				if (m_frameX > m_maxFrameX) { m_frameX = 0; }
 			}
 		}
+		return;
 	}
-	else
+
+	m_pos.x += m_movePosX[m_moveDir] * m_moveSpeed;
+	m_pos.y += m_movePosY[m_moveDir] * m_moveSpeed;
+
+	SetShape();
+
+	if (CheckInRect(m_shape, m_tileMap->GetShape()))
 	{
-		m_pos.x += m_movePosX[m_moveDir] * m_moveSpeed;
-		m_pos.y += m_movePosY[m_moveDir] * m_moveSpeed;
+		mb_isAlive = false;
+	}
 
-		SetShape();
+	switch (m_owner->GetTankType())
+	{
+	case TankType::Player:
+		PlayerAmmoCollider();
+		break;
 
-		if (CheckInRect(m_shape, m_tileMap->GetShape()))
-		{
-			mb_isAlive = false;
-		}
+	case TankType::Enemy:
+		EnemyAmmoCollider();
+		break;
 
-		switch (m_owner->GetTankType())
-		{
-		case TankType::Player:
-			PlayerAmmoCollider();
-			break;
-
-		case TankType::Enemy:
-			EnemyAmmoCollider();
-			break;
-
-		default:
-			break;
-		}
+	default:
+		break;
 	}
 }
 
@@ -94,7 +93,7 @@ void Ammo::Render(HDC hdc)
 	
 }
 
-void Ammo::Relese()
+void Ammo::Release()
 {
 	if (m_img)  SAFE_RELEASE(m_img);
 }
