@@ -74,11 +74,6 @@ void GameScene::Update()
 {
 	m_tileMap->Update();
 
-	if (m_player->GetAlive() == true)
-	{
-		m_player->Update();
-	}
-
 	// 적 생성 
 	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
 	if (m_elapsedTime > 3.0f && m_enemyNumCount < m_enemyTotNum)
@@ -114,9 +109,9 @@ void GameScene::Update()
 	}
 
 	m_uiManager->Update(m_enemyTotNum, m_enemyNumCount);
-	m_enemyMgr->Update();
-	m_ammoMgr->SetVecEnemys(m_enemyMgr->GetVecEnemys());
 
+	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
+	m_enemyMgr->Update();
 	m_vecEnemyTank = m_enemyMgr->GetEnemyVec();
 	if (!m_vecEnemyTank.empty())
 	{
@@ -133,6 +128,13 @@ void GameScene::Update()
 	m_enemyAmmoMgr->Update();
 	
 
+	// 플레이어, 플레이어 아모발사, 플레이어 아모 매니저 업데이트
+	if (m_player->GetAlive() == true)
+	{
+		m_player->Update();
+	}
+
+	m_ammoMgr->SetVecEnemys(m_enemyMgr->GetVecEnemys());
 
 	if (m_player->GetisFire())
 	{
@@ -159,7 +161,6 @@ void GameScene::Render(HDC hdc)
 	{
 		m_player->Render(hdc);
 	}
-	
 
 	m_enemyMgr->Render(hdc);
 

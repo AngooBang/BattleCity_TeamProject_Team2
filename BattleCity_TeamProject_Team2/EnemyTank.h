@@ -44,12 +44,19 @@ protected:
 
 	int m_HP;
 	int m_ammoSpeed;
-	POINTFLOAT m_Barrelend;
+	//POINTFLOAT m_Barrelend;
 
 	bool mb_isAlive;
-	bool mb_Move;
+	//bool mb_Move;
 	bool mb_isFire;
 	float m_fireElapsedCount = 0;
+
+	EnemyType m_enemyTankType;
+	Image* m_boomImage;
+
+	bool mb_isReady = true;
+	float m_boomElapsedCount;
+	float m_scale;
 
 public:
 	virtual HRESULT Init(POINTFLOAT pos, EnemyManager* manager);
@@ -71,9 +78,20 @@ public:
 	inline bool GetisFire() { return mb_isFire; }
 	inline void SetisFire(bool isFire) { this->mb_isFire = isFire; }
 
-	inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
+	//inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
 	inline MoveDir GetmoveDir() { return m_moveDir; }
 	inline int GetammoSpeed() { return m_ammoSpeed; }
+
+	inline int GetHP() { return m_HP; }
+	inline void SetHP() { this->m_HP--; }
+
+	inline void SetEnemyStatus(EnemyStatus enemyStatus) { this->m_enemyStatus = enemyStatus; }
+	inline EnemyStatus GetEnemyStatus() { return m_enemyStatus; }
+
+	inline void SetFrameY(int frameY) { this->m_frameY = frameY; }
+
+	inline void SetEnemyType(EnemyType enemyType) { this->m_enemyTankType = enemyType; }
+	inline EnemyType GetEnemyType() { return m_enemyTankType; }
 
 	EnemyTank() {}
 	~EnemyTank() {};

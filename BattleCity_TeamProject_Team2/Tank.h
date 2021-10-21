@@ -89,4 +89,7 @@ public:
 
 	inline bool GetAlive() { return mb_isAlive; }
 	inline void SetAlive(bool isAlive) { this->mb_isAlive = isAlive; }
+
+	inline int GetHP() { return m_HP; }
+	inline void SetHP() { this->m_HP--; }
 };
