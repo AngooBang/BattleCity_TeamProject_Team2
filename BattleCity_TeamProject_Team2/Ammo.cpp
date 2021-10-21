@@ -38,6 +38,7 @@ void Ammo::Update()
 	// 미사일 충돌시 이미지 프레임
 	if (!mb_isAlive)
 	{
+		m_shape.left = m_shape.right = m_shape.top = m_shape.bottom = 0;
 		if (m_totElapsedCount < 0.2f)
 		{
 			m_totElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
@@ -97,8 +98,8 @@ void Ammo::Render(HDC hdc)
 
 void Ammo::Release()
 {
-	if (m_img)  SAFE_RELEASE(m_img);
-	if (m_boomImg) SAFE_RELEASE(m_boomImg);
+	//if (m_img)  SAFE_RELEASE(m_img);
+	//if (m_boomImg) SAFE_RELEASE(m_boomImg);
 }
 
 void Ammo::SetShape()
@@ -156,7 +157,7 @@ void Ammo::EnemyAmmoCollider()
 	RECT tempRc;
 	if (IntersectRect(&tempRc, &m_shape, &playerTankRect))
 	{
-		m_playerTank->SetHP();
+		m_playerTank->SetHP(-1);
 		if (m_playerTank->GetHP() == 0)
 		{
 			m_playerTank->SetAlive(false);
@@ -178,13 +179,24 @@ void Ammo::TileCollider()
 			{
 				for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 				{
-					if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::None)
+					if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::None &&
+						m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::Grass)
 					{
 						if (IntersectRect(&m_tempRC, &m_shape, &m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].rc))
 						{
-							if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain == Terrain::HardWall)
+							if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain == Terrain::HardWall ||
+								m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain == Terrain::DestroyBase)
 							{
 								mb_isAlive = false;
+								break;
+							}
+							if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain == Terrain::Base)
+							{
+								mb_isAlive = false;
+								m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].terrain = Terrain::DestroyBase;
+								m_tileMap->SetInTileType(&(m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j]));
+								m_tileMap->SetTileFrame(&(m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j]));
+								(*mb_isGameOver) = true;
 								break;
 							}
 							switch (m_moveDir)

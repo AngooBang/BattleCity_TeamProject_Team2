@@ -21,6 +21,13 @@ HRESULT GameScene::Init()
 
 	m_backGround = ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
+	m_gameOver = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
+
+	mb_isGameOver = false;
+	m_goElapsedTime = 0.0f;
+
+	m_gameOverPos.x = TILE_MAP_START_POS_X + TILE_MAP_SIZE_X / 2;
+	m_gameOverPos.y = TILE_MAP_SIZE_Y;
 	m_tileMap = new TileMap;
 	m_tileMap->Init();
 
@@ -32,6 +39,7 @@ HRESULT GameScene::Init()
 	m_ammoMgr = new AmmoManager;
 	m_ammoMgr->Init();
 	m_ammoMgr->SetTileMap(m_tileMap);
+	m_ammoMgr->SetIsGameOver(&mb_isGameOver);
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
@@ -66,12 +74,25 @@ HRESULT GameScene::Init()
 
 void GameScene::Update()
 {
+	if (m_player->GetHP() == 0)
+	{
+		mb_isGameOver = true;
+	}
+
+	if (mb_isGameOver)
+	{
+		m_goElapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
+		if (m_gameOverPos.y > TILE_MAP_START_POS_Y + TILE_MAP_SIZE_Y / 2)
+			m_gameOverPos.y -= 2;
+		if(m_goElapsedTime > 0.4f)
+			return;
+	}
 	m_tileMap->Update();
 
 
+	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
 
 	// 적 생성 
-	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
 	if (m_elapsedTime > 3.0f && m_enemyNumCount < m_enemyTotNum)
 	{	
 		if ((m_enemyNumCount % 3) == 0 ) { m_enemySpawnPlaceX = m_spawnPlaceX1; }
@@ -104,7 +125,7 @@ void GameScene::Update()
 		m_elapsedTime = 0;
 	}
 
-	m_uiManager->Update(m_enemyTotNum, m_enemyNumCount);
+	m_uiManager->Update(m_enemyTotNum, m_enemyNumCount, m_player->GetHP());
 
 	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
 	m_enemyMgr->Update();
@@ -163,14 +184,34 @@ void GameScene::Render(HDC hdc)
 	m_enemyMgr->Render(hdc);
 
 	m_ammoMgr->Render(hdc);
+
+	// 풀 타일 출력
+	for (int i = 0; i < TILE_COUNT_Y; i++)
+	{
+		for (int j = 0; j < TILE_COUNT_X; j++)
+		{
+			if(m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].terrain == Terrain::Grass)
+				m_tileMap->GetTileImage()->Render(hdc,
+					m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].rc.left + TILE_SIZE / 2,
+					m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].rc.top + TILE_SIZE / 2,
+					m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].frameX,
+					m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].frameY);
+		}
+	}
+
+	if (mb_isGameOver)
+	{
+		m_gameOver->Render(hdc, m_gameOverPos.x, m_gameOverPos.y);
+	}
 }
 
 void GameScene::Release()
 {
-	SAFE_RELEASE(m_backGround);
+	//SAFE_RELEASE(m_backGround);
+	//SAFE_RELEASE(m_gameOver);
 	SAFE_RELEASE(m_tileMap);
 	SAFE_RELEASE(m_uiManager);
 	SAFE_RELEASE(m_player);
 	SAFE_RELEASE(m_ammoMgr);
-	//SAFE_RELEASE(m_enemyMgr);
+	SAFE_RELEASE(m_enemyMgr);
 }

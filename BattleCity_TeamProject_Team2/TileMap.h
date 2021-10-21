@@ -65,6 +65,7 @@ public:
 
 	inline LPTILE_INFO GetTileInfo() { return this->m_tileInfo; }
 
+	inline Image* GetTileImage() { return this->m_tileImage; }
 
 	void LoadMapData();
 

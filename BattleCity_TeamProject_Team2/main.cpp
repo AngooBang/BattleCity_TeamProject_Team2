@@ -105,7 +105,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_DESTROY:	// 닫기 버튼 메시지처리 (프로그램 종료)
 		PostQuitMessage(0);
-		break;
+		return 0;
 
 	case WM_MOUSEMOVE:
 		g_ptMouse.x = LOWORD(lParam);

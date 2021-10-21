@@ -18,6 +18,7 @@ private:
 
 	TileMap* m_tileMap;
 
+	bool* mb_isGameOver;
 
 public:
 	virtual HRESULT Init();
@@ -33,5 +34,7 @@ public:
 	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
 
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
+
+	inline void SetIsGameOver(bool* isGameOver) { this->mb_isGameOver = isGameOver; }
 
 };

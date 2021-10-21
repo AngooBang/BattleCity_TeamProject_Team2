@@ -17,12 +17,15 @@ protected:
 
 	//POINTFLOAT mDir;
 	Image* m_img;
+	Image* m_shieldImg;
 
 	TileMap* m_tileMap;
 
 
 	int m_frameX;
 	int m_maxFrameX;
+
+	int m_shieldframeX;
 
 	int m_frameY;
 
@@ -31,13 +34,18 @@ protected:
 	RECT m_tempRC;
 
 	POINTFLOAT m_Barrelend;
+	int m_tempHP;
 	int m_HP;
 	int m_ammoSpeed;
 
 	bool mb_isAlive;
 	bool mb_Move;
+	bool mb_isSpawn;
 	bool mb_isFire;
+	bool mb_isShield;
 
+	float m_spawnTimer;
+	float m_shieldTimer;
 
 	bool m_isCollide[MoveDir::End];
 		
@@ -70,6 +78,9 @@ public:
 
 	void MoveCorrection();
 
+	void SpawnPlayer();
+	void ShieldPlayer();
+
 	//inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
 	//inline RECT GetTileMapShape() { return this->m_tileMapShape; }
 
@@ -91,5 +102,5 @@ public:
 	inline void SetAlive(bool isAlive) { this->mb_isAlive = isAlive; }
 
 	inline int GetHP() { return m_HP; }
-	inline void SetHP() { this->m_HP--; }
+	inline void SetHP(int hp) { this->m_HP += hp; }
 };

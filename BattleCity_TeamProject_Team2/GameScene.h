@@ -13,6 +13,10 @@ class GameScene : public GameEntity
 private:
 	Image* m_backGround;
 
+	Image* m_gameOver;
+
+	POINTFLOAT m_gameOverPos;
+
 	TileMap* m_tileMap;
 
 	UIManager* m_uiManager;
@@ -22,6 +26,8 @@ private:
 	Tank* m_player;
 
 	EnemyManager* m_enemyMgr;
+
+	bool mb_isGameOver;
 
 	float m_enemySpawnPlaceX = 0;
 	float m_spawnPlaceX1 = 0;
@@ -38,6 +44,7 @@ private:
 	int m_armorTankNum = 0;
 
 	float m_elapsedTime = 0;
+	float m_goElapsedTime;
 
 	float m_fireTime = 0;
 

@@ -86,21 +86,8 @@ void TileMap::Update()
 		m_elapsedCount = 0;
 	}
 
+	SetBaseData();
 
-
-
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_SPACE))
-	{
-		for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
-		{
-			m_tileInfo[1 * TILE_COUNT_X + 1].inTile[testY * INSIDE_TILE_COUNT_X + l].terrain = Terrain::None;
-		}
-		testY++;
-		if (testY > 3)
-		{
-			testY = 0;
-		}
-	}
 }
 
 void TileMap::Render(HDC hdc)
@@ -131,14 +118,13 @@ void TileMap::Render(HDC hdc)
 			}
 		}
 	}
-	SetBaseData();
 	//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 }
 
 void TileMap::Release()
 {
-	SAFE_RELEASE(m_tileImage);
-	SAFE_RELEASE(m_smallTileImage);
+	//SAFE_RELEASE(m_tileImage);
+	//SAFE_RELEASE(m_smallTileImage);
 }
 
 void TileMap::SetTileFrame(TILE_INFO* tileInfo)
@@ -169,6 +155,10 @@ void TileMap::SetTileFrame(TILE_INFO* tileInfo)
 		tileInfo->frameX = 6;
 		tileInfo->frameY = 4;
 		break;
+	case Terrain::DestroyBase:
+		tileInfo->frameX = 8;
+		tileInfo->frameY = 4;
+		break;
 	default:
 		break;
 	}
@@ -183,7 +173,6 @@ void TileMap::SetInTileType(TILE_INFO* tileInfo)
 			tileInfo->inTile[k * INSIDE_TILE_COUNT_Y + l].terrain = tileInfo->terrain;
 		}
 	}
-
 }
 
 void TileMap::SetBaseData()
@@ -209,7 +198,7 @@ void TileMap::SetBaseData()
 
 				break;
 			}
-			else if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)
+			if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)
 			{
 				// 베이스 시작타일
 				m_tileInfo[i * TILE_COUNT_X + j].frameX = 8;
