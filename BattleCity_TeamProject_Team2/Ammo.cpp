@@ -6,9 +6,11 @@
 
 HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage)
 {
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Boom_Effect.bmp", 48, 16, 3, 1, true, RGB(255,0,255));
-	m_boomImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Boom_Effect.bmp");
+	
+	m_boomImg = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Boom_Effect.bmp", 48, 16, 3, 1, true, RGB(255, 0, 255));
+
 	m_img = m_AmmoImage;
+
 
 	m_moveDir = moveDir;
 	m_moveSpeed = ammoSpeed;
@@ -96,6 +98,7 @@ void Ammo::Render(HDC hdc)
 void Ammo::Release()
 {
 	if (m_img)  SAFE_RELEASE(m_img);
+	if (m_boomImg) SAFE_RELEASE(m_boomImg);
 }
 
 void Ammo::SetShape()
