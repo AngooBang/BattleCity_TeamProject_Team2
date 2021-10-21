@@ -26,7 +26,7 @@ using namespace std;
 enum MoveDir { Up, Left, Down, Right, End };
 
 enum class BulletSpeed {Slow = 10, Normal = 15, Fast = 20, End};
-enum class EnemyType { Basic, Speed, Power, ArmorGray, ArmorGreen, ArmorYellow, End };
+enum class EnemyType { Basic, Speed, Power, ArmorGreen = 4, ArmorYellow = 5, ArmorGray = 3, End };
 enum class TankType { Player, Enemy };
 
 typedef struct ArgumentFuncPtr

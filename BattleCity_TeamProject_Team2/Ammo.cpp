@@ -6,6 +6,8 @@
 
 HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage)
 {
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Boom_Effect.bmp", 48, 16, 3, 1, true, RGB(255,0,255));
+	m_boomImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Boom_Effect.bmp");
 	m_img = m_AmmoImage;
 
 	m_moveDir = moveDir;
@@ -20,16 +22,37 @@ HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_
 	m_shape.top = m_pos.y - m_img->GetHeight() / 2;
 	m_shape.bottom = m_pos.y + m_img->GetHeight() / 2;
 
+	m_frameX = 0; 
+	m_frameY = 0; 
+	m_maxFrameX = 2;
+	m_elapsedCount = 0;
+	m_totElapsedCount = 0;
+
 	return S_OK;
 }
 
 void Ammo::Update()
 {
-	if (!mb_isAlive) return;
+	// 미사일 충돌시 이미지 프레임
+	if (!mb_isAlive)
+	{
+		if (m_totElapsedCount < 0.2f)
+		{
+			m_totElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
+			m_elapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
+			if (m_elapsedCount > 0.05f)
+			{
+				m_frameX++;
+				m_elapsedCount = 0;
+				if (m_frameX > m_maxFrameX) { m_frameX = 0; }
+			}
+		}
+		return;
+	}
 
 	m_pos.x += m_movePosX[m_moveDir] * m_moveSpeed;
 	m_pos.y += m_movePosY[m_moveDir] * m_moveSpeed;
-	
+
 	SetShape();
 
 	if (CheckInRect(m_shape, m_tileMap->GetShape()))
@@ -37,13 +60,12 @@ void Ammo::Update()
 		mb_isAlive = false;
 	}
 
-
 	switch (m_owner->GetTankType())
 	{
 	case TankType::Player:
 		PlayerAmmoCollider();
 		break;
-		
+
 	case TankType::Enemy:
 		EnemyAmmoCollider();
 		break;
@@ -55,13 +77,23 @@ void Ammo::Update()
 
 void Ammo::Render(HDC hdc)
 {
-	if (!mb_isAlive) return;
-
-	//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
-	m_img->Render(hdc, m_pos.x, m_pos.y);
+	// 미사일 충돌시 이미지 렌더
+	if (!mb_isAlive)
+	{
+		if (m_totElapsedCount < 0.2f)
+		{
+			m_boomImg->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 3.0);
+		}
+	}
+	else
+	{
+		//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
+		m_img->Render(hdc, m_pos.x, m_pos.y);
+	}
+	
 }
 
-void Ammo::Relese()
+void Ammo::Release()
 {
 	if (m_img)  SAFE_RELEASE(m_img);
 }
@@ -78,7 +110,6 @@ void Ammo::PlayerAmmoCollider()
 {
 	EnemyCollider();
 	TileCollider();
-	
 }
 
 void Ammo::EnemyCollider()
@@ -90,7 +121,25 @@ void Ammo::EnemyCollider()
 		RECT enemyRC = (*it)->GetShape();
 		if (IntersectRect(&m_tempRC, &m_shape, &enemyRC))
 		{
-			(*it)->SetIsAlive(false);
+			(*it)->SetHP(); // 피격시 Hp 감소
+			// 적 Armor탱크 Hp감소에 따른 색깔 변화(이미지 프레임 변화)
+			if ((*it)->GetEnemyType() == EnemyType::ArmorGreen) 
+			{ 
+				(*it)->SetEnemyType(EnemyType::ArmorYellow);
+				(*it)->SetFrameY((int)EnemyType::ArmorYellow); 
+			}
+			else if ((*it)->GetEnemyType() == EnemyType::ArmorYellow) 
+			{ 
+				(*it)->SetEnemyType(EnemyType::ArmorGray);
+				(*it)->SetFrameY((int)EnemyType::ArmorGray); 
+			}
+
+			// Hp가 0일시
+			if ((*it)->GetHP() == 0)
+			{
+				(*it)->SetEnemyStatus(EnemyStatus::Dead);
+				//(*it)->SetIsAlive(false);
+			}
 			mb_isAlive = false;
 			break;
 		}
@@ -99,14 +148,20 @@ void Ammo::EnemyCollider()
 
 void Ammo::EnemyAmmoCollider()
 {
-	RECT r1 = m_playerTank->GetShape();
-	RECT r2;
-	if (IntersectRect(&r2, &m_shape, &r1))
+	// 적 미사일과 플레이어 탱크 충돌시
+	RECT playerTankRect = m_playerTank->GetShape();
+	RECT tempRc;
+	if (IntersectRect(&tempRc, &m_shape, &playerTankRect))
 	{
-		m_playerTank->SetAlive(false);
+		m_playerTank->SetHP();
+		if (m_playerTank->GetHP() == 0)
+		{
+			m_playerTank->SetAlive(false);
+		}
 		mb_isAlive = false;
 	}
 
+	// 적 미사일과 타일 충돌
 	TileCollider();
 }
 

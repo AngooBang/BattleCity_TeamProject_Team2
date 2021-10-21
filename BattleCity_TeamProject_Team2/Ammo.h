@@ -7,6 +7,7 @@ class TileMap;
 class EnemyTank;
 class Ammo : public GameObject
 {
+	Image* m_boomImg;
 	Image* m_img;
 	MoveDir m_moveDir;
 
@@ -25,11 +26,15 @@ class Ammo : public GameObject
 
 	Tank* m_playerTank;
 
+	int m_frameX; int m_frameY; int m_maxFrameX;
+	float m_elapsedCount;
+	float m_totElapsedCount;
+
 public:
 	HRESULT Init(POINTFLOAT Barrelend, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage);
 	void Update();
 	void Render(HDC hdc);
-	void Relese();
+	void Release();
 
 	void SetShape();
 

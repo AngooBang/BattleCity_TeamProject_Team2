@@ -5,9 +5,8 @@
 #include "AmmoManager.h"
 #include "Ammo.h"
 
-HRESULT EnemyManager::Init(AmmoManager* ammoMgr)
+HRESULT EnemyManager::Init()
 {
-    this->m_ammoMgr = ammoMgr;
     return S_OK;
 }
 
@@ -16,14 +15,10 @@ void EnemyManager::Update()
     for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end(); 
         ++vecEnemyTankIter)
     {
-        /*if (isCollisionPlayer(vecEnemyTankIter))
-        {
-            vecEnemyTank.erase(vecEnemyTankIter);
-            break;
-        }*/
-
         if ((*vecEnemyTankIter)->GetIsAlive())
-            (*vecEnemyTankIter)->Update();
+        {
+			(*vecEnemyTankIter)->Update();
+        }
         else
         {
             vecEnemyTank.erase(vecEnemyTankIter);
@@ -55,7 +50,6 @@ void EnemyManager::AddEnemy(EnemyTank* enemyTank, POINTFLOAT pos)
     enemyTank->Init(pos, this);
     enemyTank->SetIsAlive(true);
     vecEnemyTank.push_back(enemyTank);
-    cout << vecEnemyTank.size() << endl;
     //m_ammoMgr->AddAmmo(new Ammo, enemyTank);
 }
 

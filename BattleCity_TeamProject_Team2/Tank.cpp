@@ -111,22 +111,22 @@ void Tank::Update()
 	{
 		if (m_shape.top <= m_tileMap->GetShape().top)
 			if (m_moveDir == MoveDir::Up)
-				m_moveDir = MoveDir::End;
+				mb_Move = false;
 		else
 			m_isCollide[MoveDir::Up] = false;
 		if (m_shape.left <= m_tileMap->GetShape().left)
 			if (m_moveDir == MoveDir::Left)
-				m_moveDir = MoveDir::End;
+				mb_Move = false;
 		else
 			m_isCollide[MoveDir::Left] = false;
 		if (m_shape.bottom >= m_tileMap->GetShape().bottom)
 			if (m_moveDir == MoveDir::Down)
-				m_moveDir = MoveDir::End;
+				mb_Move = false;
 		else
 			m_isCollide[MoveDir::Down] = false;
 		if (m_shape.right >= m_tileMap->GetShape().right)
 			if (m_moveDir == MoveDir::Right)
-				m_moveDir = MoveDir::End;
+				mb_Move = false;
 		else
 			m_isCollide[MoveDir::Right] = false;
 	}
