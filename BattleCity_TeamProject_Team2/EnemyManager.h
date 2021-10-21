@@ -28,7 +28,7 @@ private:
 	//Temp p;
 
 public:
-	HRESULT Init(AmmoManager* ammoMgr);
+	HRESULT Init();
 	void Update();
 	void Render(HDC hdc);
 	void Release();

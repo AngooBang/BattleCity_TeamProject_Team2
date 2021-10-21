@@ -5,9 +5,8 @@
 #include "AmmoManager.h"
 #include "Ammo.h"
 
-HRESULT EnemyManager::Init(AmmoManager* ammoMgr)
+HRESULT EnemyManager::Init()
 {
-    this->m_ammoMgr = ammoMgr;
     return S_OK;
 }
 

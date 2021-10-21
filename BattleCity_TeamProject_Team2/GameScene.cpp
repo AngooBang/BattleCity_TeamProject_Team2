@@ -33,14 +33,8 @@ HRESULT GameScene::Init()
 	m_ammoMgr->Init();
 	m_ammoMgr->SetTileMap(m_tileMap);
 
-	// 테스트용
-	m_enemyAmmoMgr = new AmmoManager;
-	m_enemyAmmoMgr->Init();
-	m_enemyAmmoMgr->SetTileMap(m_tileMap);
-	m_enemyAmmoMgr->SetTarget(m_player);
-
 	m_enemyMgr = new EnemyManager;
-	m_enemyMgr->Init(m_enemyAmmoMgr);
+	m_enemyMgr->Init();
 	m_enemyMgr->SetPlayerTank(m_player);
 
 	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
@@ -73,6 +67,8 @@ HRESULT GameScene::Init()
 void GameScene::Update()
 {
 	m_tileMap->Update();
+
+
 
 	// 적 생성 
 	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
@@ -112,6 +108,9 @@ void GameScene::Update()
 
 	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
 	m_enemyMgr->Update();
+
+
+
 	m_vecEnemyTank = m_enemyMgr->GetEnemyVec();
 	if (!m_vecEnemyTank.empty())
 	{
@@ -119,13 +118,12 @@ void GameScene::Update()
 		{
 			if ((*m_it)->GetisFire() == true)
 			{
-				m_enemyAmmoMgr->AddAmmo(new Ammo, m_it, m_player);
+				m_ammoMgr->AddAmmo(new Ammo, m_it, m_player);
 				(*m_it)->SetisFire(false);
 			}
 		}
 	}
 	
-	m_enemyAmmoMgr->Update();
 	
 
 	// 플레이어, 플레이어 아모발사, 플레이어 아모 매니저 업데이트
@@ -135,6 +133,7 @@ void GameScene::Update()
 	}
 
 	m_ammoMgr->SetVecEnemys(m_enemyMgr->GetVecEnemys());
+	m_ammoMgr->Update();
 
 	if (m_player->GetisFire())
 	{
@@ -142,7 +141,6 @@ void GameScene::Update()
 		m_player->SetisFire(false);
 	}
 
-	m_ammoMgr->Update();
 
 	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F2))
 		SceneManager::GetSingleton()->ChangeScene("결과씬");
@@ -165,7 +163,6 @@ void GameScene::Render(HDC hdc)
 	m_enemyMgr->Render(hdc);
 
 	m_ammoMgr->Render(hdc);
-	m_enemyAmmoMgr->Render(hdc);
 }
 
 void GameScene::Release()

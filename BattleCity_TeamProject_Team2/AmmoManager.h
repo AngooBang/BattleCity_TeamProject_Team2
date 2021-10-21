@@ -18,7 +18,6 @@ private:
 
 	TileMap* m_tileMap;
 
-	GameObject* m_target;
 
 public:
 	virtual HRESULT Init();
@@ -33,5 +32,4 @@ public:
 
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 
-	inline void SetTarget(GameObject* target) { this->m_target = target; }
 };
