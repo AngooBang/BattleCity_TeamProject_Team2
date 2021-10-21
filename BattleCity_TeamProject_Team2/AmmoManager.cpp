@@ -24,8 +24,9 @@ void AmmoManager::Update()
     for (m_vecAmmoIter = m_vecAmmo.begin(); m_vecAmmoIter != m_vecAmmo.end();
         ++m_vecAmmoIter)
     {
+        AmmoCollision();
         (*m_vecAmmoIter)->SetVecEnemys(m_vecEnemys);
-        if((*m_vecAmmoIter)->GetIsAlive())
+        if((*m_vecAmmoIter)->GetIsAlive() || (*m_vecAmmoIter)->GetTotElapsedCount() < 0.2f)
          (*m_vecAmmoIter)->Update();
         else
         {
@@ -72,4 +73,22 @@ void AmmoManager::AddAmmo(Ammo* Ammo, vector<EnemyTank*>::iterator it, Tank* tar
 
     //Ammo->Init(tank->GetBarrelend(),  tank->GetmoveDir(), tank->GetammoSpeed(), m_AmmoImage);
     m_vecAmmo.push_back(Ammo);
+}
+
+void AmmoManager::AmmoCollision()
+{
+    vector<Ammo*>::iterator it;
+    for (it = m_vecAmmo.begin(); it != m_vecAmmo.end(); it++)
+    {
+        if (m_vecAmmoIter == it) continue;
+        RECT tempRC;
+        RECT r1 = (*m_vecAmmoIter)->GetShape();
+        RECT r2 = (*it)->GetShape();
+        if (IntersectRect(&tempRC, &r1, &r2))
+        {
+            (*m_vecAmmoIter)->SetIsAlive(false);
+            (*it)->SetIsAlive(false);
+            break;
+        }
+    }
 }

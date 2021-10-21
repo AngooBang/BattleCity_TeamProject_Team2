@@ -28,6 +28,8 @@ public:
 	void AddAmmo(Ammo* Ammo, Tank* tank);
 	void AddAmmo(Ammo* Ammo, vector<EnemyTank*>::iterator it, Tank* target);
 
+	void AmmoCollision();
+
 	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
 
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
