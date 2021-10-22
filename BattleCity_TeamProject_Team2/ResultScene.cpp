@@ -62,7 +62,7 @@ void ResultScene::Render(HDC hdc)
 
 void ResultScene::Release()
 {
-	SAFE_RELEASE(m_backGround);
+	//SAFE_RELEASE(m_backGround);
 	SAFE_RELEASE(m_HIScore);
 	SAFE_RELEASE(m_ScoreNumber);
 	SAFE_RELEASE(m_Player1);

@@ -68,6 +68,7 @@ public:
 	void RandomDirChange();
 
 	bool IsCollisionMap();
+	bool IsCollisionMap(MoveDir& dir);
 	bool IsCollisionTile();
 	void MoveCorrection();
 
@@ -80,6 +81,8 @@ public:
 
 	//inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
 	inline MoveDir GetmoveDir() { return m_moveDir; }
+	inline void SetmoveDir(MoveDir moveDir) { this->m_moveDir = moveDir; }
+
 	inline int GetammoSpeed() { return m_ammoSpeed; }
 
 	inline int GetHP() { return m_HP; }
@@ -92,6 +95,24 @@ public:
 
 	inline void SetEnemyType(EnemyType enemyType) { this->m_enemyTankType = enemyType; }
 	inline EnemyType GetEnemyType() { return m_enemyTankType; }
+
+	inline int GetFrameX() { return m_frameX; }
+	inline void SetFrameX(int frameX) { this->m_frameX = frameX; }
+
+	inline void SetMaxFrameX(int maxFrameX) { this->m_maxFrameX = maxFrameX; }
+
+	inline bool* GetDirCehck() { return mb_dirCheck; }
+	//inline void SetDirCheck(bool mb_dirCheck) {}
+
+	inline void SetBeforeMoveDir(MoveDir beforeMoveDir) { this->m_beforeMoveDir = beforeMoveDir; }
+
+	inline void SetMoveSpeed(int moveSpeed) { this->m_moveSpeed = moveSpeed; }
+	inline int GetMoveSpeed() { return m_moveSpeed; }
+
+	/*bool mb_dirCheck[4];
+	int m_enemyFrame[MoveDir::End];
+	int m_maxFrameX;
+	MoveDir m_beforeMoveDir;*/
 
 	EnemyTank() {}
 	~EnemyTank() {};

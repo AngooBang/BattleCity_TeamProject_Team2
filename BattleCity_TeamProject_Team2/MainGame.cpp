@@ -9,6 +9,8 @@ HRESULT MainGame::Init()
 	ImageManager::GetSingleton()->Init();
 	TimerManager::GetSingleton()->Init();
 	SceneManager::GetSingleton()->Init();
+	GameManager::GetSingleton()->Init();
+	
 
 	SceneManager::GetSingleton()->AddScene("°ÔÀÓ¾À", new GameScene());
 	SceneManager::GetSingleton()->AddScene("°á°ú¾À", new ResultScene());
@@ -70,6 +72,9 @@ void MainGame::Release()
 
 	SceneManager::GetSingleton()->Release();
 	SceneManager::GetSingleton()->ReleaseSingleton();
+
+	GameManager::GetSingleton()->Release();
+	GameManager::GetSingleton()->ReleaseSingleton();
 
 	KillTimer(g_hWnd, 0);
 }

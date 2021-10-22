@@ -43,20 +43,20 @@ void EnemyTank::RandomDirChange()
 {
 	while (true)
 	{
-		int RandomValue = rand() % 100 + 1;
-		if (RandomValue > 0 && RandomValue <= 25)
+		int RandomValue = rand() % 4 ;
+		if (RandomValue == 0)
 		{
 			m_moveDir = MoveDir::Up;
 			m_frameX = m_enemyFrame[MoveDir::Up];
 			m_maxFrameX = m_enemyFrame[MoveDir::Up] + 1;
 		}
-		else if (RandomValue > 25 && RandomValue <= 50)
+		else if (RandomValue == 1)
 		{
 			m_moveDir = MoveDir::Left;
 			m_frameX = m_enemyFrame[MoveDir::Left];
 			m_maxFrameX = m_enemyFrame[MoveDir::Left] + 1;
 		}
-		else if (RandomValue > 50 && RandomValue <= 75)
+		else if (RandomValue == 2)
 		{
 			m_moveDir = MoveDir::Down;
 			m_frameX = m_enemyFrame[MoveDir::Down];
@@ -79,12 +79,39 @@ void EnemyTank::RandomDirChange()
 
 bool EnemyTank::IsCollisionMap()
 {
+	if (m_shape.right > m_tileMap->GetShape().right || m_shape.left < m_tileMap->GetShape().left
+		|| m_shape.top < m_tileMap->GetShape().top || m_shape.bottom > m_tileMap->GetShape().bottom)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool EnemyTank::IsCollisionMap(MoveDir& dir)
+{
+	dir = MoveDir::End;
     // 탱크가 화면과 충돌시 방향전환
-    if (m_shape.right > m_tileMap->GetShape().right || m_shape.left < m_tileMap->GetShape().left
-        || m_shape.top < m_tileMap->GetShape().top || m_shape.bottom > m_tileMap->GetShape().bottom)
-    {
-        return true;
-    }
+	if (m_shape.right > m_tileMap->GetShape().right)
+	{
+		dir = MoveDir::Right;
+		return true;
+	}
+	if (m_shape.left < m_tileMap->GetShape().left)
+	{
+		dir = MoveDir::Left;
+		return true;
+	}
+	if (m_shape.top < m_tileMap->GetShape().top)
+	{
+		dir = MoveDir::Up;
+		return true;
+	}
+	if (m_shape.bottom > m_tileMap->GetShape().bottom)
+	{
+		dir = MoveDir::Down;
+		return true;
+	}
 
     return false;
 }

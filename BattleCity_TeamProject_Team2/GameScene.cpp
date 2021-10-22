@@ -18,8 +18,11 @@
 HRESULT GameScene::Init()
 {
 	SetWindowSize(WIN_START_POS_X, WIN_START_POS_Y, WIN_SIZE_X, WIN_SIZE_Y);
-
 	m_backGround = ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+	m_killCount.ArmorTankNr = 0;
+	m_killCount.BasicTankNr = 0;
+	m_killCount.PowerTankNr = 0;
+	m_killCount.SpeedTankNr = 0;
 
 	m_tileMap = new TileMap;
 	m_tileMap->Init();
@@ -32,10 +35,12 @@ HRESULT GameScene::Init()
 	m_ammoMgr = new AmmoManager;
 	m_ammoMgr->Init();
 	m_ammoMgr->SetTileMap(m_tileMap);
+	m_ammoMgr->SetKillCount(&m_killCount);
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
 	m_enemyMgr->SetPlayerTank(m_player);
+	m_enemyMgr->SetAmmoMgr(m_ammoMgr);
 
 	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
 	//m_enemyMgr->CollisionWithTile();
@@ -45,9 +50,7 @@ HRESULT GameScene::Init()
 	m_spawnPlaceX3 = m_tileMap->GetShape().left + 32;
 	m_spawnPlaceY = m_tileMap->GetShape().top + 32;
 	
-	m_stageNum = m_tileMap->GetStageNum();
-	
-	switch (m_stageNum)
+	switch (GameManager::GetSingleton()->GetStageNr())
 	{
 	case 1:
 		m_enemyTotNum = 12;
@@ -67,8 +70,6 @@ HRESULT GameScene::Init()
 void GameScene::Update()
 {
 	m_tileMap->Update();
-
-
 
 	// 적 생성 
 	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
@@ -108,24 +109,7 @@ void GameScene::Update()
 
 	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
 	m_enemyMgr->Update();
-
-
-
-	m_vecEnemyTank = m_enemyMgr->GetEnemyVec();
-	if (!m_vecEnemyTank.empty())
-	{
-		for (m_it = m_vecEnemyTank.begin(); m_it != m_vecEnemyTank.end(); m_it++)
-		{
-			if ((*m_it)->GetisFire() == true)
-			{
-				m_ammoMgr->AddAmmo(new Ammo, m_it, m_player);
-				(*m_it)->SetisFire(false);
-			}
-		}
-	}
 	
-	
-
 	// 플레이어, 플레이어 아모발사, 플레이어 아모 매니저 업데이트
 	if (m_player->GetAlive() == true)
 	{
@@ -141,9 +125,12 @@ void GameScene::Update()
 		m_player->SetisFire(false);
 	}
 
-
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F2))
+	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum)
+	{
 		SceneManager::GetSingleton()->ChangeScene("결과씬");
+	}
+	/*if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F2))
+		SceneManager::GetSingleton()->ChangeScene("결과씬");*/
 
 }
 
@@ -167,10 +154,10 @@ void GameScene::Render(HDC hdc)
 
 void GameScene::Release()
 {
-	SAFE_RELEASE(m_backGround);
-	SAFE_RELEASE(m_tileMap);
-	SAFE_RELEASE(m_uiManager);
-	SAFE_RELEASE(m_player);
-	SAFE_RELEASE(m_ammoMgr);
+	//SAFE_RELEASE(m_backGround);
+	//SAFE_RELEASE(m_tileMap);
+	//SAFE_RELEASE(m_uiManager);
+	//SAFE_RELEASE(m_player);
+	//SAFE_RELEASE(m_ammoMgr);
 	//SAFE_RELEASE(m_enemyMgr);
 }

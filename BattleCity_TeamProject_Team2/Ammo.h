@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "GameScene.h"
 
 class Tank;
 class Image;
@@ -7,6 +8,10 @@ class TileMap;
 class EnemyTank;
 class Ammo : public GameObject
 {
+private:
+	LPKILL_COUNT m_killCount;
+	//LPKillCount m_killCount; // 안 쓰는 것
+
 	Image* m_boomImg;
 	Image* m_img;
 	MoveDir m_moveDir;
@@ -52,6 +57,8 @@ public:
 	inline void SetOwner(GameObject* owner) { this->m_owner = owner; }
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
+
+	//inline void SetKillCount(LPKillCount count) { this->m_killCount = count; }
 
 
 	inline void SetPlayerTank(Tank* playerTank) { this->m_playerTank = playerTank; }

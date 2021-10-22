@@ -1,6 +1,7 @@
 #pragma once
 #include "Config.h"
 #include "GameObject.h"
+#include "GameScene.h"
 
 class Ammo;
 class Tank;
@@ -12,6 +13,8 @@ private:
 	Image* m_AmmoImage[MoveDir::End];
 
 	vector<EnemyTank*> m_vecEnemys;
+
+	LPKillCount m_killCount;
 
 	vector<Ammo*> m_vecAmmo;
 	vector<Ammo*>::iterator m_vecAmmoIter;
@@ -33,5 +36,7 @@ public:
 	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
 
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
+
+	inline void SetKillCount(LPKillCount count) { this->m_killCount = count; }
 
 };

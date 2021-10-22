@@ -1,6 +1,14 @@
 #pragma once
 #include "GameEntity.h"
 
+typedef struct KillCount
+{
+	int BasicTankNr;
+	int SpeedTankNr;
+	int PowerTankNr;
+	int ArmorTankNr;
+}*LPKillCount;
+
 class EnemyTank;
 class Image;
 class UIManager;
@@ -11,6 +19,7 @@ class AmmoManager;
 class GameScene : public GameEntity
 {
 private:
+
 	Image* m_backGround;
 
 	TileMap* m_tileMap;
@@ -23,13 +32,14 @@ private:
 
 	EnemyManager* m_enemyMgr;
 
+	KillCount m_killCount;
+
 	float m_enemySpawnPlaceX = 0;
 	float m_spawnPlaceX1 = 0;
 	float m_spawnPlaceX2 = 0;
 	float m_spawnPlaceX3 = 0;
 	float m_spawnPlaceY = 0;
 
-	int m_stageNum = 0;
 	int m_enemyNumCount = 0;
 	int m_enemyTotNum = 0;
 	int m_basicTankNum = 0;
