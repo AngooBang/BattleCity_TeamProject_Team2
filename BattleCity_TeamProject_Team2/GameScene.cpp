@@ -83,7 +83,15 @@ void GameScene::Update()
 	{
 		m_goElapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
 		if (m_gameOverPos.y > TILE_MAP_START_POS_Y + TILE_MAP_SIZE_Y / 2)
+		{
 			m_gameOverPos.y -= 2;
+		}
+		else
+		{
+			// 게임오버
+			Sleep(1000);
+			SceneManager::GetSingleton()->ChangeScene("결과씬");
+		}
 		if(m_goElapsedTime > 0.4f)
 			return;
 	}
@@ -163,8 +171,11 @@ void GameScene::Update()
 	}
 
 
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F2))
+	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum)
+	{
+		// 스테이지 클리어
 		SceneManager::GetSingleton()->ChangeScene("결과씬");
+	}
 
 }
 
