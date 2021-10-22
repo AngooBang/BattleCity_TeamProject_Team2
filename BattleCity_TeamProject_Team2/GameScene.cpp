@@ -18,7 +18,6 @@
 HRESULT GameScene::Init()
 {
 	SetWindowSize(WIN_START_POS_X, WIN_START_POS_Y, WIN_SIZE_X, WIN_SIZE_Y);
-
 	m_backGround = ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
 	m_gameOver = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
@@ -136,24 +135,7 @@ void GameScene::Update()
 
 	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
 	m_enemyMgr->Update();
-
-
-
-	m_vecEnemyTank = m_enemyMgr->GetVecEnemys();
-	if (!m_vecEnemyTank.empty())
-	{
-		for (m_it = m_vecEnemyTank.begin(); m_it != m_vecEnemyTank.end(); m_it++)
-		{
-			if ((*m_it)->GetisFire() == true)
-			{
-				m_ammoMgr->AddAmmo(new Ammo, m_it, m_player);
-				(*m_it)->SetisFire(false);
-			}
-		}
-	}
 	
-	
-
 	// 플레이어, 플레이어 아모발사, 플레이어 아모 매니저 업데이트
 	if (m_player->GetAlive() == true)
 	{

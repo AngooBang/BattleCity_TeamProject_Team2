@@ -11,6 +11,7 @@ class AmmoManager;
 class GameScene : public GameEntity
 {
 private:
+
 	Image* m_backGround;
 
 	Image* m_gameOver;
@@ -35,7 +36,6 @@ private:
 	float m_spawnPlaceX3 = 0;
 	float m_spawnPlaceY = 0;
 
-	int m_stageNum = 0;
 	int m_enemyNumCount = 0;
 	int m_enemyTotNum = 0;
 	int m_basicTankNum = 0;
