@@ -1,6 +1,7 @@
 #include "ArmorTank.h"
 #include "Image.h"
 #include "TileMap.h"
+#include "GameScene.h"
 
 HRESULT ArmorTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
@@ -57,8 +58,12 @@ void ArmorTank::Update()
 {
     if (m_enemyStatus == EnemyStatus::Create)
     {
-        totElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
-        ++m_elapsedCount;
+        // 시간 정지 아이템 먹었을 때
+        if (!m_gameScene->GetIsTimeStop())
+        {
+            totElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
+            ++m_elapsedCount;
+        }
         if (m_elapsedCount > 3)
         {
             m_frameX += m_frameCount;
@@ -88,27 +93,30 @@ void ArmorTank::Update()
     }
     else if (m_enemyStatus == EnemyStatus::Alive)
     {
-        // 미사일 딜레이 
-        m_fireElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
-        if (m_fireElapsedCount > 4.0f)
+        // 시간 정지 아이템 먹었을 때
+        if (!m_gameScene->GetIsTimeStop())
         {
-            mb_isFire = true;
-            m_fireElapsedCount = 0;
-        }
-
-        // 시간에 따른 탱크 이미지(탱크 움직임) 프레임 업데이트
-        ++m_elapsedCount;
-        if (m_elapsedCount % 5 == 0)
-        {
-            ++m_frameX;
-            if (m_frameX > m_maxFrameX)
+            // 미사일 딜레이   
+            m_fireElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
+            if (m_fireElapsedCount > 4.0f)
             {
-                m_frameX -= 2;
+                mb_isFire = true;
+                m_fireElapsedCount = 0;
             }
-        }
+            // 시간에 따른 탱크 이미지(탱크 움직임) 프레임 업데이트
+            ++m_elapsedCount;
+            if (m_elapsedCount % 5 == 0)
+            {
+                ++m_frameX;
+                if (m_frameX > m_maxFrameX)
+                {
+                    m_frameX -= 2;
+                }
+            }
 
-        // 탱크 위치 좌표 업데이트
-        AutoMove();
+            // 탱크 위치 좌표 업데이트
+            AutoMove();
+        }
 
         // 타일과 충돌했을 시
         IsCollisionTile();
@@ -129,53 +137,7 @@ void ArmorTank::Update()
         }
 
         // 시간에 따른 탱크 이동방향 전환
-        if (m_elapsedCount > m_moveDelay)
-        {
-            int  RandomValue = rand() % 4;
-            switch (RandomValue)
-            {
-            case 0:
-                m_moveDir = MoveDir::Left;
-                mb_dirCheck[m_beforeMoveDir] = false;
-                mb_dirCheck[m_moveDir] = true;
-                m_beforeMoveDir = m_moveDir;
-
-                m_frameX = m_enemyFrame[MoveDir::Left];
-                m_maxFrameX = m_enemyFrame[MoveDir::Left] + 1;
-                break;
-
-            case 1:
-                m_moveDir = MoveDir::Right;
-                mb_dirCheck[m_beforeMoveDir] = false;
-                mb_dirCheck[m_moveDir] = true;
-                m_beforeMoveDir = m_moveDir;
-
-                m_frameX = m_enemyFrame[MoveDir::Right];
-                m_maxFrameX = m_enemyFrame[MoveDir::Right] + 1;
-                break;
-
-            case 2:
-                m_moveDir = MoveDir::Up;
-                mb_dirCheck[m_beforeMoveDir] = false;
-                mb_dirCheck[m_moveDir] = true;
-                m_beforeMoveDir = m_moveDir;
-
-                m_frameX = m_enemyFrame[MoveDir::Up];
-                m_maxFrameX = m_enemyFrame[MoveDir::Up] + 1;
-                break;
-
-            case 3:
-                m_moveDir = MoveDir::Down;
-                mb_dirCheck[m_beforeMoveDir] = false;
-                mb_dirCheck[m_moveDir] = true;
-                m_beforeMoveDir = m_moveDir;
-
-                m_frameX = m_enemyFrame[MoveDir::Down];
-                m_maxFrameX = m_enemyFrame[MoveDir::Down] + 1;
-                break;
-            }
-            m_elapsedCount = 0;
-        }
+        TimeDirChange();
     }
     else if (m_enemyStatus == EnemyStatus::Dead)
     {

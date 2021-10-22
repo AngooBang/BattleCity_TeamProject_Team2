@@ -9,6 +9,7 @@ class Tank;
 class TileMap;
 class EnemyTank;
 class AmmoManager;
+class GameScene;
 class EnemyManager : public GameObject
 {
 private:
@@ -19,6 +20,7 @@ private:
 	Tank* m_player;
 	RECT m_tempRect;
 
+	GameScene* m_gameScene;
 	//
 	AmmoManager* m_ammoMgr;
 
@@ -33,8 +35,7 @@ public:
 	void Render(HDC hdc);
 	void Release();
 
-	//inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
-	//inline RECT GetTileMapShape() { return this->m_tileMapShape; }
+	void SetGameScene(GameScene* gameScene) { this->m_gameScene = gameScene; }
 
 	void AddEnemy(EnemyTank* EnemyTank, POINTFLOAT pos);
 

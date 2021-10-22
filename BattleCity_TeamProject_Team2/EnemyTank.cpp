@@ -2,6 +2,7 @@
 #include "EnemyManager.h"
 #include "Image.h"
 #include "TileMap.h"
+#include "GameScene.h"
 
 HRESULT EnemyTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
@@ -75,6 +76,59 @@ void EnemyTank::RandomDirChange()
 	mb_dirCheck[m_beforeMoveDir] = false;
 	mb_dirCheck[m_moveDir] = true;
 	m_beforeMoveDir = m_moveDir;
+}
+
+void EnemyTank::TimeDirChange()
+{
+	if (m_gameScene->GetIsTimeStop()) return;
+
+	if (m_elapsedCount > m_moveDelay)
+	{
+		int  RandomValue = rand() % 4;
+		switch (RandomValue)
+		{
+		case 0:
+			m_moveDir = MoveDir::Left;
+			mb_dirCheck[m_beforeMoveDir] = false;
+			mb_dirCheck[m_moveDir] = true;
+			m_beforeMoveDir = m_moveDir;
+
+			m_frameX = m_enemyFrame[MoveDir::Left];
+			m_maxFrameX = m_enemyFrame[MoveDir::Left] + 1;
+			break;
+
+		case 1:
+			m_moveDir = MoveDir::Right;
+			mb_dirCheck[m_beforeMoveDir] = false;
+			mb_dirCheck[m_moveDir] = true;
+			m_beforeMoveDir = m_moveDir;
+
+			m_frameX = m_enemyFrame[MoveDir::Right];
+			m_maxFrameX = m_enemyFrame[MoveDir::Right] + 1;
+			break;
+
+		case 2:
+			m_moveDir = MoveDir::Up;
+			mb_dirCheck[m_beforeMoveDir] = false;
+			mb_dirCheck[m_moveDir] = true;
+			m_beforeMoveDir = m_moveDir;
+
+			m_frameX = m_enemyFrame[MoveDir::Up];
+			m_maxFrameX = m_enemyFrame[MoveDir::Up] + 1;
+			break;
+
+		case 3:
+			m_moveDir = MoveDir::Down;
+			mb_dirCheck[m_beforeMoveDir] = false;
+			mb_dirCheck[m_moveDir] = true;
+			m_beforeMoveDir = m_moveDir;
+
+			m_frameX = m_enemyFrame[MoveDir::Down];
+			m_maxFrameX = m_enemyFrame[MoveDir::Down] + 1;
+			break;
+		}
+		m_elapsedCount = 0;
+	}
 }
 
 bool EnemyTank::IsCollisionMap()

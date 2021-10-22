@@ -18,6 +18,7 @@ HRESULT TimeItem::Init()
 	m_shape.bottom = m_pos.y + m_bodySize / 2;
 
 	mb_isAlive = true;
+	mb_isActive = false;
 	m_timeStopCount = 0.0f;
 
 	return S_OK;
@@ -25,25 +26,27 @@ HRESULT TimeItem::Init()
 
 void TimeItem::Update()
 {
-	if (!mb_isAlive) return;
+	if (!mb_isAlive && !mb_isActive) return;
 	CountShow();
-
-	if (m_gameScene->GetIsTimeStop())
-	{
-		m_timeStopCount += TimerManager::GetSingleton()->GetDeltaTime();
-
-		if (m_timeStopCount > 0.5f)
-		{
-			m_gameScene->SetIsTimeStop(false);
-			m_timeStopCount = 0.0f;
-			mb_isAlive = false;
-		}
-	}
 
 	if (CheckCollision())
 	{
 		m_gameScene->SetIsTimeStop(true);
+		mb_isActive = true;
+		mb_isAlive = false;
 	}
+	if (mb_isActive)
+	{
+		m_timeStopCount += TimerManager::GetSingleton()->GetDeltaTime();
+
+		if (m_timeStopCount > 6.0f)
+		{
+			m_gameScene->SetIsTimeStop(false);
+			m_timeStopCount = 0.0f;
+			mb_isActive = false;
+		}
+	}
+
 }
 
 void TimeItem::Render(HDC hdc)

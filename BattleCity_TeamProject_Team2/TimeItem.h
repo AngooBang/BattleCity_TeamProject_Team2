@@ -3,7 +3,9 @@
 class TimeItem : public Item
 {
 private:
+	bool mb_isActive;
 	float m_timeStopCount;
+
 
 public:
 	virtual HRESULT Init();

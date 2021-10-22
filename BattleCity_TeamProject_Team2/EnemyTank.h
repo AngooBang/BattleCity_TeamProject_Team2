@@ -9,6 +9,7 @@ enum class EnemyStatus {Create, Alive, Dead, End};
 class Image;
 class TileMap;
 class EnemyManager;
+class GameScene;
 class EnemyTank : public GameObject
 {
 protected:
@@ -17,6 +18,9 @@ protected:
 
 	Image* m_img;
 	EnemyManager* m_manager;
+
+
+	GameScene* m_gameScene;
 
 	int m_elapsedCount = 0;
 	int m_moveDelay = 70;
@@ -66,11 +70,15 @@ public:
 
 	void AutoMove();
 	void RandomDirChange();
+	void TimeDirChange();
 
 	bool IsCollisionMap();
 	bool IsCollisionMap(MoveDir& dir);
 	bool IsCollisionTile();
 	void MoveCorrection();
+
+
+	void SetGameScene(GameScene* gameScene) { this->m_gameScene = gameScene; }
 
 
 	inline void SetIsAlive(bool isAlive) { this->mb_isAlive = isAlive; }

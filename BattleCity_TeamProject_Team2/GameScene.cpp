@@ -43,6 +43,7 @@ HRESULT GameScene::Init()
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
+	m_enemyMgr->SetGameScene(this);
 	m_enemyMgr->SetPlayerTank(m_player);
 	m_enemyMgr->SetAmmoMgr(m_ammoMgr);
 
@@ -95,11 +96,14 @@ void GameScene::Update()
 	m_tileMap->Update();
 
 	// Àû »ý¼º 
-	m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
-	if (m_elapsedTime > 3.0f && m_enemyNumCount < m_enemyTotNum)
-	{	
-		SpawnEnemy();
-		m_elapsedTime = 0;
+	if (!mb_isTimeStop)
+	{
+		m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
+		if (m_elapsedTime > 3.0f && m_enemyNumCount < m_enemyTotNum)
+		{
+			SpawnEnemy();
+			m_elapsedTime = 0;
+		}
 	}
 
 	m_uiManager->Update(m_enemyTotNum, m_enemyNumCount, m_player->GetHP());

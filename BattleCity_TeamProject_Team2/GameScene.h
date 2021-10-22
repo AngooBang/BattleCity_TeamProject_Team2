@@ -49,9 +49,6 @@ private:
 
 	float m_fireTime = 0;
 
-	vector<EnemyTank*> m_vecEnemyTank;
-	vector<EnemyTank*>::iterator m_it;
-
 public:
 	HRESULT Init();
 	void Update();
