@@ -8,6 +8,7 @@ class TileMap;
 class EnemyManager;
 class Tank;
 class AmmoManager;
+class ItemManager;
 class GameScene : public GameEntity
 {
 private:
@@ -27,7 +28,11 @@ private:
 
 	EnemyManager* m_enemyMgr;
 
+	ItemManager* m_itemMgr;
+
 	bool mb_isGameOver;
+
+	bool mb_isTimeStop;
 
 	float m_enemySpawnPlaceX = 0;
 	float m_spawnPlaceX1 = 0;
@@ -56,5 +61,15 @@ public:
 	void Update();
 	void Render(HDC hdc);	
 	void Release();
+
+	
+	inline Tank* GetPlayer() { return this->m_player; }
+
+	inline EnemyManager* GetEnemyMgr() { return this->m_enemyMgr; }
+
+	inline TileMap* GetTileMap() { return this->m_tileMap; }
+
+	inline void SetIsTimeStop(bool isTimeStop) { this->mb_isTimeStop = isTimeStop; }
+	inline bool GetIsTimeStop() { return this->mb_isTimeStop; }
 };
 

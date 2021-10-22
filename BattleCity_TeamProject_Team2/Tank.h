@@ -80,6 +80,7 @@ public:
 
 	void SpawnPlayer();
 	void ShieldPlayer();
+	void UpgradeTank();
 
 	//inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
 	//inline RECT GetTileMapShape() { return this->m_tileMapShape; }

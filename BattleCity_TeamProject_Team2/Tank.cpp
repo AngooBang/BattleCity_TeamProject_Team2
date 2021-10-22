@@ -45,6 +45,11 @@ HRESULT Tank::Init()
 
 void Tank::Update()
 {
+	// 아이템을 먹어 체력이 높아졌을때
+	if (m_tempHP < m_HP)
+	{
+		m_tempHP = m_HP;
+	}
 	if (mb_isSpawn)
 	{
 		m_spawnTimer += TimerManager::GetSingleton()->GetDeltaTime();
@@ -370,6 +375,7 @@ void Tank::SpawnPlayer()
 	m_pos.y = 20 + TILE_MAP_SIZE_Y / 2;
 
 	m_frameX = 0;
+	m_frameY = 0;
 	m_maxFrameX = 2;
 
 	mb_isSpawn = true;
@@ -381,6 +387,16 @@ void Tank::ShieldPlayer()
 	m_shieldframeX = 0;
 	m_shieldTimer = 0.0f;
 	mb_isShield = true;
+}
+
+void Tank::UpgradeTank()
+{
+	++m_frameY;
+
+	if (m_frameY > 3)
+	{
+		m_frameY = 3;
+	}
 }
 
 void Tank::SetImage()

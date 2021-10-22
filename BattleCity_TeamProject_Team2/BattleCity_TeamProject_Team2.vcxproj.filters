@@ -49,6 +49,9 @@
     <Filter Include="MainGame\Ammo">
       <UniqueIdentifier>{20400523-d18e-4668-bf1a-d67e24bdbdab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Item">
+      <UniqueIdentifier>{6f7549db-cf58-49b2-b91a-a859f8198c5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -132,6 +135,30 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>2D FrameWork\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="StarItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="GranadeItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HardWallItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ShieldItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -171,9 +198,6 @@
       <Filter>2D FrameWork\Timer</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
-      <Filter>MainGame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
@@ -220,6 +244,33 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>2D FrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="StarItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="GranadeItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="HardWallItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ShieldItem.h">
+      <Filter>MainGame\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

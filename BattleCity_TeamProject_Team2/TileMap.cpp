@@ -196,7 +196,7 @@ void TileMap::SetBaseData()
 				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameX = 7;
 				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameY = 5;
 
-				break;
+				return;
 			}
 			if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)
 			{
@@ -213,7 +213,7 @@ void TileMap::SetBaseData()
 				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameX = 9;
 				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameY = 5;
 
-				break;
+				return;
 			}
 		}
 	}

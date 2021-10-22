@@ -1,21 +1,22 @@
 #pragma once
 #include "GameObject.h"
 
-
-
 #define TILE_MAP_START_POS_X 20
 #define TILE_MAP_START_POS_Y 20
 #define TILE_MAP_SIZE_X TILE_SIZE * TILE_COUNT_X
 #define TILE_MAP_SIZE_Y TILE_SIZE * TILE_COUNT_Y
-
-enum class Terrain { None, Wall, HardWall, Water, Grass, Base, DestroyBase, End };
-
 #define TILE_SIZE 32
 #define SMALL_TILE_SIZE 16
 #define TILE_COUNT_X 26
 #define TILE_COUNT_Y 26
 #define INSIDE_TILE_COUNT_X 2
 #define INSIDE_TILE_COUNT_Y 2
+
+
+
+enum class Terrain { None, Wall, HardWall, Water, Grass, Base, DestroyBase, End };
+
+
 typedef struct InsideTile
 {
 	RECT rc;

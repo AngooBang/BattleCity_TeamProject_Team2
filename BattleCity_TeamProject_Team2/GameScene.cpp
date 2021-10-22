@@ -11,7 +11,7 @@
 #include "ArmorTank.h"
 #include "Ammo.h"
 #include "AmmoManager.h"
-
+#include "ItemManager.h"
 #include "EnemyTank.h"
 
 
@@ -24,6 +24,7 @@ HRESULT GameScene::Init()
 	m_gameOver = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
 
 	mb_isGameOver = false;
+	mb_isTimeStop = false;
 	m_goElapsedTime = 0.0f;
 
 	m_gameOverPos.x = TILE_MAP_START_POS_X + TILE_MAP_SIZE_X / 2;
@@ -44,9 +45,11 @@ HRESULT GameScene::Init()
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
 	m_enemyMgr->SetPlayerTank(m_player);
+	m_enemyMgr->SetTileMap(m_tileMap);
 
-	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
-	//m_enemyMgr->CollisionWithTile();
+	m_itemMgr = new ItemManager;
+	m_itemMgr->Init();
+	m_itemMgr->SetGameScene(this);
 
 	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2;
 	m_spawnPlaceX2 = m_tileMap->GetShape().right - 32;
@@ -137,9 +140,6 @@ void GameScene::Update()
 
 	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
 	m_enemyMgr->Update();
-
-
-
 	m_vecEnemyTank = m_enemyMgr->GetVecEnemys();
 	if (!m_vecEnemyTank.empty())
 	{
@@ -151,6 +151,13 @@ void GameScene::Update()
 				(*m_it)->SetisFire(false);
 			}
 		}
+	}
+
+	// 아이템 매니저 업데이트
+	m_itemMgr->Update();
+	if (KeyManager::GetSingleton()->IsOnceKeyDown('G'))
+	{
+		m_itemMgr->AddItem();
 	}
 	
 	
@@ -175,6 +182,7 @@ void GameScene::Update()
 	{
 		// 스테이지 클리어
 		SceneManager::GetSingleton()->ChangeScene("결과씬");
+
 	}
 
 }
@@ -195,6 +203,8 @@ void GameScene::Render(HDC hdc)
 	m_enemyMgr->Render(hdc);
 
 	m_ammoMgr->Render(hdc);
+
+	m_itemMgr->Render(hdc);
 
 	// 풀 타일 출력
 	for (int i = 0; i < TILE_COUNT_Y; i++)
@@ -225,4 +235,5 @@ void GameScene::Release()
 	SAFE_RELEASE(m_player);
 	SAFE_RELEASE(m_ammoMgr);
 	SAFE_RELEASE(m_enemyMgr);
+	SAFE_RELEASE(m_itemMgr);
 }
