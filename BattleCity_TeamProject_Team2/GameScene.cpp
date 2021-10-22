@@ -44,6 +44,7 @@ HRESULT GameScene::Init()
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
 	m_enemyMgr->SetPlayerTank(m_player);
+	m_enemyMgr->SetAmmoMgr(m_ammoMgr);
 
 	m_enemyMgr->SetTileMap(m_tileMap);	// 맵과 적탱크 충돌처리 하기위해 데이터 갖고오기 위해 만들어 놓은 실험용.
 	//m_enemyMgr->CollisionWithTile();
@@ -53,9 +54,7 @@ HRESULT GameScene::Init()
 	m_spawnPlaceX3 = m_tileMap->GetShape().left + 32;
 	m_spawnPlaceY = m_tileMap->GetShape().top + 32;
 	
-	m_stageNum = m_tileMap->GetStageNum();
-	
-	switch (m_stageNum)
+	switch (GameManager::GetSingleton()->GetStageNr())
 	{
 	case 1:
 		m_enemyTotNum = 12;
