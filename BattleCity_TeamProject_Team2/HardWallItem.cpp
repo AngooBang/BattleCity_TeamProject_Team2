@@ -61,7 +61,6 @@ void HardWallItem::Render(HDC hdc)
 
 void HardWallItem::Release()
 {
-	SAFE_RELEASE(m_tileMap);
 }
 
 void HardWallItem::SetHardWall()
