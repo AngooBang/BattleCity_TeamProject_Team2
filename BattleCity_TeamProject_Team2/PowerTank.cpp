@@ -88,7 +88,7 @@ void PowerTank::Update()
     }
     else if (m_enemyStatus == EnemyStatus::Alive)
     {
-        // 미사일 딜레이 
+        // 미사일 딜레이         
         m_fireElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
         if (m_fireElapsedCount > 4.0f)
         {
