@@ -7,6 +7,10 @@ class TileMap;
 class EnemyTank;
 class Ammo : public GameObject
 {
+private:
+	LPKILL_COUNT m_killCount;
+	//LPKillCount m_killCount; // 안 쓰는 것
+
 	Image* m_boomImg;
 	Image* m_img;
 	MoveDir m_moveDir;

@@ -1,0 +1,9 @@
+diff a/BattleCity_TeamProject_Team2/Ammo.h b/BattleCity_TeamProject_Team2/Ammo.h	(rejected hunks)
+@@ -10,6 +10,7 @@
+ {
+ private:
+ 	LPKILL_COUNT m_killCount;
++	//LPKillCount m_killCount; // �� ���� ��
+ 
+ 	Image* m_boomImg;
+ 	Image* m_img;

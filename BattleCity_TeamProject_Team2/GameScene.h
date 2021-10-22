@@ -12,6 +12,7 @@ class ItemManager;
 class GameScene : public GameEntity
 {
 private:
+
 	Image* m_backGround;
 
 	Image* m_gameOver;
@@ -40,13 +41,8 @@ private:
 	float m_spawnPlaceX3 = 0;
 	float m_spawnPlaceY = 0;
 
-	int m_stageNum = 0;
 	int m_enemyNumCount = 0;
 	int m_enemyTotNum = 0;
-	int m_basicTankNum = 0;
-	int m_speedTankNum = 0;
-	int m_powerTankNum = 0;
-	int m_armorTankNum = 0;
 
 	float m_elapsedTime = 0;
 	float m_goElapsedTime;
@@ -71,5 +67,7 @@ public:
 
 	inline void SetIsTimeStop(bool isTimeStop) { this->mb_isTimeStop = isTimeStop; }
 	inline bool GetIsTimeStop() { return this->mb_isTimeStop; }
+
+	void SpawnEnemy();
 };
 

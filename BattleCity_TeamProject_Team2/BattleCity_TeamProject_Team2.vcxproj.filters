@@ -135,6 +135,9 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>2D FrameWork\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="ItemManager.cpp">
       <Filter>MainGame\Item</Filter>
     </ClCompile>
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>2D FrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>MainGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="ItemManager.h">
       <Filter>MainGame\Item</Filter>

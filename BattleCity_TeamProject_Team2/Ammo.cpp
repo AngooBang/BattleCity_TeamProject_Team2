@@ -30,6 +30,8 @@ HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_
 	m_elapsedCount = 0;
 	m_totElapsedCount = 0;
 
+	m_killCount = GameManager::GetSingleton()->GetKillCount();
+
 	return S_OK;
 }
 
@@ -142,6 +144,30 @@ void Ammo::EnemyCollider()
 			if ((*it)->GetHP() == 0)
 			{
 				(*it)->SetEnemyStatus(EnemyStatus::Dead);
+				
+				switch ((*it)->GetEnemyType())
+				{
+				case EnemyType::Basic:
+					m_killCount->basicTankNr++;
+					m_killCount->totKillTankNr++;
+					break;
+
+				case EnemyType::Speed:
+					m_killCount->speedTankNr++;
+					m_killCount->totKillTankNr++;
+					break;
+
+				case EnemyType::Power:
+					m_killCount->powerTankNr++;
+					m_killCount->totKillTankNr++;
+					break;
+
+				case EnemyType::ArmorGray:
+					m_killCount->armorTankNr++;
+					m_killCount->totKillTankNr++;
+					break;
+				}
+				cout << m_killCount->totKillTankNr << endl;
 				//(*it)->SetIsAlive(false);
 			}
 			mb_isAlive = false;
