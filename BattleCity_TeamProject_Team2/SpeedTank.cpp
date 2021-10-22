@@ -115,9 +115,10 @@ void SpeedTank::Update()
         IsCollisionTile();
 
         // 충돌했을시 방향 전환
-        if (IsCollisionMap())
+        MoveDir dir;
+        if (IsCollisionMap(dir))
         {
-            switch (m_moveDir)
+            switch (dir)
             {
             case MoveDir::Left:		m_pos.x = m_pos.x + (m_tileMap->GetShape().left - m_shape.left); break;
             case MoveDir::Right:	m_pos.x = m_pos.x - (m_shape.right - m_tileMap->GetShape().right); break;

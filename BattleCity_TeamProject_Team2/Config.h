@@ -39,6 +39,7 @@ typedef struct ArgumentFuncPtr
 #include "ImageManager.h"
 #include "KeyManager.h"
 #include "SceneManager.h"
+#include "GameManager.h"
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;

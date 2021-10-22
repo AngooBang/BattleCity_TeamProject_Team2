@@ -132,7 +132,7 @@ void GameScene::Update()
 
 
 
-	m_vecEnemyTank = m_enemyMgr->GetEnemyVec();
+	m_vecEnemyTank = m_enemyMgr->GetVecEnemys();
 	if (!m_vecEnemyTank.empty())
 	{
 		for (m_it = m_vecEnemyTank.begin(); m_it != m_vecEnemyTank.end(); m_it++)

@@ -47,5 +47,7 @@ public:
 
 	bool CollisionWithTile();
 
-	inline vector<EnemyTank*> GetEnemyVec() { return vecEnemyTank; }
+	inline void SetAmmoMgr(AmmoManager* ammoMgr) { this->m_ammoMgr = ammoMgr; }
+
+	
 };
