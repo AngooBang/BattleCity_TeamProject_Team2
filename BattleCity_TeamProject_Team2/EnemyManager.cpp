@@ -220,21 +220,3 @@ bool EnemyManager::isCollisionPlayer(vector<EnemyTank*>::iterator EnemyTankIter)
     return false;
 }
 
-bool EnemyManager::CollisionWithTile()
-{
-    m_tileMap->GetShape();
-    for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end();
-        ++vecEnemyTankIter)
-    {
-        if (CheckInRect((*vecEnemyTankIter)->GetShape(), m_tileMap->GetShape() ) )
-        {
-
-        }
-    }
-    /*p = m_tileMap->GetMapTileInfo();
-    cout << p[0][0].rc.left << endl;*/
-    /*cout << map[0][0].rc.left << endl;
-    cout << map[0][0].rc.right << endl;*/
-
-    return true;
-}

@@ -2,6 +2,7 @@
 #include "Image.h"
 #include "GameScene.h"
 #include "ResultScene.h"
+#include "GameOverScene.h"
 
 HRESULT MainGame::Init()
 {
@@ -14,6 +15,8 @@ HRESULT MainGame::Init()
 
 	SceneManager::GetSingleton()->AddScene("∞‘¿”æ¿", new GameScene());
 	SceneManager::GetSingleton()->AddScene("∞·∞˙æ¿", new ResultScene());
+
+	SceneManager::GetSingleton()->AddScene("∞‘¿”ø¿πˆæ¿", new GameOverScene());
 
 
 	SceneManager::GetSingleton()->ChangeScene("∞‘¿”æ¿");

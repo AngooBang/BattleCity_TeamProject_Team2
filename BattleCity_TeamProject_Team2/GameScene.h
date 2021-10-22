@@ -38,10 +38,6 @@ private:
 
 	int m_enemyNumCount = 0;
 	int m_enemyTotNum = 0;
-	int m_basicTankNum = 0;
-	int m_speedTankNum = 0;
-	int m_powerTankNum = 0;
-	int m_armorTankNum = 0;
 
 	float m_elapsedTime = 0;
 	float m_goElapsedTime;
@@ -56,5 +52,7 @@ public:
 	void Update();
 	void Render(HDC hdc);	
 	void Release();
+
+	void SpawnEnemy();
 };
 

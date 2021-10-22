@@ -33,19 +33,12 @@ public:
 	void Render(HDC hdc);
 	void Release();
 
-	//inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
-	//inline RECT GetTileMapShape() { return this->m_tileMapShape; }
-
 	void AddEnemy(EnemyTank* EnemyTank, POINTFLOAT pos);
-
-	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 
 	bool isCollisionPlayer(vector<EnemyTank*>::iterator EnemyTankIter);
 	inline void SetPlayerTank(Tank* playerTank) { this->m_player = playerTank; }
 
 	inline vector<EnemyTank*> GetVecEnemys() { return vecEnemyTank; }
-
-	bool CollisionWithTile();
 
 	inline void SetAmmoMgr(AmmoManager* ammoMgr) { this->m_ammoMgr = ammoMgr; }
 
