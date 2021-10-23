@@ -4,6 +4,7 @@
 #include "ResultScene.h"
 #include "TitleScene.h"
 #include "StageScene.h"
+#include "GameOverScene.h"
 
 HRESULT MainGame::Init()
 {
@@ -18,9 +19,10 @@ HRESULT MainGame::Init()
 	SceneManager::GetSingleton()->AddScene("스테이지씬", new StageScene());
 	SceneManager::GetSingleton()->AddScene("게임씬", new GameScene());
 	SceneManager::GetSingleton()->AddScene("결과씬", new ResultScene());
+	SceneManager::GetSingleton()->AddScene("게임오버씬", new GameOverScene());
 
 	SceneManager::GetSingleton()->ChangeScene("타이틀씬");
-
+	 
 	srand((unsigned int)time(nullptr));
 	// 타이머 셋팅
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);

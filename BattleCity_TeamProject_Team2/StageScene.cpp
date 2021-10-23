@@ -56,7 +56,7 @@ void StageScene::Render(HDC hdc)
 	m_backGround->Render(hdc, m_pos.x, m_pos2.y);
 	if (m_moveSpeed == 0) 
 	{
-		m_stage->Render(hdc, WIN_SIZE_X / 2 - 50, WIN_SIZE_Y / 2);
+		m_stage->Render(hdc, WIN_SIZE_X / 2 - 20, WIN_SIZE_Y / 2);
 		m_stageNumber->Render(hdc, WIN_SIZE_X / 2 + 150, WIN_SIZE_Y / 2 + 10, m_stageNumX[1], m_stageNumY[0]);
 	}
 }

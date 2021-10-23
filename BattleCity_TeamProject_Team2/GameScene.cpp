@@ -19,8 +19,7 @@ HRESULT GameScene::Init()
 {
 	SetWindowSize(WIN_START_POS_X, WIN_START_POS_Y, WIN_SIZE_X, WIN_SIZE_Y);
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
-	m_backGround = ImageManager::GetSingleton()->FindImage("Image/BattleCity/mapImage.bmp");
+	m_backGround = ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
 	m_gameOver = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
 
@@ -221,9 +220,9 @@ void GameScene::Release()
 {
 	//SAFE_RELEASE(m_backGround);
 	//SAFE_RELEASE(m_gameOver);
-	/*SAFE_RELEASE(m_tileMap);
+	SAFE_RELEASE(m_tileMap);
 	SAFE_RELEASE(m_uiManager);
 	SAFE_RELEASE(m_player);
 	SAFE_RELEASE(m_ammoMgr);
-	SAFE_RELEASE(m_enemyMgr);*/
+	SAFE_RELEASE(m_enemyMgr);
 }
