@@ -4,7 +4,7 @@
 HRESULT ResultScene::Init()
 {
 	//스테이지 넘버 
-	int StageNum = 1;
+	int m_stageNum = 1;
 
 	//이미지 불러오기 
 	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
@@ -36,28 +36,30 @@ void ResultScene::Update()
 // 스테이지 숫자 갱신
 	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F5))
 	{
-		StageNum++;
-		if (StageNum > 9)
-			StageNum = 0;
+		m_stageNumX++;
+		if (m_stageNumX > 9)
+			m_stageNumX = 0;
 	}
-// 탱크 종류 마다 점수 갱신 (탱크 킬할떄마다 스코어 프레임 증가하는 방식)
+// 결과씬 이후 
+	//if (SceneManager::GetSingleton()->ChangeScene("스테이지씬"))
+	//{
+	//	m_stageNumX++;
+	//}
 
 }
 
 void ResultScene::Render(HDC hdc)
 {
-
 	m_backGround->Render(hdc); 
 	m_HIScore->Render(hdc, HISCORE_POS_X, HISCORE_POS_Y);
 	m_Stage->Render(hdc, WIN_SIZE_X / 2.6 ,WIN_SIZE_Y / 5);
-	m_StageNumber->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, StageNum % 5, StageNum / 5);
+	m_StageNumber->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, m_stageNumX % 5, m_stageNumX / 5);
 	for (int k = 0; k < 4; k++)
 	{
 		m_PTS->Render(hdc, WIN_SIZE_X / 4, WIN_SIZE_Y * 0.4 + k * 70);
 	}
 	m_Player1->Render(hdc, WIN_SIZE_X / 4 - 55 , WIN_SIZE_Y / 4);
 	m_TotalScore->Render(hdc, WIN_SIZE_X / 3 - 10, WIN_SIZE_Y * 0.7);
-
 }
 
 void ResultScene::Release()

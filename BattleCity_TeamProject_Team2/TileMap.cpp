@@ -12,6 +12,8 @@ HRESULT TileMap::Init()
 	m_shape.right = m_shape.left + TILE_MAP_SIZE_X;
 	m_shape.bottom = m_shape.top + TILE_MAP_SIZE_Y;
 
+	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
+
 	m_backGround = ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", TILE_MAP_SIZE_X, TILE_MAP_SIZE_Y);
 
 	m_tileImage = ImageManager::GetSingleton()->AddImage("Image/BattleCity/SamlpTile1.bmp", 320, 320, 10, 10, true, RGB(255, 0, 255));
