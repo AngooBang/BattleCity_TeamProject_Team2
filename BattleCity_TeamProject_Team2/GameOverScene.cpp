@@ -3,11 +3,12 @@
 
 HRESULT GameOverScene::Init()
 {
-    ImageManager::GetSingleton()->AddImage("Image/BattleCity/game_over_screen.bmp", WIN_SIZE_X, WIN_SIZE_Y);
-    m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/game_over_screen.bmp");
-    m_elapsedTime = 0;
+	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 
-    return S_OK;
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/GameOver.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+	m_gameOver = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/GameOver.bmp");
+
+	return S_OK;
 }
 
 void GameOverScene::Update()
@@ -24,7 +25,8 @@ void GameOverScene::Update()
 
 void GameOverScene::Render(HDC hdc)
 {
-    m_img->Render(hdc, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
+	m_backGround->Render(hdc);
+	m_gameOver->Render(hdc);
 }
 
 void GameOverScene::Release()

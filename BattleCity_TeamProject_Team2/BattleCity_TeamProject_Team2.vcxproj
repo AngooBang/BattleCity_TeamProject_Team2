@@ -165,6 +165,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShieldItem.cpp" />
     <ClCompile Include="SpeedTank.cpp" />
+    <ClCompile Include="StageScene.cpp" />
     <ClCompile Include="StarItem.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Tank.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SpeedTank.h" />
     <ClInclude Include="StarItem.h" />
+    <ClInclude Include="StageScene.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TimeItem.h" />

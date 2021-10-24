@@ -22,7 +22,8 @@ private:
 	Image* m_Stage;
 	Image* m_StageNumber;
 
-	int StageNum;
+	int m_stageNumX;
+	int m_stageNumY;
 	EnemyManager* m_enemyMgr;
 	
 
