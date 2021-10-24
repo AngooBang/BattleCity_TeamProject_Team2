@@ -48,10 +48,8 @@ protected:
 
 	int m_HP;
 	int m_ammoSpeed;
-	//POINTFLOAT m_Barrelend;
 
 	bool mb_isAlive;
-	//bool mb_Move;
 	bool mb_isFire;
 	float m_fireElapsedCount = 0;
 
@@ -87,14 +85,13 @@ public:
 	inline bool GetisFire() { return mb_isFire; }
 	inline void SetisFire(bool isFire) { this->mb_isFire = isFire; }
 
-	//inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
 	inline MoveDir GetmoveDir() { return m_moveDir; }
 	inline void SetmoveDir(MoveDir moveDir) { this->m_moveDir = moveDir; }
 
 	inline int GetammoSpeed() { return m_ammoSpeed; }
 
 	inline int GetHP() { return m_HP; }
-	inline void SetHP() { this->m_HP--; }
+	inline void SetHP(int num) { this->m_HP += num; }
 
 	inline void SetEnemyStatus(EnemyStatus enemyStatus) { this->m_enemyStatus = enemyStatus; }
 	inline EnemyStatus GetEnemyStatus() { return m_enemyStatus; }
@@ -110,17 +107,11 @@ public:
 	inline void SetMaxFrameX(int maxFrameX) { this->m_maxFrameX = maxFrameX; }
 
 	inline bool* GetDirCehck() { return mb_dirCheck; }
-	//inline void SetDirCheck(bool mb_dirCheck) {}
 
 	inline void SetBeforeMoveDir(MoveDir beforeMoveDir) { this->m_beforeMoveDir = beforeMoveDir; }
 
 	inline void SetMoveSpeed(int moveSpeed) { this->m_moveSpeed = moveSpeed; }
 	inline int GetMoveSpeed() { return m_moveSpeed; }
-
-	/*bool mb_dirCheck[4];
-	int m_enemyFrame[MoveDir::End];
-	int m_maxFrameX;
-	MoveDir m_beforeMoveDir;*/
 
 	EnemyTank() {}
 	~EnemyTank() {};

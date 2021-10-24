@@ -17,7 +17,11 @@ private:
 
 	LPKILL_COUNT m_killCountNr = nullptr;
 
-	int m_stageNr = 0;
+	int m_stageNr = 1;
+	int m_maxStageNr = 2;
+
+	int m_playerHP = 5;
+	int m_playerFrameY = 0;
 
 public:
 	void Init();
@@ -28,21 +32,20 @@ public:
 	inline void SetStageNrPlus(int num) { this->m_stageNr += num; }
 	inline int GetStageNr() { return m_stageNr; }
 
+	inline int GetMaxStageNr() { return m_maxStageNr; }
+
+	inline void SetPlayerHp(int playerHp) { this->m_playerHP = playerHp; }
+	inline int GetPlayerHp() { return m_playerHP; }
+
+	inline void SetPlayerFrameY(int playerFrameY) { this->m_playerFrameY = playerFrameY;}
+	inline int GetPlayerFrameY() { return m_playerFrameY; }
+
 	inline LPKILL_COUNT GetKillCount() { return m_killCountNr; }
 
+	inline void TotKillTankNrCalculation(int num) { this->m_killCountNr->totKillTankNr += num; }
+
 	void ResetKillCount();
-
-	/*inline void SetKillNrBasic(int num) { this->m_killCountNr->basicTankNr += num; }
-	inline int GetKillNrBasic() { return m_killCountNr->basicTankNr; }
-
-	inline void SetKillNrSpeed(int num) { this->m_killCountNr->SpeedTankNr += num; }
-	inline int GetKillNrSpeed() { return m_killCountNr->SpeedTankNr; }
-
-	inline void SetKillNrPower(int num) { this->m_killCountNr->PowerTankNr += num; }
-	inline int GetKillNrPower() { return m_killCountNr->PowerTankNr; }
-
-	inline void SetKillNrArmor(int num) { this->m_killCountNr->ArmorTankNr += num; }
-	inline int GetKillNrArmor() { return m_killCountNr->ArmorTankNr; }*/
+	void ResetData();
 
 };
 

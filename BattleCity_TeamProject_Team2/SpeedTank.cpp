@@ -5,6 +5,18 @@
 
 HRESULT SpeedTank::Init(POINTFLOAT pos, EnemyManager* manager)
 {
+    m_moveDir = MoveDir::Down;
+    m_elapsedCount = 0;
+    m_moveDelay = 70;
+
+    m_imgDelay = 5;
+    m_frameCount = 1;
+
+    totElapsedCount = 0.0f;
+    m_fireElapsedCount = 0;
+    mb_isReady = true;
+
+
     m_type = TankType::Enemy;
     m_enemyTankType = EnemyType::Speed;
     m_HP = 1;
@@ -117,29 +129,29 @@ void SpeedTank::Update()
 
             // 탱크 위치 좌표 업데이트
             AutoMove();
-        }
 
-        // 타일과 충돌했을 시
-        IsCollisionTile();
 
-        // 충돌했을시 방향 전환
-        MoveDir dir;
-        if (IsCollisionMap(dir))
-        {
-            switch (dir)
+            // 타일과 충돌했을 시
+            IsCollisionTile();
+
+            // 충돌했을시 방향 전환
+            MoveDir dir;
+            if (IsCollisionMap(dir))
             {
-            case MoveDir::Left:		m_pos.x = m_pos.x + (m_tileMap->GetShape().left - m_shape.left); break;
-            case MoveDir::Right:	m_pos.x = m_pos.x - (m_shape.right - m_tileMap->GetShape().right); break;
-            case MoveDir::Up:	    m_pos.y = m_pos.y + (m_tileMap->GetShape().top - m_shape.top); break;
-            case MoveDir::Down:	    m_pos.y = m_pos.y - (m_shape.bottom - m_tileMap->GetShape().bottom); break;
+                switch (dir)
+                {
+                case MoveDir::Left:		m_pos.x = m_pos.x + (m_tileMap->GetShape().left - m_shape.left); break;
+                case MoveDir::Right:	m_pos.x = m_pos.x - (m_shape.right - m_tileMap->GetShape().right); break;
+                case MoveDir::Up:	    m_pos.y = m_pos.y + (m_tileMap->GetShape().top - m_shape.top); break;
+                case MoveDir::Down:	    m_pos.y = m_pos.y - (m_shape.bottom - m_tileMap->GetShape().bottom); break;
+                }
+
+                //RandomDirChange();
             }
 
-            //RandomDirChange();
+            // 시간에 따른 탱크 이동방향 전환
+            TimeDirChange();
         }
-
-        // 시간에 따른 탱크 이동방향 전환
-        TimeDirChange();
-
     }
     else if (m_enemyStatus == EnemyStatus::Dead)
     {
@@ -179,7 +191,7 @@ void SpeedTank::Update()
             m_boomElapsedCount = 0.0f;
         }
 
-        if (totElapsedCount > 0.5f)
+        if (totElapsedCount > 0.70f)
         {
             mb_isAlive = false;
         }

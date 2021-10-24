@@ -181,7 +181,8 @@ bool EnemyTank::IsCollisionTile()
 			{
 				for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 				{
-					if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::None)
+					if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::None &&
+						m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::Grass)
 					{
 						if (IntersectRect(&m_tempRC, &m_shape, &m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].rc))
 							//if (CheckCollision(m_shape, m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].rc))
@@ -218,6 +219,7 @@ bool EnemyTank::IsCollisionTile()
 							{
 								m_isCollide[MoveDir::Right] = false;
 							}
+
 							MoveCorrection();
 
 							return true;
@@ -236,7 +238,8 @@ void EnemyTank::MoveCorrection()
 {
 	if (m_isCollide[MoveDir::Up] && m_moveDir == MoveDir::Up)
 	{
-			m_pos.y = m_pos.y + (m_tempRC.bottom - m_tempRC.top);
+		m_pos.y = m_pos.y + (m_tempRC.bottom - m_tempRC.top);
+		
 		if (m_tempRC.right - m_tempRC.left > MOVE_CORRECTION_VALUE)
 		{
 			//RandomDirChange();
@@ -251,7 +254,9 @@ void EnemyTank::MoveCorrection()
 	}
 	if (m_isCollide[MoveDir::Left] && m_moveDir == MoveDir::Left)
 	{
-			m_pos.x = m_pos.x + (m_tempRC.right - m_tempRC.left);
+		m_pos.x = m_pos.x + (m_tempRC.right - m_tempRC.left);
+		
+			
 		if (m_tempRC.bottom - m_tempRC.top > MOVE_CORRECTION_VALUE)
 		{
 			//RandomDirChange();
@@ -266,7 +271,8 @@ void EnemyTank::MoveCorrection()
 	}
 	if (m_isCollide[MoveDir::Down] && m_moveDir == MoveDir::Down)
 	{
-			m_pos.y = m_pos.y - (m_tempRC.bottom - m_tempRC.top);
+		m_pos.y = m_pos.y - (m_tempRC.bottom - m_tempRC.top);
+			
 		if (m_tempRC.right - m_tempRC.left > MOVE_CORRECTION_VALUE)
 		{
 			//RandomDirChange();
@@ -282,7 +288,8 @@ void EnemyTank::MoveCorrection()
 
 	if (m_isCollide[MoveDir::Right] && m_moveDir == MoveDir::Right)
 	{
-			m_pos.x = m_pos.x - (m_tempRC.right - m_tempRC.left);
+		m_pos.x = m_pos.x - (m_tempRC.right - m_tempRC.left);
+
 		if (m_tempRC.bottom - m_tempRC.top > MOVE_CORRECTION_VALUE)
 		{
 			//RandomDirChange();

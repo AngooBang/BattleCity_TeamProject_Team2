@@ -104,4 +104,6 @@ public:
 
 	inline int GetHP() { return m_HP; }
 	inline void SetHP(int hp) { this->m_HP += hp; }
+
+	inline int GetFrameY() { return m_frameY; }
 };

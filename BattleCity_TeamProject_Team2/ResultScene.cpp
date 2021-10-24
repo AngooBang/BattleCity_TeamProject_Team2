@@ -4,7 +4,14 @@
 HRESULT ResultScene::Init()
 {
 	//스테이지 넘버 
-	int StageNum = 1;
+	//int StageNum = 1;
+	StageNum = GameManager::GetSingleton()->GetStageNr();
+
+	//적 숫자 받아오기
+	m_Enemytype[0] = GameManager::GetSingleton()->GetKillCount()->basicTankNr;
+	m_Enemytype[1] = GameManager::GetSingleton()->GetKillCount()->speedTankNr;
+	m_Enemytype[2] = GameManager::GetSingleton()->GetKillCount()->powerTankNr;
+	m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
 
 	//이미지 불러오기 
 	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
@@ -53,12 +60,12 @@ HRESULT ResultScene::Init()
 void ResultScene::Update()
 {
 	// 스테이지 숫자 갱신
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F4))
+	/*if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F4))
 	{
 		StageNum++;
 		if (StageNum > 9)
 			StageNum = 0;
-	}
+	}*/
 	// 탱크 종류 마다 점수 갱신 (탱크 킬할떄마다 스코어 프레임 증가하는 방식)
 	if (mb_Calculate == true)
 	{
@@ -85,7 +92,23 @@ void ResultScene::Update()
 			}
 		}
 	}
-
+	else
+	{
+		if (GameManager::GetSingleton()->GetStageNr() != GameManager::GetSingleton()->GetMaxStageNr() &&
+			GameManager::GetSingleton()->GetPlayerHp() != 0)
+		{
+			GameManager::GetSingleton()->SetStageNrPlus(1);
+			GameManager::GetSingleton()->ResetKillCount();
+			
+			Sleep(1000);
+			SceneManager::GetSingleton()->ChangeScene("스테이지씬");
+		}
+		else
+		{
+			Sleep(1000);
+			SceneManager::GetSingleton()->ChangeScene("게임오버씬");
+		}
+	}
 	//if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F5))
 	//{
 	//	m_countofEnemy[0]++;

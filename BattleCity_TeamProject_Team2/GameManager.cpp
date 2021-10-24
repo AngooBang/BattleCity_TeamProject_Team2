@@ -10,6 +10,10 @@ void GameManager::Init()
 	m_killCountNr->totKillTankNr = 0;
 
 	m_stageNr = 1;
+	m_maxStageNr = 2;
+
+	m_playerHP = 1;
+	m_playerFrameY = 0;
 }
 
 void GameManager::Update()
@@ -33,3 +37,15 @@ void GameManager::ResetKillCount()
 	m_killCountNr->armorTankNr = 0;
 	m_killCountNr->totKillTankNr = 0;
 }
+
+void GameManager::ResetData()
+{
+	ResetKillCount();
+
+	m_stageNr = 1;
+	m_maxStageNr = 2;
+
+	m_playerHP = 5;
+	m_playerFrameY = 0;
+}
+

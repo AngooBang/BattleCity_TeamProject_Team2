@@ -45,7 +45,8 @@ private:
 	// 테스트용 변수(추후 지울예정)
 	// (추후엔 에너미 타입을 인트형으로 형변환시킨 값을 가져올예정)
 	// (현재는 스트럭트 자료형에 일반변수형으로 적들의 정보가 저장됨)
-	int m_Enemytype[4] = { 10, 5, 8, 14 };
+	//int m_Enemytype[4] = { 10, 5, 8, 14 };
+	int m_Enemytype[4];// = { 1,1,1,1 };
 
 	int m_elapseCount;
 	int m_CalculateEnemytypeNum;

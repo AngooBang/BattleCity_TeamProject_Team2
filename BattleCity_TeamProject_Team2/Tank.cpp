@@ -7,14 +7,16 @@
 HRESULT Tank::Init()
 {
 	m_type = TankType::Player;
-	m_HP = 5;
+	m_HP = GameManager::GetSingleton()->GetPlayerHp();
 	m_tempHP = m_HP;
 
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Player/Player.bmp", 512, 256, 8, 4, true, RGB(255, 0, 255));
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Spawn_Effect2.bmp",
 		256, 64, 4, 1, true, RGB(255, 0, 255));
 
-	m_shieldImg = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Shield.bmp", 128, 64, 2, 1, true, RGB(255, 0, 255));
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Shield.bmp", 128, 64, 2, 1, true, RGB(255, 0, 255));
+	m_shieldImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Shield.bmp");
+
 	SpawnPlayer();
 
 	m_bodySize = 64;
@@ -37,7 +39,8 @@ HRESULT Tank::Init()
 	m_Barrelend.x = m_pos.x;
 	m_Barrelend.y = m_pos.y - 32;
 
-	m_frameY = 0;
+	//m_frameY = 0;
+	m_frameY = GameManager::GetSingleton()->GetPlayerFrameY();
 
 	// ³ªÁß¿¡...
 	return S_OK;

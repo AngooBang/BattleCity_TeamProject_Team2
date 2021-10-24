@@ -5,6 +5,8 @@
 #include "AmmoManager.h"
 #include "Ammo.h"
 
+#include "GameScene.h"
+
 HRESULT EnemyManager::Init()
 {
     return S_OK;

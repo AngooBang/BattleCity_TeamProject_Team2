@@ -31,12 +31,13 @@ void GranadeItem::Update()
 
 	if (CheckCollision())
 	{
+		GameManager::GetSingleton()->TotKillTankNrCalculation(m_gameScene->GetEnemyMgr()->GetVecEnemys().size());
+		
 		mb_isAlive = false;
 		for (int i = 0; i < m_gameScene->GetEnemyMgr()->GetVecEnemys().size(); i++)
 		{
 			m_gameScene->GetEnemyMgr()->GetVecEnemys()[i]->SetEnemyStatus(EnemyStatus::Dead);
 		}
-		
 	}
 }
 

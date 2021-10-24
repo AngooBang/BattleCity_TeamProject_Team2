@@ -7,9 +7,10 @@ HRESULT StageScene::Init()
 	m_pos.x = 500;
 	m_pos.y = -450;
 	m_pos2.y = 1350;
-	m_moveSpeed;
+	m_moveSpeed = 15;
 	m_elapsedTime = 0;
 	
+	m_stageNr = GameManager::GetSingleton()->GetStageNr();
 
 	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
 	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
@@ -42,7 +43,7 @@ void StageScene::Update()
 	if (m_moveSpeed == 0)
 	{
 		m_elapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
-		if (m_elapsedTime >= 4.0f)
+		if (m_elapsedTime >= 3.0f)
 		{
 			SceneManager::GetSingleton()->ChangeScene("°ÔÀÓ¾À");
 		}
@@ -57,7 +58,8 @@ void StageScene::Render(HDC hdc)
 	if (m_moveSpeed == 0) 
 	{
 		m_stage->Render(hdc, WIN_SIZE_X / 2 - 20, WIN_SIZE_Y / 2);
-		m_stageNumber->Render(hdc, WIN_SIZE_X / 2 + 150, WIN_SIZE_Y / 2 + 10, m_stageNumX[1], m_stageNumY[0]);
+		m_stageNumber->Render(hdc, WIN_SIZE_X / 2 + 150, WIN_SIZE_Y / 2 + 10, 
+							m_stageNumX[m_stageNr % 10], m_stageNumY[m_stageNr % 10]);
 	}
 }
 

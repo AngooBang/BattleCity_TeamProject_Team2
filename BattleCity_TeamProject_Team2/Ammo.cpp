@@ -127,7 +127,7 @@ void Ammo::EnemyCollider()
 		RECT enemyRC = (*it)->GetShape();
 		if (IntersectRect(&m_tempRC, &m_shape, &enemyRC))
 		{
-			(*it)->SetHP(); // 피격시 Hp 감소
+			(*it)->SetHP(-1); // 피격시 Hp 감소
 			// 적 Armor탱크 Hp감소에 따른 색깔 변화(이미지 프레임 변화)
 			if ((*it)->GetEnemyType() == EnemyType::ArmorGreen) 
 			{ 
@@ -167,7 +167,6 @@ void Ammo::EnemyCollider()
 					m_killCount->totKillTankNr++;
 					break;
 				}
-				cout << m_killCount->totKillTankNr << endl;
 				//(*it)->SetIsAlive(false);
 			}
 			mb_isAlive = false;
