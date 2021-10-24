@@ -133,7 +133,7 @@ void ArmorTank::Update()
             case MoveDir::Down:	    m_pos.y = m_pos.y - (m_shape.bottom - m_tileMap->GetShape().bottom); break;
             }
 
-            RandomDirChange();
+            //RandomDirChange();
         }
 
         // 시간에 따른 탱크 이동방향 전환

@@ -236,10 +236,10 @@ void EnemyTank::MoveCorrection()
 {
 	if (m_isCollide[MoveDir::Up] && m_moveDir == MoveDir::Up)
 	{
+			m_pos.y = m_pos.y + (m_tempRC.bottom - m_tempRC.top);
 		if (m_tempRC.right - m_tempRC.left > MOVE_CORRECTION_VALUE)
 		{
-			m_pos.y = m_pos.y + (m_tempRC.bottom - m_tempRC.top);
-			RandomDirChange();
+			//RandomDirChange();
 		}
 		else
 		{
@@ -251,10 +251,10 @@ void EnemyTank::MoveCorrection()
 	}
 	if (m_isCollide[MoveDir::Left] && m_moveDir == MoveDir::Left)
 	{
+			m_pos.x = m_pos.x + (m_tempRC.right - m_tempRC.left);
 		if (m_tempRC.bottom - m_tempRC.top > MOVE_CORRECTION_VALUE)
 		{
-			m_pos.x = m_pos.x + (m_tempRC.right - m_tempRC.left);
-			RandomDirChange();
+			//RandomDirChange();
 		}
 		else
 		{
@@ -266,10 +266,10 @@ void EnemyTank::MoveCorrection()
 	}
 	if (m_isCollide[MoveDir::Down] && m_moveDir == MoveDir::Down)
 	{
+			m_pos.y = m_pos.y - (m_tempRC.bottom - m_tempRC.top);
 		if (m_tempRC.right - m_tempRC.left > MOVE_CORRECTION_VALUE)
 		{
-			m_pos.y = m_pos.y - (m_tempRC.bottom - m_tempRC.top);
-			RandomDirChange();
+			//RandomDirChange();
 		}
 		else
 		{
@@ -282,10 +282,10 @@ void EnemyTank::MoveCorrection()
 
 	if (m_isCollide[MoveDir::Right] && m_moveDir == MoveDir::Right)
 	{
+			m_pos.x = m_pos.x - (m_tempRC.right - m_tempRC.left);
 		if (m_tempRC.bottom - m_tempRC.top > MOVE_CORRECTION_VALUE)
 		{
-			m_pos.x = m_pos.x - (m_tempRC.right - m_tempRC.left);
-			RandomDirChange();
+			//RandomDirChange();
 		}
 		else
 		{

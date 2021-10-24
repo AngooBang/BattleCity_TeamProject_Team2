@@ -3,8 +3,6 @@
 #include "GameObject.h"
 #include "TileMap.h"
 
-//typedef TILE_INFO(*Temp)/*[TILE_COUNT_Y]*/[13];
-
 class Tank;
 class TileMap;
 class EnemyTank;
