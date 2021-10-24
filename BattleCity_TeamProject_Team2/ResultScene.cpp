@@ -135,6 +135,7 @@ void ResultScene::Render(HDC hdc)
 				m_enemySumScoreThousandNumImg[i]->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_scoreThousandofDigits[i]], m_numFrameY[m_scoreThousandofDigits[i]]);
 			}
 		}
+	
 	}
 
 	//m_enemySumScoreThousandNumImg[1]->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 470, m_numFrameX[m_scoreThousandofDigits[1]], m_numFrameY[m_scoreThousandofDigits[1]]);
