@@ -13,7 +13,6 @@ HRESULT UIManager::Init(int m_enemyTotNum)
 	
 	m_enemyLeftNum = m_enemyTotNum;
 
-	m_p1LifeNum = 5;
 	m_stageNum = 1;
 	return S_OK;
 }
@@ -23,16 +22,9 @@ void UIManager::Update(int m_enemyTotNum, int m_enemyNumCount, int m_playerHp)
 	m_enemyLeftNum = m_enemyTotNum;
 	m_enemyLeftNum -= m_enemyNumCount;
 
-	m_p1LifeNum = m_playerHp;
+	m_playerLife = m_playerHp;
 
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F5))
-	{
-		m_p1LifeNum++;
-		
-		if (m_p1LifeNum > 9)
-			m_p1LifeNum = 0;
 
-	}
 
 	
 }
@@ -44,7 +36,7 @@ void UIManager::Render(HDC hdc)
 		m_enemyLeft->Render(hdc, ENEMY_LEFT_POS_X + (i % 2) * m_enemyLeft->GetWidth(), ENEMY_LEFT_POS_Y + (i / 2) * m_enemyLeft->GetHeight());
 	}
 	m_p1LifeUI->Render(hdc, PLAYER1_LIFE_POS_X, PLAYER1_LIFE_POS_Y);
-	m_numberUI->Render(hdc, PLAYER1_LIFE_POS_X + 80, PLAYER1_LIFE_POS_Y + 30, m_p1LifeNum % 5, m_p1LifeNum / 5);
+	m_numberUI->Render(hdc, PLAYER1_LIFE_POS_X + 80, PLAYER1_LIFE_POS_Y + 30, m_playerLife % 5, m_playerLife / 5);
 	m_stageFlag->Render(hdc, STAGE_FLAG_POS_X, STAGE_FLAG_POS_Y);
 	m_numberUI->Render(hdc, STAGE_FLAG_POS_X + 80, STAGE_FLAG_POS_Y + 50, m_stageNum % 5, m_stageNum / 5);
 }

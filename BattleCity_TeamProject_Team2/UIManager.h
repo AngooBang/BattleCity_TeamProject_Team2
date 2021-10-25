@@ -25,8 +25,10 @@ private:
 
 
 	int m_enemyLeftNum;
-	int m_p1LifeNum;
+	int m_playerLife;
 	int m_stageNum;
+
+	
 
 
 public:
