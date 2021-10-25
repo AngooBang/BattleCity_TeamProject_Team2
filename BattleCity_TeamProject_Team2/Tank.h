@@ -18,6 +18,7 @@ protected:
 	//POINTFLOAT mDir;
 	Image* m_img;
 	Image* m_shieldImg;
+	Image* m_boomImg;
 
 	TileMap* m_tileMap;
 
@@ -43,6 +44,7 @@ protected:
 	bool mb_isSpawn;
 	bool mb_isFire;
 	bool mb_isShield;
+	bool mb_isDead;
 
 	float m_spawnTimer;
 	float m_shieldTimer;

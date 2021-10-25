@@ -84,7 +84,6 @@ void GameScene::Update()
 
 	if (mb_isGameOver)
 	{
-		m_goElapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
 		if (m_gameOverPos.y > TILE_MAP_START_POS_Y + TILE_MAP_SIZE_Y / 2)
 		{
 			m_gameOverPos.y -= 2;
@@ -92,12 +91,15 @@ void GameScene::Update()
 		else
 		{
 			// 게임오버
+			m_goElapsedTime += TimerManager::GetSingleton()->GetDeltaTime();
+		}
+		if (m_goElapsedTime > 0.4f)
+		{
 			Sleep(1000);
 			GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
 			SceneManager::GetSingleton()->ChangeScene("결과씬");
-		}
-		if(m_goElapsedTime > 0.4f)
 			return;
+		}
 	}
 
 	m_tileMap->Update();

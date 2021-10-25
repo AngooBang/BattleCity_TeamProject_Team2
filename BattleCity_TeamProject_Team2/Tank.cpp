@@ -12,6 +12,7 @@ HRESULT Tank::Init()
 
 	m_shieldImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Shield.bmp");
 
+
 	SpawnPlayer();
 
 	m_bodySize = 64;
@@ -19,9 +20,12 @@ HRESULT Tank::Init()
 	m_moveSpeed = 3;
 	m_moveDir = MoveDir::Up;
 
+	m_elapsedCount = 0;
+
 	mb_isAlive = true;
 	mb_isShield = false;
 	mb_Move = false;
+	mb_isDead = false;
 
 	m_ammoSpeed = 10;
 
@@ -85,67 +89,84 @@ void Tank::Update()
 		}
 		if (m_tempHP > m_HP)
 		{
-			SpawnPlayer();
-			m_tempHP = m_HP;
+			if (m_HP == 0 && !mb_isDead)
+			{
+				m_tempHP = m_HP;
+				m_frameX = 0;
+				m_frameY = 0;
+				m_maxFrameX = 4;
+				mb_isDead = true;
+				m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Boom_Effect2_Tank.bmp");
+			}
+			else
+			{
+				SpawnPlayer();
+				m_tempHP = m_HP;
+			}
 		}
+
+
 #pragma region 涝仿何
-
-		if (KeyManager::GetSingleton()->IsOnceKeyDown('F'))
+		if (!mb_isDead)
 		{
-			mb_isFire = true;
-		}
 
-		if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
-		{
-			//SetMoveDir(MoveDir::Left);
-
-			if (m_moveDir != MoveDir::Left)
+			if (KeyManager::GetSingleton()->IsOnceKeyDown('F'))
 			{
-				m_moveDir = MoveDir::Left;
-				m_frameX = (int)m_moveDir * 2;
-				m_maxFrameX = (int)m_moveDir * 2 + 1;
+				mb_isFire = true;
 			}
-			mb_Move = true;
-		}
-		else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
-		{
-			//SetMoveDir(MoveDir::Right);
 
-			if (m_moveDir != MoveDir::Right)
+			if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
 			{
-				m_moveDir = MoveDir::Right;
-				m_frameX = (int)m_moveDir * 2;
-				m_maxFrameX = (int)m_moveDir * 2 + 1;
-			}
-			mb_Move = true;
-		}
-		else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_UP))
-		{
-			//SetMoveDir(MoveDir::Up);
+				//SetMoveDir(MoveDir::Left);
 
-			if (m_moveDir != MoveDir::Up)
-			{
-				m_moveDir = MoveDir::Up;
-				m_frameX = (int)m_moveDir * 2;
-				m_maxFrameX = (int)m_moveDir * 2 + 1;
+				if (m_moveDir != MoveDir::Left)
+				{
+					m_moveDir = MoveDir::Left;
+					m_frameX = (int)m_moveDir * 2;
+					m_maxFrameX = (int)m_moveDir * 2 + 1;
+				}
+				mb_Move = true;
 			}
-			mb_Move = true;
-		}
-		else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_DOWN))
-		{
-			//SetMoveDir(MoveDir::Down);
+			else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
+			{
+				//SetMoveDir(MoveDir::Right);
 
-			if (m_moveDir != MoveDir::Down)
-			{
-				m_moveDir = MoveDir::Down;
-				m_frameX = (int)m_moveDir * 2;
-				m_maxFrameX = (int)m_moveDir * 2 + 1;
+				if (m_moveDir != MoveDir::Right)
+				{
+					m_moveDir = MoveDir::Right;
+					m_frameX = (int)m_moveDir * 2;
+					m_maxFrameX = (int)m_moveDir * 2 + 1;
+				}
+				mb_Move = true;
 			}
-			mb_Move = true;
-		}
-		else
-		{
-			mb_Move = false;
+			else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_UP))
+			{
+				//SetMoveDir(MoveDir::Up);
+
+				if (m_moveDir != MoveDir::Up)
+				{
+					m_moveDir = MoveDir::Up;
+					m_frameX = (int)m_moveDir * 2;
+					m_maxFrameX = (int)m_moveDir * 2 + 1;
+				}
+				mb_Move = true;
+			}
+			else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_DOWN))
+			{
+				//SetMoveDir(MoveDir::Down);
+
+				if (m_moveDir != MoveDir::Down)
+				{
+					m_moveDir = MoveDir::Down;
+					m_frameX = (int)m_moveDir * 2;
+					m_maxFrameX = (int)m_moveDir * 2 + 1;
+				}
+				mb_Move = true;
+			}
+			else
+			{
+				mb_Move = false;
+			}
 		}
 #pragma endregion
 #pragma region 面倒贸府何
@@ -238,7 +259,7 @@ void Tank::Update()
 #pragma endregion
 #pragma region 捞悼蔼 贸府何
 
-		if (mb_Move)
+		if (mb_Move && !mb_isDead)
 		{
 			switch (m_moveDir)
 			{
@@ -268,8 +289,16 @@ void Tank::Update()
 void Tank::Render(HDC hdc)
 {
 	//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
+	if (mb_isAlive)
+		m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY);
 
-	m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY);
+	if (mb_isDead)
+	{
+		if( m_frameX >= 3)
+			m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 2.5f);
+		else
+			m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 1.5f);
+	}
 
 	if (mb_isShield)
 		m_shieldImg->Render(hdc, m_pos.x, m_pos.y, m_shieldframeX, 0);
@@ -367,7 +396,7 @@ void Tank::MoveCorrection()
 
 void Tank::SpawnPlayer()
 {
-	m_spawnTimer = 0;
+	m_spawnTimer = 0.0f;
 
 	m_pos.x = 20 + TILE_MAP_SIZE_X / 2;
 	m_pos.y = 20 + TILE_MAP_SIZE_Y / 2;
@@ -413,6 +442,30 @@ void Tank::SetImage()
 			{
 				m_maxFrameX = 2;
 				m_frameX++;	
+			}
+			m_elapsedCount = 0;
+		}
+	}
+	else if (mb_isDead)
+	{
+		if (m_elapsedCount > 10)
+		{
+			static int deadCount = 0;
+			if (deadCount > 8)
+			{
+				mb_isAlive = false;
+			}
+			if (m_frameX >= m_maxFrameX)
+			{
+				m_maxFrameX = 0;
+				deadCount++;
+				m_frameX--;
+			}
+			else
+			{
+				m_maxFrameX = 4;
+				deadCount++;
+				m_frameX++;
 			}
 			m_elapsedCount = 0;
 		}

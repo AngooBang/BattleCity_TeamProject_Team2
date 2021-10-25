@@ -182,10 +182,10 @@ void Ammo::EnemyAmmoCollider()
 	if (IntersectRect(&tempRc, &m_shape, &playerTankRect))
 	{
 		m_playerTank->SetHP(-1);
-		if (m_playerTank->GetHP() == 0)
-		{
-			m_playerTank->SetAlive(false);
-		}
+		//if (m_playerTank->GetHP() == 0)
+		//{
+		//	m_playerTank->SetAlive(false);
+		//}
 		mb_isAlive = false;
 	}
 

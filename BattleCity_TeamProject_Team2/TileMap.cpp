@@ -12,6 +12,9 @@ HRESULT TileMap::Init()
 	m_shape.right = m_shape.left + TILE_MAP_SIZE_X;
 	m_shape.bottom = m_shape.top + TILE_MAP_SIZE_Y;
 
+	mb_destroyBase = false;
+	m_frameX = 0;
+	m_maxFrameX = 4;
 
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/TileBackGround.bmp");
 
@@ -19,11 +22,13 @@ HRESULT TileMap::Init()
 
 	m_smallTileImage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/SmallSamlpTile.bmp");
 
+	m_boomImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Boom_Effect2_Tank.bmp");
+
 	m_fp = nullptr;
 
-	m_stageNum = 1;
+	m_stageNum = GameManager::GetSingleton()->GetStageNr();
 
-	m_elapsedCount = 0;
+	m_elapsedCount = 0.0f;
 	testY = 0;
 
 	for (int i = 0; i < TILE_COUNT_Y; i++)
@@ -71,8 +76,8 @@ HRESULT TileMap::Init()
 
 void TileMap::Update()
 {
-	m_elapsedCount++;
-	if (m_elapsedCount > 40)
+	m_elapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
+	if (m_elapsedCount > 0.2f)
 	{
 		for (int i = 0; i < TILE_COUNT_Y; i++)
 		{
@@ -82,9 +87,31 @@ void TileMap::Update()
 				{
 					m_tileInfo[i * TILE_COUNT_X + j].frameY == 2 ? m_tileInfo[i * TILE_COUNT_X + j].frameY = 3 : m_tileInfo[i * TILE_COUNT_X + j].frameY = 2;
 				}
+
+				if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)
+				{
+					mb_destroyBase = true;
+				}
 			}
 		}
-		m_elapsedCount = 0;
+		if (m_frameX < 0)
+		{
+			mb_destroyBase = false;
+		}
+		if (mb_destroyBase)
+		{
+			if (m_frameX >= m_maxFrameX)
+			{
+				m_maxFrameX = 0;
+				m_frameX--;
+			}
+			else
+			{
+				m_maxFrameX = 4;
+				m_frameX++;
+			}
+			m_elapsedCount = 0.0f;
+		}
 	}
 
 	SetBaseData();
@@ -116,6 +143,23 @@ void TileMap::Render(HDC hdc)
 							5,
 							0);
 				}
+			}
+		}
+	}
+	for (int i = 0; i < TILE_COUNT_Y; i++)
+	{
+		for (int j = 0; j < TILE_COUNT_X; j++)
+		{
+			if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)
+			{
+				if (mb_destroyBase)
+				{
+					if (m_frameX >= 3)
+						m_boomImg->Render(hdc, m_tileInfo[i * TILE_COUNT_X + j].rc.right, m_tileInfo[i * TILE_COUNT_X + j].rc.bottom, m_frameX, 0, 2.5f);
+					else
+						m_boomImg->Render(hdc, m_tileInfo[i * TILE_COUNT_X + j].rc.right, m_tileInfo[i * TILE_COUNT_X + j].rc.bottom, m_frameX, 0, 1.5f);
+				}
+				break;
 			}
 		}
 	}
