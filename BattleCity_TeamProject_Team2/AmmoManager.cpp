@@ -48,6 +48,9 @@ void AmmoManager::Release()
     {
         SAFE_RELEASE((*m_vecAmmoIter));
     }
+    m_vecAmmo.clear();
+
+    m_tileMap = nullptr;
 }
 
 void AmmoManager::AddAmmo(Ammo* Ammo, Tank* tank)

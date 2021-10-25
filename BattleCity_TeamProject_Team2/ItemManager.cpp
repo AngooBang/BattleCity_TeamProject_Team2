@@ -61,6 +61,10 @@ void ItemManager::Release()
     {
         SAFE_RELEASE(m_vecItems[i]);
     }
+    m_vecItems.clear();
+
+    m_item = nullptr;
+    m_gameScene = nullptr;
 }
 
 void ItemManager::AddItem()

@@ -61,6 +61,7 @@ protected:
 	float m_scale;
 
 public:
+	virtual ~EnemyTank() {}
 	virtual HRESULT Init(POINTFLOAT pos, EnemyManager* manager);
 	virtual void Update() = 0;
 	virtual void Render(HDC hdc) = 0;
@@ -113,7 +114,5 @@ public:
 	inline void SetMoveSpeed(int moveSpeed) { this->m_moveSpeed = moveSpeed; }
 	inline int GetMoveSpeed() { return m_moveSpeed; }
 
-	EnemyTank() {}
-	~EnemyTank() {};
 };
 

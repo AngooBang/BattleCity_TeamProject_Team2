@@ -13,6 +13,7 @@ protected:
 
 
 public:
+	virtual ~GameObject() {}
 
 	inline void SetPos(POINTFLOAT m_pos) { this->m_pos = m_pos; }
 	inline POINTFLOAT GetPos() { return this->m_pos; }
@@ -30,7 +31,5 @@ public:
 	
 
 
-	GameObject();
-	~GameObject();
 };
 

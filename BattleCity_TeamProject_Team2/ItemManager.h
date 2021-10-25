@@ -14,6 +14,7 @@ private:
 	GameScene* m_gameScene;
 
 public:
+	virtual ~ItemManager() {}
 	HRESULT Init();
 	void Update();
 	void Render(HDC hdc);

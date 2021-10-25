@@ -15,6 +15,8 @@ private:
 	unsigned long fps;				// 초당 프레임 수
 
 public:
+	Timer() {}
+	~Timer() {}
 	void Init();
 	void Tick();
 

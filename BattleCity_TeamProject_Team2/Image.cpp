@@ -106,7 +106,7 @@ void Image::Release()
 		DeleteObject(imageInfo->hBitmap);
 		DeleteDC(imageInfo->hMemDc);
 
-		//delete imageInfo;
+		delete imageInfo;
 		imageInfo = nullptr;
 	}
 }

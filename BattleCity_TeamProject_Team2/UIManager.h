@@ -32,6 +32,7 @@ private:
 
 
 public:
+	virtual ~UIManager() {}
 	virtual HRESULT Init(int m_enemyTotNum);
 	virtual void Update(int m_enemyTotNum, int m_enemyNumCount, int m_playerHp);
 	virtual void Render(HDC hdc);

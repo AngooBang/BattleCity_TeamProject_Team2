@@ -41,7 +41,3 @@ void ShieldItem::Render(HDC hdc)
 	if (mb_isShow)
 		m_img->Render(hdc, m_pos.x, m_pos.y);
 }
-
-void ShieldItem::Release()
-{
-}

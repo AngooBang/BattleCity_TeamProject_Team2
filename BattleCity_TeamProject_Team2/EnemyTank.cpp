@@ -21,7 +21,8 @@ void EnemyTank::Render(HDC hdc)
 
 void EnemyTank::Release()
 {
-    //if(m_backGround) SAFE_RELEASE(m_backGround);
+	m_gameScene = nullptr;
+	m_tileMap = nullptr;
 }
 
 void EnemyTank::AutoMove()

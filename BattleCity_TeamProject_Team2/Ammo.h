@@ -9,7 +9,6 @@ class Ammo : public GameObject
 {
 private:
 	LPKILL_COUNT m_killCount;
-	//LPKillCount m_killCount; // 안 쓰는 것
 
 	Image* m_boomImg;
 	Image* m_img;
@@ -37,6 +36,7 @@ private:
 	float m_totElapsedCount;
 
 public:
+	virtual ~Ammo() {}
 	HRESULT Init(POINTFLOAT Barrelend, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage);
 	void Update();
 	void Render(HDC hdc);

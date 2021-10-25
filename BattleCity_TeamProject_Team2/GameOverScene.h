@@ -10,12 +10,11 @@ private:
 	float m_elapsedTime = 0;
 
 public:
+	virtual ~GameOverScene() {}
 	virtual HRESULT Init() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
 
-	GameOverScene() {};
-	virtual ~GameOverScene() {};
 };
 

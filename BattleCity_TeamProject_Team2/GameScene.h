@@ -51,6 +51,7 @@ private:
 	float m_fireTime = 0;
 
 public:
+	virtual ~GameScene() {}
 	HRESULT Init();
 	void Update();
 	void Render(HDC hdc);	

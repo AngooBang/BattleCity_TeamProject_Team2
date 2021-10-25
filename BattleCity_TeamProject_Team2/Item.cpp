@@ -19,6 +19,7 @@ void Item::Render(HDC hdc)
 
 void Item::Release()
 {
+	m_gameScene = nullptr;
 }
 
 void Item::CountShow()

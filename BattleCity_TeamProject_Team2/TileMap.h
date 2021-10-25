@@ -58,6 +58,7 @@ private:
 	int testY;
 
 public:
+	virtual ~TileMap() {}
 	virtual HRESULT Init();
 	virtual void Update();
 	virtual void Render(HDC hdc);
@@ -77,7 +78,5 @@ public:
 
 	//inline Temp GetMapTileInfo() { return this->m_tileInfo; }
 
-	TileMap() {}
-	~TileMap() {}
 };
 

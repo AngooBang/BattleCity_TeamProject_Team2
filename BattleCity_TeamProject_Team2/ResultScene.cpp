@@ -179,14 +179,7 @@ void ResultScene::Render(HDC hdc)
 
 void ResultScene::Release()
 {
-	//SAFE_RELEASE(m_backGround);
-	//SAFE_RELEASE(m_HIScore);
-	//SAFE_RELEASE(m_ScoreNumber);
-	//SAFE_RELEASE(m_Player1);
-	//SAFE_RELEASE(m_PTS);
-	//SAFE_RELEASE(m_TotalScore);
-	//SAFE_RELEASE(m_Stage);
-	//SAFE_RELEASE(m_StageNumber);
+	m_enemyMgr = nullptr;
 }
 
 void ResultScene::Calculate(int num)

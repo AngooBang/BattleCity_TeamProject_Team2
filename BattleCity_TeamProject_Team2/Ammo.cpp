@@ -99,8 +99,10 @@ void Ammo::Render(HDC hdc)
 
 void Ammo::Release()
 {
-	//if (m_img)  SAFE_RELEASE(m_img);
-	//if (m_boomImg) SAFE_RELEASE(m_boomImg);
+
+	m_playerTank = nullptr;
+	m_tileMap = nullptr;
+	m_owner = nullptr;
 }
 
 void Ammo::SetShape()

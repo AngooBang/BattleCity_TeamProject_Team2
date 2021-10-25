@@ -38,6 +38,11 @@ void SceneManager::Render(HDC hdc)
 
 void SceneManager::Release()
 {
+	for (auto& elem : mapScenes)
+	{
+		SAFE_RELEASE(elem.second);
+	}
+	mapScenes.clear();
 }
 
 void SceneManager::AddScene(string key, GameEntity* scene)

@@ -22,6 +22,7 @@ private:
 	POINTFLOAT m_pos2;
 
 public:
+	virtual ~StageScene() {}
 	virtual HRESULT Init();
 	virtual void Update();
 	virtual void Render(HDC hdc);

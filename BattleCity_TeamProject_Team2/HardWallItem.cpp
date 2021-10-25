@@ -60,7 +60,10 @@ void HardWallItem::Render(HDC hdc)
 
 void HardWallItem::Release()
 {
+	m_gameScene = nullptr;
+	m_tileMap = nullptr;
 }
+
 
 void HardWallItem::SetHardWall()
 {

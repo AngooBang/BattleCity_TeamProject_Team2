@@ -168,8 +168,7 @@ void TileMap::Render(HDC hdc)
 
 void TileMap::Release()
 {
-	//SAFE_RELEASE(m_tileImage);
-	//SAFE_RELEASE(m_smallTileImage);
+	m_fp = nullptr;
 }
 
 void TileMap::SetTileFrame(TILE_INFO* tileInfo)

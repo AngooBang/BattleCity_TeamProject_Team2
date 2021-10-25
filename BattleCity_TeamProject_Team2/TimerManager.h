@@ -10,6 +10,7 @@ private:
 	char szText[256];
 
 public:
+	virtual ~TimerManager() {}
 	void Init();
 	void Update();
 	void Render(HDC hdc);

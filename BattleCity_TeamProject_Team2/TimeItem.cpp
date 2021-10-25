@@ -56,6 +56,3 @@ void TimeItem::Render(HDC hdc)
 		m_img->Render(hdc, m_pos.x, m_pos.y);
 }
 
-void TimeItem::Release()
-{
-}

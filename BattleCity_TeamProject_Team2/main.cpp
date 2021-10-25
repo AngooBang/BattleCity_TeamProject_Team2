@@ -3,6 +3,10 @@
 #include <Windows.h>
 #include "MainGame.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+
+
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 #else
@@ -24,6 +28,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage,
 int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
 	LPSTR _lpszCmdParam, int nCmdShow)
 {
+#ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+	_CrtSetBreakAlloc(1425);
+	//_CrtSetBreakAlloc(999);
+
+#endif
 	// 윈도우를 생성하기 위한 기본 셋팅
 	g_hInstance = _hInstance;
 	WNDCLASS wndClass;

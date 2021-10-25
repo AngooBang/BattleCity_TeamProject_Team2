@@ -14,30 +14,28 @@ HRESULT EnemyManager::Init()
 
 void EnemyManager::Update()
 {
-    for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end(); 
-        ++vecEnemyTankIter)
+    for (int i = 0; i < vecEnemyTank.size(); ++i)
     {
-        vector<EnemyTank*>::iterator it;
-           for (it = vecEnemyTank.begin(); it != vecEnemyTank.end(); ++it)
+        for (int j = 0; j < vecEnemyTank.size(); ++j)
            {
-               if (vecEnemyTankIter == it) continue;
+               if (vecEnemyTank[j] == vecEnemyTank[i]) continue;
 
                bool* arr1;
-               arr1 = (*it)->GetDirCehck(); 
+               arr1 = vecEnemyTank[j]->GetDirCehck();
                RECT tempRC;
-               RECT r1 = (*it)->GetShape();
-               POINTFLOAT p1 = (*it)->GetPos();
-               int b1 = (*it)->GetBodySize();
-               int s1 = (*it)->GetMoveSpeed();
-               MoveDir m1 = (*it)->GetmoveDir();
+               RECT r1 = vecEnemyTank[j]->GetShape();
+               POINTFLOAT p1 = vecEnemyTank[j]->GetPos();
+               int b1 = vecEnemyTank[j]->GetBodySize();
+               int s1 = vecEnemyTank[j]->GetMoveSpeed();
+               MoveDir m1 = vecEnemyTank[j]->GetmoveDir();
 
                bool* arr;
-               arr = (*vecEnemyTankIter)->GetDirCehck();
-               RECT r2 = (*vecEnemyTankIter)->GetShape();
-               POINTFLOAT p2 = (*vecEnemyTankIter)->GetPos();
-               int b2 = (*vecEnemyTankIter)->GetBodySize();
-               int s2 = (*vecEnemyTankIter)->GetMoveSpeed();
-               MoveDir m2 = (*vecEnemyTankIter)->GetmoveDir();
+               arr = vecEnemyTank[i]->GetDirCehck();
+               RECT r2 = vecEnemyTank[i]->GetShape();
+               POINTFLOAT p2 = vecEnemyTank[i]->GetPos();
+               int b2 = vecEnemyTank[i]->GetBodySize();
+               int s2 = vecEnemyTank[i]->GetMoveSpeed();
+               MoveDir m2 = vecEnemyTank[i]->GetmoveDir();
 
                if (IntersectRect(&tempRC, &r1, &r2))
                {
@@ -60,105 +58,8 @@ void EnemyManager::Update()
                        }
                    }                  
 
-                   //switch (m2)
-                   //{
-                   //case Up:
-                   //    (*vecEnemyTankIter)->SetmoveDir(MoveDir::Down);
-                   //    
-                   //    arr[MoveDir::Up] = false;
-                   //    arr[MoveDir::Down] = true;
-                   //    (*vecEnemyTankIter)->SetBeforeMoveDir(MoveDir::Down);
-                   //    (*vecEnemyTankIter)->SetFrameX(4);
-                   //    (*vecEnemyTankIter)->SetMaxFrameX(5);
-                   //    break;
-                   //case Left:
-                   //    //p2.x = p2.x + (tempRC.right - tempRC.left);
-
-                   //    (*vecEnemyTankIter)->SetmoveDir(MoveDir::Right);
-                   //    
-                   //    arr[MoveDir::Left] = false;
-                   //    arr[MoveDir::Right] = true;
-                   //    (*vecEnemyTankIter)->SetBeforeMoveDir(MoveDir::Right);
-                   //    (*vecEnemyTankIter)->SetFrameX(6);
-                   //    (*vecEnemyTankIter)->SetMaxFrameX(7);
-                   //    break;
-                   //case Down:
-                   //    //p2.y = p2.y - (tempRC.bottom - tempRC.top);
-
-                   //    (*vecEnemyTankIter)->SetmoveDir(MoveDir::Up);
-                   //    
-                   //    arr[MoveDir::Down] = false;
-                   //    arr[MoveDir::Up] = true;
-                   //    (*vecEnemyTankIter)->SetBeforeMoveDir(MoveDir::Up);
-                   //    (*vecEnemyTankIter)->SetFrameX(0);
-                   //    (*vecEnemyTankIter)->SetMaxFrameX(1);
-                   //    break;
-                   //case Right:
-                   //    //p2.x = p2.x - (tempRC.right - tempRC.left);
-
-                   //    (*vecEnemyTankIter)->SetmoveDir(MoveDir::Left);
-                   //    
-                   //    arr[MoveDir::Right] = false;
-                   //    arr[MoveDir::Left] = true;
-                   //    (*vecEnemyTankIter)->SetBeforeMoveDir(MoveDir::Left);
-                   //    (*vecEnemyTankIter)->SetFrameX(2);
-                   //    (*vecEnemyTankIter)->SetMaxFrameX(3);
-                   //    break;
-                   //}
-
-                  /* if (m1 != m2)
-                   {
-                       switch (m1)
-                       {
-                       case Up:
-                       	p1.y = p1.y + (tempRC.bottom - tempRC.top);
-
-                       	(*it)->SetmoveDir(MoveDir::Down);
-                       	
-                        arr1[MoveDir::Up] = false;
-                        arr1[MoveDir::Down] = true;
-                       	(*it)->SetBeforeMoveDir(MoveDir::Down);
-                       	(*it)->SetFrameX(4);
-                       	(*it)->SetMaxFrameX(5);
-                       	break;
-                       case Left:
-                       	p1.x = p1.x + (tempRC.right - tempRC.left);
-
-                       	(*it)->SetmoveDir(MoveDir::Right);
-                       	
-                        arr1[MoveDir::Left] = false;
-                        arr1[MoveDir::Right] = true;
-                       	(*it)->SetBeforeMoveDir(MoveDir::Right);
-                       	(*it)->SetFrameX(6);
-                       	(*it)->SetMaxFrameX(7);
-                       	break;
-                       case Down:
-                       	p1.y = p1.y - (tempRC.bottom - tempRC.top);
-
-                       	(*it)->SetmoveDir(MoveDir::Up);
-                       	
-                        arr1[MoveDir::Down] = false;
-                        arr1[MoveDir::Up] = true;
-                       	(*it)->SetBeforeMoveDir(MoveDir::Up);
-                       	(*it)->SetFrameX(0);
-                       	(*it)->SetMaxFrameX(1);
-                       	break;
-                       case Right:
-                       	p1.x = p1.x - (tempRC.right - tempRC.left);
-
-                       	(*it)->SetmoveDir(MoveDir::Left);
-                       	
-                        arr1[MoveDir::Right] = false;
-                        arr1[MoveDir::Left] = true;
-                       	(*it)->SetBeforeMoveDir(MoveDir::Left);
-                       	(*it)->SetFrameX(2);
-                       	(*it)->SetMaxFrameX(3);
-                       	break;
-                       }
-                   }*/
-                   
-                   (*it)->SetPos(p1);
-                   (*vecEnemyTankIter)->SetPos(p2);
+                   vecEnemyTank[j]->SetPos(p1);
+                   vecEnemyTank[i]->SetPos(p2);
 
                    r1.left = p1.x - (b1 / 2);
                    r1.top = p1.y - (b1 / 2);
@@ -170,30 +71,27 @@ void EnemyManager::Update()
                    r2.right = r2.left + b2;
                    r2.bottom = r2.top + b2;
 
-                   (*it)->SetShape(r1);
-                   (*vecEnemyTankIter)->SetShape(r2);
+                   vecEnemyTank[j]->SetShape(r1);
+                   vecEnemyTank[i]->SetShape(r2);
 
-                   (*it)->RandomDirChange();
-                   (*vecEnemyTankIter)->RandomDirChange();
-
-                   //(*it)->AutoMove();
-                   //(*vecEnemyTankIter)->AutoMove();
+                   vecEnemyTank[j]->RandomDirChange();
+                   vecEnemyTank[i]->RandomDirChange();
                }
            }
 
-        if ((*vecEnemyTankIter)->GetIsAlive())
+        if (vecEnemyTank[i]->GetIsAlive())
         {
-            if ((*vecEnemyTankIter)->GetisFire() == true)
+            if (vecEnemyTank[i]->GetisFire() == true)
             {
-                m_ammoMgr->AddAmmo(new Ammo, vecEnemyTankIter, m_player);
-                (*vecEnemyTankIter)->SetisFire(false);
+                m_ammoMgr->AddAmmo(new Ammo, vecEnemyTank[i], m_player);
+                vecEnemyTank[i]->SetisFire(false);
             }
 
-			(*vecEnemyTankIter)->Update();
+            vecEnemyTank[i]->Update();
         }
         else
         {
-            vecEnemyTank.erase(vecEnemyTankIter);
+            delete vecEnemyTank[i];
             break;
         }
     }
@@ -201,20 +99,30 @@ void EnemyManager::Update()
 
 void EnemyManager::Render(HDC hdc)
 {
-    for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end();
-        ++vecEnemyTankIter)
+
+    for (int i = 0; i < vecEnemyTank.size(); ++i)
     {
-       (*vecEnemyTankIter)->Render(hdc);
+        vecEnemyTank[i]->Render(hdc);
     }
 }
 
 void EnemyManager::Release()
 {
-    for (vecEnemyTankIter = vecEnemyTank.begin(); vecEnemyTankIter != vecEnemyTank.end();
-        ++vecEnemyTankIter)
+
+    for (int i = 0; i < vecEnemyTank.size(); ++i)
     {
-        SAFE_RELEASE((*vecEnemyTankIter));
+        EnemyTank* temp = vecEnemyTank[i];
+        delete temp;
     }
+    vecEnemyTank.clear();
+
+    m_player = nullptr;
+    m_gameScene = nullptr;
+    m_ammoMgr = nullptr;
+    m_tileMap = nullptr;
+    //SAFE_RELEASE(m_gameScene);
+    //SAFE_RELEASE(m_ammoMgr);
+    //SAFE_RELEASE(m_tileMap);
 }
 
 void EnemyManager::AddEnemy(EnemyTank* enemyTank, POINTFLOAT pos)

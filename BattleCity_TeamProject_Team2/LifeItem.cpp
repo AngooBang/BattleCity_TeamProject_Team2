@@ -42,6 +42,3 @@ void LifeItem::Render(HDC hdc)
 		m_img->Render(hdc, m_pos.x, m_pos.y);
 }
 
-void LifeItem::Release()
-{
-}

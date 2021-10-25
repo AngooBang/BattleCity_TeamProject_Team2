@@ -11,6 +11,7 @@ private:
 	float m_hardWallCount;
 
 public:
+	virtual ~HardWallItem() {}
 	virtual HRESULT Init();
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;

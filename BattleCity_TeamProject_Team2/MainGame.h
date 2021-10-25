@@ -21,6 +21,7 @@ private:
 
 
 public:
+	virtual ~MainGame() {}
 	HRESULT Init();
 	void Update();
 	void Render(HDC hdc);	// 오버로딩

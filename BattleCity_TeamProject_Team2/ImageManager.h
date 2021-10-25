@@ -11,6 +11,7 @@ private:
 
 
 public:
+	virtual ~ImageManager() {}
 	void Init();
 	void Release();
 

@@ -42,6 +42,3 @@ void StarItem::Render(HDC hdc)
 		m_img->Render(hdc, m_pos.x, m_pos.y);
 }
 
-void StarItem::Release()
-{
-}

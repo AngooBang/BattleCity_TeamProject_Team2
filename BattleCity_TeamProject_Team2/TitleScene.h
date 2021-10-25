@@ -14,6 +14,7 @@ private:
 	POINTFLOAT m_pos;
 
 public:
+	virtual ~TitleScene() {}
 	virtual HRESULT Init();
 	virtual void Update();
 	virtual void Render(HDC hdc);

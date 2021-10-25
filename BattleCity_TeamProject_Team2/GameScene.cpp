@@ -48,7 +48,6 @@ HRESULT GameScene::Init()
 	m_enemyMgr->SetAmmoMgr(m_ammoMgr);
 
 	m_itemMgr = new ItemManager;
-	m_itemMgr->Init();
 	m_itemMgr->SetGameScene(this);
 
 	m_enemySpawnPlaceX = 0;
@@ -192,8 +191,6 @@ void GameScene::Render(HDC hdc)
 
 void GameScene::Release()
 {
-	//SAFE_RELEASE(m_backGround);
-	//SAFE_RELEASE(m_gameOver);
 	SAFE_RELEASE(m_tileMap);
 	SAFE_RELEASE(m_uiManager);
 	SAFE_RELEASE(m_player);

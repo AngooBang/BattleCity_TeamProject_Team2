@@ -64,6 +64,7 @@ protected:
 	AmmoManager* m_ammoMgr;
 
 public:
+	virtual ~Tank() {}
 	virtual HRESULT Init();
 	void Update();
 	void Render(HDC hdc);

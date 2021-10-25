@@ -12,7 +12,6 @@ class EnemyManager : public GameObject
 {
 private:
 	vector<EnemyTank*> vecEnemyTank;
-	vector<EnemyTank*>::iterator vecEnemyTankIter;
 
 	// 탱크 테스트용
 	Tank* m_player;
@@ -28,6 +27,7 @@ private:
 	//Temp p;
 
 public:
+	virtual ~EnemyManager() {}
 	HRESULT Init();
 	void Update();
 	void Render(HDC hdc);
@@ -42,9 +42,7 @@ public:
 	bool isCollisionPlayer(vector<EnemyTank*>::iterator EnemyTankIter);
 	inline void SetPlayerTank(Tank* playerTank) { this->m_player = playerTank; }
 
-	inline vector<EnemyTank*> GetVecEnemys() { return vecEnemyTank; }
-
-	bool CollisionWithTile();
+	inline vector<EnemyTank*> GetVecEnemys() { return this->vecEnemyTank; }
 
 	inline void SetAmmoMgr(AmmoManager* ammoMgr) { this->m_ammoMgr = ammoMgr; }
 

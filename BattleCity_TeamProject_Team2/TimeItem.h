@@ -8,9 +8,9 @@ private:
 
 
 public:
+	virtual ~TimeItem() {}
 	virtual HRESULT Init();
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
-	virtual void Release() override;
 };
 

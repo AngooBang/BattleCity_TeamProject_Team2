@@ -21,6 +21,7 @@ private:
 	bool* mb_isGameOver;
 
 public:
+	virtual ~AmmoManager() {}
 	virtual HRESULT Init();
 	virtual void Update();
 	virtual void Render(HDC hdc);

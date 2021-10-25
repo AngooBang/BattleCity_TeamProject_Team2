@@ -24,6 +24,7 @@ private:
 	int m_playerFrameY = 0;
 
 public:
+	virtual ~GameManager() {}
 	void Init();
 	void Update();
 	void Render();

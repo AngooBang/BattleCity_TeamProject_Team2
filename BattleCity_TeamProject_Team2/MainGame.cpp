@@ -67,19 +67,14 @@ void MainGame::Release()
 	SAFE_RELEASE(backBuffer);
 
 	TimerManager::GetSingleton()->Release();
-	TimerManager::GetSingleton()->ReleaseSingleton();
 
 	ImageManager::GetSingleton()->Release();
-	ImageManager::GetSingleton()->ReleaseSingleton();
 
 	KeyManager::GetSingleton()->Release();
-	KeyManager::GetSingleton()->ReleaseSingleton();
 
 	SceneManager::GetSingleton()->Release();
-	SceneManager::GetSingleton()->ReleaseSingleton();
 
 	GameManager::GetSingleton()->Release();
-	GameManager::GetSingleton()->ReleaseSingleton();
 
 	KillTimer(g_hWnd, 0);
 }

@@ -47,6 +47,3 @@ void GranadeItem::Render(HDC hdc)
 		m_img->Render(hdc, m_pos.x, m_pos.y);
 }
 
-void GranadeItem::Release()
-{
-}
