@@ -44,11 +44,16 @@ private:
 	Image* m_tileImage;		
 
 	Image* m_smallTileImage;
+	Image* m_boomImg;
 
 	FILE* m_fp;
 	int m_stageNum;
 
-	int m_elapsedCount;
+
+	int m_frameX, m_maxFrameX;
+	bool mb_destroyBase;
+
+	float m_elapsedCount;
 
 	int testY;
 
