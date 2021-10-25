@@ -5,7 +5,7 @@ HRESULT TitleScene::Init()
 {
 	m_pos.x = 500;
 	m_pos.y = 1350;
-	m_moveSpeed;
+	m_moveSpeed = 5;
 
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Title.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 	m_title = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Title.bmp");

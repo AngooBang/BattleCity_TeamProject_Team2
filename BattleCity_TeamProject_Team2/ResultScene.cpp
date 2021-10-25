@@ -4,9 +4,17 @@
 HRESULT ResultScene::Init()
 {
 	//스테이지 넘버 
-	int StageNum = 1;
+	//int StageNum = 1;
+	StageNum = GameManager::GetSingleton()->GetStageNr();
+
+	//적 숫자 받아오기
+	m_Enemytype[0] = GameManager::GetSingleton()->GetKillCount()->basicTankNr;
+	m_Enemytype[1] = GameManager::GetSingleton()->GetKillCount()->speedTankNr;
+	m_Enemytype[2] = GameManager::GetSingleton()->GetKillCount()->powerTankNr;
+	m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
 
 	//이미지 불러오기 
+	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
 	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 
@@ -52,40 +60,56 @@ HRESULT ResultScene::Init()
 
 void ResultScene::Update()
 {
-// 스테이지 숫자 갱신
-	if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F4))
+	// 스테이지 숫자 갱신
+	/*if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F4))
 	{
 		StageNum++;
 		if (StageNum > 9)
 			StageNum = 0;
-	}
-// 탱크 종류 마다 점수 갱신 (탱크 킬할떄마다 스코어 프레임 증가하는 방식)
-		if(mb_Calculate == true)
+	}*/
+	// 탱크 종류 마다 점수 갱신 (탱크 킬할떄마다 스코어 프레임 증가하는 방식)
+	if (mb_Calculate == true)
+	{
+		m_elapseCount++;
+		if (m_elapseCount == 15)
 		{
-			m_elapseCount++;
-			if (m_elapseCount == 15)
+			if (m_countofEnemy[m_CalculateEnemytypeNum] != m_Enemytype[m_CalculateEnemytypeNum])
 			{
-				if (m_countofEnemy[m_CalculateEnemytypeNum] != m_Enemytype[m_CalculateEnemytypeNum])
+				m_countofEnemy[m_CalculateEnemytypeNum]++;
+				Calculate(m_CalculateEnemytypeNum);
+				m_elapseCount = 0;
+			}
+			else
+			{
+				if (m_CalculateEnemytypeNum < 3)
 				{
-					m_countofEnemy[m_CalculateEnemytypeNum]++;
-					Calculate(m_CalculateEnemytypeNum);
-					m_elapseCount = 0;
+					m_CalculateEnemytypeNum++;
 				}
 				else
 				{
-					if (m_CalculateEnemytypeNum < 3)
-					{
-						m_CalculateEnemytypeNum++;
-					}					
-					else
-					{
-						mb_Calculate = false;
-					}
-					m_elapseCount = -75;
+					mb_Calculate = false;
 				}
+				m_elapseCount = -75;
 			}
 		}
-
+	}
+	else
+	{
+		if (GameManager::GetSingleton()->GetStageNr() != GameManager::GetSingleton()->GetMaxStageNr() &&
+			GameManager::GetSingleton()->GetPlayerHp() != 0)
+		{
+			GameManager::GetSingleton()->SetStageNrPlus(1);
+			GameManager::GetSingleton()->ResetKillCount();
+			
+			Sleep(1000);
+			SceneManager::GetSingleton()->ChangeScene("스테이지씬");
+		}
+		else
+		{
+			Sleep(1000);
+			SceneManager::GetSingleton()->ChangeScene("게임오버씬");
+		}
+	}
 	//if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F5))
 	//{
 	//	m_countofEnemy[0]++;
@@ -111,16 +135,16 @@ void ResultScene::Update()
 void ResultScene::Render(HDC hdc)
 {
 	m_backGround->Render(hdc);
-	m_backGround->Render(hdc); 
+	m_HIScore->Render(hdc, HISCORE_POS_X, HISCORE_POS_Y);
 	m_Stage->Render(hdc, WIN_SIZE_X / 2.6, WIN_SIZE_Y / 5);
-	m_StageNumber->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, StageNum % 5, StageNum / 5);
-	m_Stage->Render(hdc, WIN_SIZE_X / 2.6 ,WIN_SIZE_Y / 5);
 	m_StageNumber->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, StageNum % 5, StageNum / 5);
 	for (int k = 0; k < 4; k++)
 	{
 		m_PTS->Render(hdc, WIN_SIZE_X / 4, WIN_SIZE_Y * 0.4 + k * 70);
 		m_enemy[k]->Render(hdc, WIN_SIZE_X / 3 + 120, WIN_SIZE_Y - 540 + (70 * k), 0, k);
 	}
+	m_Player1->Render(hdc, WIN_SIZE_X / 4 - 55, WIN_SIZE_Y / 4);
+	m_TotalScore->Render(hdc, WIN_SIZE_X / 3 - 10, WIN_SIZE_Y * 0.7);
 
 	for (int i = 0; i <= m_CalculateEnemytypeNum; i++)
 	{
@@ -135,7 +159,7 @@ void ResultScene::Render(HDC hdc)
 				m_enemySumScoreThousandNumImg[i]->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_scoreThousandofDigits[i]], m_numFrameY[m_scoreThousandofDigits[i]]);
 			}
 		}
-	
+
 	}
 
 	//m_enemySumScoreThousandNumImg[1]->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 470, m_numFrameX[m_scoreThousandofDigits[1]], m_numFrameY[m_scoreThousandofDigits[1]]);
@@ -158,8 +182,6 @@ void ResultScene::Render(HDC hdc)
 	//{
 
 	//}
-
-	m_TotalScore->Render(hdc, WIN_SIZE_X / 3 - 10, WIN_SIZE_Y * 0.7);
 
 }
 

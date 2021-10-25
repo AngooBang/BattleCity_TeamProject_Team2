@@ -11,6 +11,7 @@ private:
 	Image* m_backGround;
 	Image* m_backGround2;
 
+	int m_stageNr = 0;
 	int m_stageNumX[10] = { 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 };
 
 	int m_stageNumY[10] = { 0,0,0,0,0,1,1,1,1,1 };

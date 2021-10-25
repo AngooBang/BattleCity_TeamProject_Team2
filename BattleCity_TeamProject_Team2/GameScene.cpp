@@ -18,9 +18,11 @@
 HRESULT GameScene::Init()
 {
 	SetWindowSize(WIN_START_POS_X, WIN_START_POS_Y, WIN_SIZE_X, WIN_SIZE_Y);
-	m_backGround = ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+	m_backGround = ImageManager::GetSingleton()->FindImage("Image/BattleCity/mapImage.bmp");
 
-	m_gameOver = ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
+	m_gameOver = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Game_Over.bmp");
 
 	mb_isGameOver = false;
 	mb_isTimeStop = false;
@@ -51,6 +53,11 @@ HRESULT GameScene::Init()
 	m_itemMgr->Init();
 	m_itemMgr->SetGameScene(this);
 
+	m_enemySpawnPlaceX = 0;
+	m_enemyNumCount = 0;
+	m_elapsedTime = 0;
+	m_fireTime = 0;
+
 	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2;
 	m_spawnPlaceX2 = m_tileMap->GetShape().right - 32;
 	m_spawnPlaceX3 = m_tileMap->GetShape().left + 32;
@@ -59,9 +66,9 @@ HRESULT GameScene::Init()
 	switch (GameManager::GetSingleton()->GetStageNr())
 	{
 	case 1:
-		m_enemyTotNum = 12; break;
+		m_enemyTotNum = 3; break;
 	case 2:
-		m_enemyTotNum = 15; break;
+		m_enemyTotNum = 3; break;
 	}
 
 	m_uiManager = new UIManager;
@@ -88,11 +95,13 @@ void GameScene::Update()
 		{
 			// 게임오버
 			Sleep(1000);
+			GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
 			SceneManager::GetSingleton()->ChangeScene("결과씬");
 		}
 		if(m_goElapsedTime > 0.4f)
 			return;
 	}
+
 	m_tileMap->Update();
 
 	// 적 생성 
@@ -108,8 +117,6 @@ void GameScene::Update()
 
 	m_uiManager->Update(m_enemyTotNum, m_enemyNumCount, m_player->GetHP());
 
-	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
-	m_enemyMgr->Update();
 	// 아이템 매니저 업데이트
 	m_itemMgr->Update();
 	if (KeyManager::GetSingleton()->IsOnceKeyDown('G'))
@@ -131,9 +138,15 @@ void GameScene::Update()
 		m_player->SetisFire(false);
 	}
 
+	// 에너미 , 에너미 아모발사, 에너미 아모 매니저 업데이트
+	m_enemyMgr->Update();
+
 	// 스테이지 클리어
-	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum)
+	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum && m_enemyMgr->GetVecEnemys().empty())
 	{
+		Sleep(2000);
+		GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
+		GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
 		SceneManager::GetSingleton()->ChangeScene("결과씬");
 
 	}
@@ -203,17 +216,17 @@ void GameScene::SpawnEnemy()
 		break;
 
 	case 1:
-		m_enemyMgr->AddEnemy(new BasicTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+		m_enemyMgr->AddEnemy(new SpeedTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
 		m_enemyNumCount++;
 		break;
 
 	case 2:
-		m_enemyMgr->AddEnemy(new BasicTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+		m_enemyMgr->AddEnemy(new PowerTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
 		m_enemyNumCount++;
 		break;
 
 	case 3:
-		m_enemyMgr->AddEnemy(new BasicTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
+		m_enemyMgr->AddEnemy(new ArmorTank(m_tileMap), POINTFLOAT{ m_enemySpawnPlaceX, m_spawnPlaceY });
 		m_enemyNumCount++;
 		break;
 	}
