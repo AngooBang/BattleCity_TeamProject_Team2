@@ -18,10 +18,8 @@
 HRESULT GameScene::Init()
 {
 	SetWindowSize(WIN_START_POS_X, WIN_START_POS_Y, WIN_SIZE_X, WIN_SIZE_Y);
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/BattleCity/mapImage.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
 	m_gameOver = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Game_Over.bmp");
 
 	mb_isGameOver = false;

@@ -35,6 +35,7 @@ private:
 
 	bool mb_isTimeStop;
 
+
 	float m_enemySpawnPlaceX = 0;
 	float m_spawnPlaceX1 = 0;
 	float m_spawnPlaceX2 = 0;

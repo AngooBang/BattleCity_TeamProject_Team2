@@ -6,7 +6,6 @@ HRESULT GameOverScene::Init()
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 	m_elapsedTime = 0.0f;
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/GameOver.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 	m_gameOver = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/GameOver.bmp");
 
 	return S_OK;

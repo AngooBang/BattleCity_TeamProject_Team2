@@ -12,15 +12,11 @@ HRESULT TileMap::Init()
 	m_shape.right = m_shape.left + TILE_MAP_SIZE_X;
 	m_shape.bottom = m_shape.top + TILE_MAP_SIZE_Y;
 
-	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", TILE_MAP_SIZE_X, TILE_MAP_SIZE_Y);
-	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
+	m_backGround = ImageManager::GetSingleton()->FindImage("Image/TileBackGround.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/SamlpTile1.bmp", 320, 320, 10, 10, true, RGB(255, 0, 255));
 	m_tileImage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/SamlpTile1.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/SmallSamlpTile.bmp", 96, 64, 6, 4, true, RGB(255, 0, 255));
 	m_smallTileImage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/SmallSamlpTile.bmp");
 
 	m_fp = nullptr;
