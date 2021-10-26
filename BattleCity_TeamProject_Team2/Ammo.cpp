@@ -123,7 +123,7 @@ void Ammo::PlayerAmmoCollider()
 
 void Ammo::EnemyCollider()
 {
-	vector<EnemyTank*> m_vecEnemys = m_enemyMgr->GetVecEnemys();
+	vector<EnemyTank*>& m_vecEnemys = m_enemyMgr->GetVecEnemys();
 	for (int i=0; i< m_vecEnemys.size();i++)
 	{
 		

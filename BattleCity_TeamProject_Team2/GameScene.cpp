@@ -39,12 +39,14 @@ HRESULT GameScene::Init()
 
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
+
+	m_ammoMgr = new AmmoManager;
+	m_ammoMgr->Init();
+
 	m_enemyMgr->SetGameScene(this);
 	m_enemyMgr->SetPlayerTank(m_player);
 	m_enemyMgr->SetAmmoMgr(m_ammoMgr);
 
-	m_ammoMgr = new AmmoManager;
-	m_ammoMgr->Init();
 	m_ammoMgr->SetEnemyMgr(m_enemyMgr);
 	m_ammoMgr->SetTileMap(m_tileMap);
 	m_ammoMgr->SetIsGameOver(&mb_isGameOver);

@@ -83,7 +83,7 @@ void EnemyManager::Update()
         {
             if (vecEnemyTank[i]->GetisFire() == true)
             {
-                m_ammoMgr->AddAmmo(new Ammo, vecEnemyTank[i], m_player);
+                m_ammoMgr->AddAmmo(new Ammo, vecEnemyTank.begin()+i, m_player);
                 vecEnemyTank[i]->SetisFire(false);
             }
 

@@ -31,7 +31,7 @@ public:
 	virtual void Release();
 
 	void AddAmmo(Ammo* Ammo, Tank* tank);
-	void AddAmmo(Ammo* Ammo, EnemyTank* enemyTank, Tank* target);
+	void AddAmmo(Ammo* Ammo, vector<EnemyTank*>::iterator it, Tank* target);
 
 	void AmmoCollision();
 
