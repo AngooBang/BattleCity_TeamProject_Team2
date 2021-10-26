@@ -21,7 +21,7 @@ HRESULT MainGame::Init()
 	SceneManager::GetSingleton()->AddScene("결과씬", new ResultScene());
 	SceneManager::GetSingleton()->AddScene("게임오버씬", new GameOverScene());
 
-	SceneManager::GetSingleton()->ChangeScene("결과씬");
+	SceneManager::GetSingleton()->ChangeScene("타이틀씬");
 	 
 	srand((unsigned int)time(nullptr));
 	// 타이머 셋팅
