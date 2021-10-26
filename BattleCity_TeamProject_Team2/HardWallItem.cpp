@@ -5,7 +5,6 @@
 
 HRESULT HardWallItem::Init()
 {
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Item/Item3.bmp", 64, 64, true, RGB(255, 0, 255));
 	m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Item/Item3.bmp");
 
 	m_pos.x = TILE_MAP_START_POS_X + rand() % (TILE_MAP_SIZE_X);

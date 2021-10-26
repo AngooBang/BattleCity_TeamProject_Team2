@@ -1,5 +1,6 @@
 #include "ResultScene.h"
 #include "Image.h"
+#include "Ammo.h"
 
 HRESULT ResultScene::Init()
 {
@@ -14,30 +15,26 @@ HRESULT ResultScene::Init()
 	m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
 
 	//이미지 불러오기 
+
 	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
 	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+
+
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/HISocre.bmp", 470, 50, true, RGB(255, 0, 255));
 	m_HIScore = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/HISocre.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Player1.bmp", 230, 40, true, RGB(255, 0, 255));
 	m_Player1 = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Player1.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/PTS.bmp", 90, 40, true, RGB(255, 0, 255));
 	m_PTS = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/PTS.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/TotalScore.bmp", 360, 40, true, RGB(255, 0, 255));
 	m_TotalScore = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/TotalScore.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Stage_w.bmp", 111, 21, true, RGB(255, 0, 255));
 	m_Stage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Stage_w.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Number_w.bmp", 120, 42, 5, 2, true, RGB(255, 0, 255));
 	m_StageNumber = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
 	/*ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/ScoreNumber.bmp", 40, 14, true, RGB(255, 0, 255));*/
 
-	ImageManager::GetSingleton()->AddImage("Image/Enemy.bmp", 512, 384, 8, 6, true, RGB(255, 0, 255));
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -96,7 +93,7 @@ void ResultScene::Update()
 	else
 	{
 		if (GameManager::GetSingleton()->GetStageNr() != GameManager::GetSingleton()->GetMaxStageNr() &&
-			GameManager::GetSingleton()->GetPlayerHp() != 0)
+			GameManager::GetSingleton()->GetPlayerHp() != 0 )
 		{
 			GameManager::GetSingleton()->SetStageNrPlus(1);
 			GameManager::GetSingleton()->ResetKillCount();
@@ -134,7 +131,7 @@ void ResultScene::Update()
 
 void ResultScene::Render(HDC hdc)
 {
-	m_backGround->Render(hdc);
+	m_backGround->Render(hdc, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
 	m_HIScore->Render(hdc, HISCORE_POS_X, HISCORE_POS_Y);
 	m_Stage->Render(hdc, WIN_SIZE_X / 2.6, WIN_SIZE_Y / 5);
 	m_StageNumber->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, StageNum % 5, StageNum / 5);

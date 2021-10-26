@@ -27,10 +27,6 @@ HRESULT BasicTank::Init(POINTFLOAT pos, EnemyManager* manager)
     //mb_Move = false;
     mb_isFire = false;
 
-    ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Spawn_Effect2.bmp", 
-                                            256, 64, 4, 1, true, RGB(255, 0, 255));
-    ImageManager::GetSingleton()->AddImage("Image/Enemy.bmp", 512, 384, 8, 6, true, RGB(255, 0, 255));
-    ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Boom_Effect2_Tank.bmp", 160, 32, 5, 1, true, RGB(255, 0, 255));
     m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Spawn_Effect2.bmp");
 
     m_pos.x = pos.x;

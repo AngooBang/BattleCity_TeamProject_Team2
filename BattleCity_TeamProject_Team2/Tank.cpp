@@ -10,11 +10,6 @@ HRESULT Tank::Init()
 	m_HP = GameManager::GetSingleton()->GetPlayerHp();
 	m_tempHP = m_HP;
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Player/Player.bmp", 512, 256, 8, 4, true, RGB(255, 0, 255));
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Spawn_Effect2.bmp",
-		256, 64, 4, 1, true, RGB(255, 0, 255));
-
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Shield.bmp", 128, 64, 2, 1, true, RGB(255, 0, 255));
 	m_shieldImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Shield.bmp");
 
 	SpawnPlayer();
@@ -374,8 +369,8 @@ void Tank::SpawnPlayer()
 {
 	m_spawnTimer = 0;
 
-	m_pos.x = 20 + TILE_MAP_SIZE_X / 2;
-	m_pos.y = 20 + TILE_MAP_SIZE_Y / 2;
+	m_pos.x = TILE_MAP_SIZE_X / 2 - 112;
+	m_pos.y = TILE_MAP_SIZE_Y - 32;
 
 	m_frameX = 0;
 	m_frameY = 0;

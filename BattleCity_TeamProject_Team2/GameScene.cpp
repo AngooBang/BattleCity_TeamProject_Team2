@@ -18,15 +18,14 @@
 HRESULT GameScene::Init()
 {
 	SetWindowSize(WIN_START_POS_X, WIN_START_POS_Y, WIN_SIZE_X, WIN_SIZE_Y);
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/BattleCity/mapImage.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Game_Over.bmp", 96, 45, true, RGB(255, 0, 255));
 	m_gameOver = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Game_Over.bmp");
 
 	mb_isGameOver = false;
 	mb_isTimeStop = false;
 	m_goElapsedTime = 0.0f;
+	m_elapsedTime2 = 0.0f;
 
 	m_gameOverPos.x = TILE_MAP_START_POS_X + TILE_MAP_SIZE_X / 2;
 	m_gameOverPos.y = TILE_MAP_SIZE_Y;
@@ -55,7 +54,6 @@ HRESULT GameScene::Init()
 
 	m_enemySpawnPlaceX = 0;
 	m_enemyNumCount = 0;
-	m_elapsedTime = 0;
 	m_fireTime = 0;
 
 	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2;
@@ -144,11 +142,13 @@ void GameScene::Update()
 	// 스테이지 클리어
 	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum && m_enemyMgr->GetVecEnemys().empty())
 	{
-		Sleep(2000);
-		GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
-		GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
-		SceneManager::GetSingleton()->ChangeScene("결과씬");
-
+		m_elapsedTime2 += TimerManager::GetSingleton()->GetDeltaTime();
+		if (m_elapsedTime2 >= 3.0f)
+		{
+			GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
+			GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
+			SceneManager::GetSingleton()->ChangeScene("결과씬");
+		}
 	}
 }
 

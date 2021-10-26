@@ -7,13 +7,10 @@ HRESULT TitleScene::Init()
 	m_pos.y = 1350;
 	m_moveSpeed = 5;
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Title.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 	m_title = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Title.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 	m_backGround2 = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/Enemy.bmp", 512, 384, 8, 6, true, RGB(255, 0, 255));
 	m_enemyType = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
 
 	return S_OK;

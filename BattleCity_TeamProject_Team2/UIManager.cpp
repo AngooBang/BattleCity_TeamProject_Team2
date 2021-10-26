@@ -3,15 +3,12 @@
 
 HRESULT UIManager::Init(int m_enemyTotNum)
 {
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/Icon_Enemy.bmp", 30, 30);
 	m_enemyLeft = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Icon/Icon_Enemy.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/player1Life.bmp", 60, 60, true, RGB(255, 0, 255));
 	m_p1LifeUI = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Icon/player1Life.bmp");
 	
 	m_numberUI = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number.bmp");
 
-	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/StageFlag.bmp", 60, 60, true, RGB(255, 0, 255));
 	m_stageFlag = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Icon/StageFlag.bmp");
 	
 	m_enemyLeftNum = m_enemyTotNum;

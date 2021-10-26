@@ -35,6 +35,7 @@ private:
 
 	bool mb_isTimeStop;
 
+
 	float m_enemySpawnPlaceX = 0;
 	float m_spawnPlaceX1 = 0;
 	float m_spawnPlaceX2 = 0;
@@ -44,6 +45,7 @@ private:
 	int m_enemyNumCount = 0;
 	int m_enemyTotNum = 0;
 
+	float m_elapsedTime2 = 0;
 	float m_elapsedTime = 0;
 	float m_goElapsedTime;
 

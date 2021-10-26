@@ -4,9 +4,9 @@
 
 HRESULT StageScene::Init()
 {
-	m_pos.x = 500;
-	m_pos.y = -450;
-	m_pos2.y = 1350;
+	m_pos.x = WIN_SIZE_X / 2;
+	m_pos.y = -(WIN_SIZE_Y / 2);
+	m_pos2.y = WIN_SIZE_Y + WIN_SIZE_Y / 2;
 	m_moveSpeed = 15;
 	m_elapsedTime = 0;
 	
@@ -33,7 +33,7 @@ void StageScene::AutoMove()
 	m_pos.y += m_moveSpeed;
 	m_pos2.y -= m_moveSpeed;
 
-	if (m_pos.y && m_pos2.y ==450)
+	if (m_pos.y && m_pos2.y == WIN_SIZE_Y / 2)
 		m_moveSpeed = 0;
 }
 
