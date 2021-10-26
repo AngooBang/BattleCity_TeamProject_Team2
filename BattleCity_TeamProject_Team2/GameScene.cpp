@@ -95,7 +95,7 @@ void GameScene::Update()
 		{
 			// 게임오버
 			Sleep(1000);
-			GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
+			GameManager::GetSingleton()->SetPlayerHp(0);
 			SceneManager::GetSingleton()->ChangeScene("결과씬");
 		}
 		if(m_goElapsedTime > 0.4f)

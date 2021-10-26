@@ -4,7 +4,7 @@
 #include "TileMap.h"
 #include "GameScene.h"
 
-HRESULT EnemyTank::Init(POINTFLOAT pos, EnemyManager* manager)
+HRESULT EnemyTank::Init(POINTFLOAT pos)
 {
     //ImageManager::GetSingleton()->AddImage("Image/Taeyeon.bmp", WIN_SIZE_X, WIN_SIZE_Y);
     //m_backGround = ImageManager::GetSingleton()->FindImage("Image/Taeyeon.bmp");

@@ -3,13 +3,12 @@
 #include "TileMap.h"
 #include "GameScene.h"
 
-HRESULT SpeedTank::Init(POINTFLOAT pos, EnemyManager* manager)
+HRESULT SpeedTank::Init(POINTFLOAT pos)
 {
     m_moveDir = MoveDir::Down;
     m_elapsedCount = 0;
     m_moveDelay = 70;
 
-    m_imgDelay = 5;
     m_frameCount = 1;
 
     totElapsedCount = 0.0f;

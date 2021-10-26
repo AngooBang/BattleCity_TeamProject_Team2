@@ -13,48 +13,42 @@ class GameScene;
 class EnemyTank : public GameObject
 {
 protected:
+	Image* m_backGround = nullptr;
+	Image* m_img = nullptr;
+	Image* m_boomImage = nullptr;
+
+	GameScene* m_gameScene = nullptr;
+
 	MoveDir m_moveDir = MoveDir::Down;
-
-
-	Image* m_img;
-	EnemyManager* m_manager;
-
-
-	GameScene* m_gameScene;
-
+	int m_enemyFrame[MoveDir::End];
+	
 	int m_elapsedCount = 0;
 	int m_moveDelay = 70;
 
-	int m_enemyFrame[MoveDir::End];
-
-	int m_imgDelay = 5;
-	int m_frameX;
+	int m_frameX = 0;
 	int m_frameCount = 1;
-	int m_maxFrameX;
-	int m_frameY;
-
-	Image* m_backGround;
+	int m_maxFrameX = 0;
+	int m_frameY = 0;
 
 	float totElapsedCount = 0.0f;
-	EnemyStatus m_enemyStatus;
+	EnemyStatus m_enemyStatus = EnemyStatus::End;
 
-	MoveDir m_beforeMoveDir;
+	MoveDir m_beforeMoveDir = MoveDir::End;
 	bool mb_dirCheck[4];
 
-	TileMap* m_tileMap;
+	TileMap* m_tileMap = nullptr;
 
 	RECT m_tempRC;
 	bool m_isCollide[MoveDir::End];
 
-	int m_HP;
-	int m_ammoSpeed;
+	int m_HP = 0;
+	int m_ammoSpeed = 0;
 
-	bool mb_isAlive;
-	bool mb_isFire;
+	bool mb_isAlive = true;
+	bool mb_isFire = true;
 	float m_fireElapsedCount = 0;
 
-	EnemyType m_enemyTankType;
-	Image* m_boomImage;
+	EnemyType m_enemyTankType = EnemyType::End;
 
 	bool mb_isReady = true;
 	float m_boomElapsedCount = 0.0f;
@@ -63,7 +57,7 @@ protected:
 	float m_scale = 0.0f;
 
 public:
-	virtual HRESULT Init(POINTFLOAT pos, EnemyManager* manager);
+	virtual HRESULT Init(POINTFLOAT pos);
 	virtual void Update() = 0;
 	virtual void Render(HDC hdc) = 0;
 	virtual void Release();
