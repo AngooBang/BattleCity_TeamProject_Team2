@@ -398,8 +398,8 @@ void Tank::SpawnPlayer()
 {
 	m_spawnTimer = 0.0f;
 
-	m_pos.x = 20 + TILE_MAP_SIZE_X / 2;
-	m_pos.y = 20 + TILE_MAP_SIZE_Y / 2;
+	m_pos.x = TILE_MAP_SIZE_X / 2 - 112;
+	m_pos.y = TILE_MAP_SIZE_Y - 32;
 
 	m_frameX = 0;
 	m_frameY = 0;

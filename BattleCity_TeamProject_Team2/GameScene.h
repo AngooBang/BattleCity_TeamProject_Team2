@@ -12,7 +12,6 @@ class ItemManager;
 class GameScene : public GameEntity
 {
 private:
-
 	Image* m_backGround;
 
 	Image* m_gameOver;
@@ -45,10 +44,12 @@ private:
 	int m_enemyNumCount = 0;
 	int m_enemyTotNum = 0;
 
+	float m_elapsedTime2 = 0;
 	float m_elapsedTime = 0;
 	float m_goElapsedTime;
 
 	float m_fireTime = 0;
+	float m_itemTime = 0;
 
 public:
 	virtual ~GameScene() {}

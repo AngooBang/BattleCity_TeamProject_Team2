@@ -153,21 +153,25 @@ void Ammo::EnemyCollider()
 				case EnemyType::Basic:
 					m_killCount->basicTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(100);
 					break;
 
 				case EnemyType::Speed:
 					m_killCount->speedTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(200);
 					break;
 
 				case EnemyType::Power:
 					m_killCount->powerTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(300);
 					break;
 
 				case EnemyType::ArmorGray:
 					m_killCount->armorTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(400);
 					break;
 				}
 			}
@@ -207,7 +211,8 @@ void Ammo::TileCollider()
 				for (int l = 0; l < INSIDE_TILE_COUNT_X; l++)
 				{
 					if (m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::None &&
-						m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::Grass)
+						m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::Grass &&
+						m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].terrain != Terrain::Water)
 					{
 						if (IntersectRect(&m_tempRC, &m_shape, &m_tileMap->GetTileInfo()[i * TILE_COUNT_X + j].inTile[k * INSIDE_TILE_COUNT_X + l].rc))
 						{

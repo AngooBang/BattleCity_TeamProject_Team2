@@ -25,6 +25,7 @@ HRESULT GameScene::Init()
 	mb_isGameOver = false;
 	mb_isTimeStop = false;
 	m_goElapsedTime = 0.0f;
+	m_elapsedTime2 = 0.0f;
 
 	m_gameOverPos.x = TILE_MAP_START_POS_X + TILE_MAP_SIZE_X / 2;
 	m_gameOverPos.y = TILE_MAP_SIZE_Y;
@@ -68,10 +69,18 @@ HRESULT GameScene::Init()
 		m_enemyTotNum = 1; break;
 	case 2:
 		m_enemyTotNum = 1; break;
+	case 3:
+		m_enemyTotNum = 1; break;
+	case 4:
+		m_enemyTotNum = 1; break;
+	case 5:
+		m_enemyTotNum = 1; break;
 	}
 
 	m_uiManager = new UIManager;
 	m_uiManager->Init(m_enemyTotNum);
+
+	m_itemTime = 0;
 
 	return S_OK;
 }
@@ -97,7 +106,7 @@ void GameScene::Update()
 		if (m_goElapsedTime > 0.4f)
 		{
 			Sleep(1000);
-			GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
+			GameManager::GetSingleton()->SetPlayerHp(0);
 			SceneManager::GetSingleton()->ChangeScene("결과씬");
 			return;
 		}
@@ -120,10 +129,13 @@ void GameScene::Update()
 
 	// 아이템 매니저 업데이트
 	m_itemMgr->Update();
-	if (KeyManager::GetSingleton()->IsOnceKeyDown('G'))
+	m_itemTime += TimerManager::GetSingleton()->GetDeltaTime();
+	if (m_itemTime > 10.0f)
 	{
 		m_itemMgr->AddItem();
+		m_itemTime = 0.0f;
 	}
+
 	// 플레이어, 플레이어 아모발사, 플레이어 아모 매니저 업데이트
 	if (m_player->GetAlive() == true)
 	{
@@ -144,11 +156,13 @@ void GameScene::Update()
 	// 스테이지 클리어
 	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum && m_enemyMgr->GetVecEnemys().empty())
 	{
-		Sleep(2000);
-		GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
-		GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
-		SceneManager::GetSingleton()->ChangeScene("결과씬");
-
+		m_elapsedTime2 += TimerManager::GetSingleton()->GetDeltaTime();
+		if (m_elapsedTime2 >= 3.0f)
+		{
+			GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
+			GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
+			SceneManager::GetSingleton()->ChangeScene("결과씬");
+		}
 	}
 }
 

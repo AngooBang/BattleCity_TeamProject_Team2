@@ -14,11 +14,10 @@ protected:
 	bool mb_isAlive;
 	bool mb_isShow;
 
+	bool mb_renderScore = false;
+	float m_elapsedCount2 = 0.0f;
 
 	GameScene* m_gameScene;
-
-
-
 
 public:
 	virtual ~Item() {}

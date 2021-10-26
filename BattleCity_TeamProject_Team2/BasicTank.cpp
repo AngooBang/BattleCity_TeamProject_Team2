@@ -3,28 +3,26 @@
 #include "TileMap.h"
 #include "GameScene.h"
 
-HRESULT BasicTank::Init(POINTFLOAT pos, EnemyManager* manager)
+HRESULT BasicTank::Init(POINTFLOAT pos)
 {
     m_moveDir = MoveDir::Down;
     m_elapsedCount = 0;
     m_moveDelay = 70;
 
-    m_imgDelay = 5;
     m_frameCount = 1;
 
     totElapsedCount = 0.0f;
-    m_fireElapsedCount = 0;
+    m_fireElapsedCount = 0.0f;
+    m_renderScore = false;
+    m_hitByGranade = false;
     mb_isReady = true;
-
 
     m_type = TankType::Enemy;
     m_enemyTankType = EnemyType::Basic;
     m_HP = 1;
     m_ammoSpeed = (int)BulletSpeed::Slow;
-    //m_Barrelend = { pos.x, pos.y };
 
     mb_isAlive = true;
-    //mb_Move = false;
     mb_isFire = false;
 
     m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Spawn_Effect2.bmp");
@@ -187,8 +185,29 @@ void BasicTank::Update()
 
 	    if (totElapsedCount > 0.70f)
 	    {
-	    	mb_isAlive = false;
+            m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Icon/Point.bmp");
+            m_frameX = 0;
+            m_frameY = 0;
+            totElapsedCount = 0.0f;
+            m_renderScore = true;
+            m_enemyStatus = EnemyStatus::End;
 	    }
+    }
+    else if (m_renderScore == true)
+    {
+        if(m_hitByGranade == false)
+        {
+			totElapsedCount += TimerManager::GetSingleton()->GetDeltaTime();
+			if (totElapsedCount > 0.5f)
+			{
+				m_hitByGranade = true;
+			}
+        }
+        else 
+        {
+            m_renderScore = false;
+            mb_isAlive = false;
+        }
     }
 }
 
@@ -209,6 +228,10 @@ void BasicTank::Render(HDC hdc)
         if (m_frameX == 3 || m_frameX == 4) { m_scale = 3.0f; }
         else { m_scale = 2.0f; }
         m_boomImage->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, m_scale);
+    }
+    else if (m_img && m_renderScore == true && m_hitByGranade == false)
+    {
+        m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 2.0f);
     }
 }
 

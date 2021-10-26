@@ -44,6 +44,12 @@ bool Item::CheckCollision()
 	RECT r1 = m_gameScene->GetPlayer()->GetShape();
 	if (IntersectRect(&tempRC, &r1, &m_shape))
 	{
+		GameManager::GetSingleton()->SetTotScore(500);
+		m_bodySize = 0;
+		m_shape.left = m_pos.x - m_bodySize / 2;
+		m_shape.top = m_pos.y - m_bodySize / 2;
+		m_shape.right = m_pos.x + m_bodySize / 2;
+		m_shape.bottom = m_pos.y + m_bodySize / 2;
 		return true;
 	}
 	else

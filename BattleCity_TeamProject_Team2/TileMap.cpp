@@ -85,7 +85,7 @@ void TileMap::Update()
 			{
 				if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::Water)
 				{
-					m_tileInfo[i * TILE_COUNT_X + j].frameY == 2 ? m_tileInfo[i * TILE_COUNT_X + j].frameY = 3 : m_tileInfo[i * TILE_COUNT_X + j].frameY = 2;
+					m_tileInfo[i * TILE_COUNT_X + j].frameX == 0 ? m_tileInfo[i * TILE_COUNT_X + j].frameX = 2 : m_tileInfo[i * TILE_COUNT_X + j].frameX = 0;
 				}
 
 				if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)

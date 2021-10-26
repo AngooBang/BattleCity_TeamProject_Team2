@@ -127,7 +127,7 @@ void EnemyManager::Release()
 
 void EnemyManager::AddEnemy(EnemyTank* enemyTank, POINTFLOAT pos)
 {
-    enemyTank->Init(pos, this);
+    enemyTank->Init(pos);
     enemyTank->SetIsAlive(true);
     enemyTank->SetGameScene(m_gameScene);
     vecEnemyTank.push_back(enemyTank);

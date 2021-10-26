@@ -1,5 +1,6 @@
 #include "ResultScene.h"
 #include "Image.h"
+#include "Ammo.h"
 
 HRESULT ResultScene::Init()
 {
@@ -8,12 +9,16 @@ HRESULT ResultScene::Init()
 	StageNum = GameManager::GetSingleton()->GetStageNr();
 
 	//적 숫자 받아오기
-	m_Enemytype[0] = GameManager::GetSingleton()->GetKillCount()->basicTankNr;
-	m_Enemytype[1] = GameManager::GetSingleton()->GetKillCount()->speedTankNr;
-	m_Enemytype[2] = GameManager::GetSingleton()->GetKillCount()->powerTankNr;
-	m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
+	//m_Enemytype[0] = GameManager::GetSingleton()->GetKillCount()->basicTankNr;
+	//m_Enemytype[1] = GameManager::GetSingleton()->GetKillCount()->speedTankNr;
+	//m_Enemytype[2] = GameManager::GetSingleton()->GetKillCount()->powerTankNr;
+	//m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
 
 	//이미지 불러오기 
+
+	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
+	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+
 
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 
@@ -27,21 +32,10 @@ HRESULT ResultScene::Init()
 
 	m_Stage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Stage_w.bmp");
 
-	m_StageNumber = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
+	m_NumberImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
 	/*ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/ScoreNumber.bmp", 40, 14, true, RGB(255, 0, 255));*/
 
-
-	for (int i = 0; i < 4; i++)
-	{
-		m_enemy[i] = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
-
-		m_enemyCountNumImg[i] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
-
-		m_enemySumScoreThousandNumImg[i] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
-		m_enemySumScoreHundredsNumImg[i] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
-		m_enemySumScoreZero1NumImg[i] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
-		m_enemySumScoreZero2NumImg[i] = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
-	}
+	m_EnemyImg = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
 
 	m_elapseCount = -100;
 	m_CalculateEnemytypeNum = 0;
@@ -88,7 +82,7 @@ void ResultScene::Update()
 	else
 	{
 		if (GameManager::GetSingleton()->GetStageNr() != GameManager::GetSingleton()->GetMaxStageNr() &&
-			GameManager::GetSingleton()->GetPlayerHp() != 0)
+			GameManager::GetSingleton()->GetPlayerHp() != 0 )
 		{
 			GameManager::GetSingleton()->SetStageNrPlus(1);
 			GameManager::GetSingleton()->ResetKillCount();
@@ -129,29 +123,38 @@ void ResultScene::Render(HDC hdc)
 	m_backGround->Render(hdc, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
 	m_HIScore->Render(hdc, HISCORE_POS_X, HISCORE_POS_Y);
 	m_Stage->Render(hdc, WIN_SIZE_X / 2.6, WIN_SIZE_Y / 5);
-	m_StageNumber->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, StageNum % 5, StageNum / 5);
+	m_NumberImg->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, StageNum % 5, StageNum / 5);
+
 	for (int k = 0; k < 4; k++)
 	{
 		m_PTS->Render(hdc, WIN_SIZE_X / 4, WIN_SIZE_Y * 0.4 + k * 70);
-		m_enemy[k]->Render(hdc, WIN_SIZE_X / 3 + 120, WIN_SIZE_Y - 540 + (70 * k), 0, k);
+		m_EnemyImg->Render(hdc, WIN_SIZE_X / 3 + 120, WIN_SIZE_Y - 540 + (70 * k), 0, k);
 	}
 	m_Player1->Render(hdc, WIN_SIZE_X / 4 - 55, WIN_SIZE_Y / 4);
 	m_TotalScore->Render(hdc, WIN_SIZE_X / 3 - 10, WIN_SIZE_Y * 0.7);
 
 	for (int i = 0; i <= m_CalculateEnemytypeNum; i++)
 	{
-		m_enemyCountNumImg[i]->Render(hdc, WIN_SIZE_X / 3 + 30, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_countofEnemy[i]], m_numFrameY[m_countofEnemy[i]]);
-		m_enemySumScoreZero2NumImg[i]->Render(hdc, WIN_SIZE_X / 5 - 10, WIN_SIZE_Y - 540 + (70 * i), 0, 0);
-		if (m_scoreSum[i] != 0)
+		//m_NumberImg->Render(hdc, WIN_SIZE_X / 3 + 30, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_countofEnemy[i]], m_numFrameY[m_countofEnemy[i]]);
+		//m_NumberImg->Render(hdc, WIN_SIZE_X / 5 - 10, WIN_SIZE_Y - 540 + (70 * i), 0, 0);
+		//if (m_scoreSum[i] != 0)
+		//{
+		//	m_NumberImg->Render(hdc, WIN_SIZE_X / 5 - 35, WIN_SIZE_Y - 540 + (70 * i), 0, 0);
+		//	m_NumberImg->Render(hdc, WIN_SIZE_X / 5 - 60, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_scoreHundredsofDigits[i]], m_numFrameY[m_scoreHundredsofDigits[i]]);
+		//	if (m_scoreSum[i] >= 1000)
+		//	{
+		//		m_NumberImg->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_scoreThousandofDigits[i]], m_numFrameY[m_scoreThousandofDigits[i]]);
+		//	}
+		//}
+		m_ScoreTemp = m_scoreSum[i];
+		while (m_ScoreTemp != 0)
 		{
-			m_enemySumScoreZero1NumImg[i]->Render(hdc, WIN_SIZE_X / 5 - 35, WIN_SIZE_Y - 540 + (70 * i), 0, 0);
-			m_enemySumScoreHundredsNumImg[i]->Render(hdc, WIN_SIZE_X / 5 - 60, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_scoreHundredsofDigits[i]], m_numFrameY[m_scoreHundredsofDigits[i]]);
-			if (m_scoreSum[i] >= 1000)
-			{
-				m_enemySumScoreThousandNumImg[i]->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_scoreThousandofDigits[i]], m_numFrameY[m_scoreThousandofDigits[i]]);
-			}
+			m_ScoreDigit = m_ScoreTemp % 10;
+			m_NumberImg->Render(hdc, WIN_SIZE_X / 5 - 10 - (25 * m_ScoreTempCount), WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_ScoreDigit], m_numFrameY[m_ScoreDigit]);
+			m_ScoreTemp /= 10;
+			m_ScoreTempCount++;
 		}
-
+		m_ScoreTempCount = 0;
 	}
 
 	//m_enemySumScoreThousandNumImg[1]->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 470, m_numFrameX[m_scoreThousandofDigits[1]], m_numFrameY[m_scoreThousandofDigits[1]]);

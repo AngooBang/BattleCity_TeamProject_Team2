@@ -7,7 +7,7 @@ private:
 
 public:
 	virtual ~ArmorTank() {}
-	virtual HRESULT Init(POINTFLOAT pos, EnemyManager* manager) override;
+	virtual HRESULT Init(POINTFLOAT pos) override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 

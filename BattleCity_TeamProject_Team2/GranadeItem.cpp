@@ -19,6 +19,8 @@ HRESULT GranadeItem::Init()
 	m_shape.bottom = m_pos.y + m_bodySize / 2;
 
 	mb_isAlive = true;
+	mb_renderScore = false;
+	m_elapsedCount2 = 0.0f;
 
 	return S_OK;
 }
@@ -26,16 +28,38 @@ HRESULT GranadeItem::Init()
 void GranadeItem::Update()
 {
 	if (!mb_isAlive) return;
-	CountShow();
+	
+	if (mb_renderScore == false)
+	{
+		CountShow();
+	}
 
 	if (CheckCollision())
 	{
 		GameManager::GetSingleton()->TotKillTankNrCalculation(m_gameScene->GetEnemyMgr()->GetVecEnemys().size());
-		
-		mb_isAlive = false;
+		//cout << m_gameScene->GetEnemyMgr()->GetVecEnemys().size() << endl;
+		//cout << GameManager::GetSingleton()->GetKillCount()->totKillTankNr << endl;
+		//mb_isAlive = false;
 		for (int i = 0; i < m_gameScene->GetEnemyMgr()->GetVecEnemys().size(); i++)
 		{
 			m_gameScene->GetEnemyMgr()->GetVecEnemys()[i]->SetEnemyStatus(EnemyStatus::Dead);
+			m_gameScene->GetEnemyMgr()->GetVecEnemys()[i]->SetHitByGranade(true);
+		}
+		//m_gameScene->GetEnemyMgr()->GetVecEnemys().clear(); // 왜 동작을 안하지?
+		
+		mb_renderScore = true;
+		mb_isShow = false;
+		m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Icon/Point.bmp");
+	}
+
+	if (mb_renderScore == true)
+	{
+		m_elapsedCount2 += TimerManager::GetSingleton()->GetDeltaTime();
+		if (m_elapsedCount2 > 0.5f)
+		{
+			mb_renderScore = false;
+			m_elapsedCount2 = 0.0f;
+			mb_isAlive = false;
 		}
 	}
 }
@@ -45,5 +69,8 @@ void GranadeItem::Render(HDC hdc)
 	if (!mb_isAlive) return;
 	if (mb_isShow)
 		m_img->Render(hdc, m_pos.x, m_pos.y);
+
+	if (mb_renderScore == true)
+		m_img->Render(hdc, m_pos.x, m_pos.y, 4, 0, 2.0f);
 }
 
