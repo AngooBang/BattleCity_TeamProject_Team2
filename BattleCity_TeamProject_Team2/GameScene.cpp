@@ -68,15 +68,15 @@ HRESULT GameScene::Init()
 	switch (GameManager::GetSingleton()->GetStageNr())
 	{
 	case 1:
-		m_enemyTotNum = 1; break;
+		m_enemyTotNum = 6; break;
 	case 2:
-		m_enemyTotNum = 1; break;
+		m_enemyTotNum = 9; break;
 	case 3:
-		m_enemyTotNum = 1; break;
+		m_enemyTotNum = 12; break;
 	case 4:
-		m_enemyTotNum = 1; break;
+		m_enemyTotNum = 15; break;
 	case 5:
-		m_enemyTotNum = 1; break;
+		m_enemyTotNum = 18; break;
 	}
 
 	m_uiManager = new UIManager;

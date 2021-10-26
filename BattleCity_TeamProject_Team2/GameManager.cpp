@@ -7,6 +7,7 @@ void GameManager::Init()
 	m_killCountNr->speedTankNr = 0;
 	m_killCountNr->powerTankNr = 0;
 	m_killCountNr->armorTankNr = 0;
+	m_killCountNr->KillByAmmoTankNr = 0;
 	m_killCountNr->totKillTankNr = 0;
 
 	m_stageNr = 1;
@@ -38,6 +39,7 @@ void GameManager::ResetKillCount()
 	m_killCountNr->powerTankNr = 0;
 	m_killCountNr->armorTankNr = 0;
 	m_killCountNr->totKillTankNr = 0;
+	m_killCountNr->KillByAmmoTankNr = 0;
 }
 
 void GameManager::ResetData()

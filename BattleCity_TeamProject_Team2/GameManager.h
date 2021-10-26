@@ -8,7 +8,8 @@
 		int speedTankNr;
 		int powerTankNr;
 		int armorTankNr;
-		int totKillTankNr;
+		int KillByAmmoTankNr;	// 미사일로만 잡은 갯수
+		int totKillTankNr; // 미사일 + 수류탄으로 잡은 갯수
 	}KILL_COUNT, *LPKILL_COUNT;
 
 class GameManager : public Singleton<GameManager>
