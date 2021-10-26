@@ -148,12 +148,6 @@ void GameScene::Update()
 	// 스테이지 클리어
 	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum && m_enemyMgr->GetVecEnemys().empty())
 	{
-<<<<<<< HEAD
-		Sleep(2000);
-		GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
-		GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
-		SceneManager::GetSingleton()->ChangeScene("결과씬");
-=======
 		m_elapsedTime2 += TimerManager::GetSingleton()->GetDeltaTime();
 		if (m_elapsedTime2 >= 3.0f)
 		{
@@ -161,7 +155,6 @@ void GameScene::Update()
 			GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
 			SceneManager::GetSingleton()->ChangeScene("결과씬");
 		}
->>>>>>> 1024_JY
 	}
 }
 

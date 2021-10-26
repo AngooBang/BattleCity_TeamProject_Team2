@@ -1,9 +1,0 @@
-diff a/BattleCity_TeamProject_Team2/GameScene.cpp b/BattleCity_TeamProject_Team2/GameScene.cpp	(rejected hunks)
-@@ -148,6 +148,7 @@
- 	// �������� Ŭ����
- 	if (GameManager::GetSingleton()->GetKillCount()->totKillTankNr == m_enemyTotNum && m_enemyMgr->GetVecEnemys().empty())
- 	{
-+<<<<<<< HEAD
- 		Sleep(2000);
- 		GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
- 		GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
