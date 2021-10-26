@@ -38,6 +38,8 @@ void ImageManager::Init()
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/TotalScore.bmp", 360, 40, true, RGB(255, 0, 255));
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Stage_w.bmp", 111, 21, true, RGB(255, 0, 255));
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/Number_w.bmp", 120, 42, 5, 2, true, RGB(255, 0, 255));
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/ScoreNumber.bmp", 120, 42, 5, 2, true, RGB(255, 0, 255));
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/Arrow.bmp", 23, 20, true, RGB(255, 0, 255));
 	//ImageManager::GetSingleton()->AddImage("Image/Enemy.bmp", 512, 384, 8, 6, true, RGB(255, 0, 255));
 
 
