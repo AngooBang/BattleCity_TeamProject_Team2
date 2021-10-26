@@ -9,35 +9,37 @@ class EnemyManager;
 class Ammo : public GameObject
 {
 private:
-	LPKILL_COUNT m_killCount;
+	LPKILL_COUNT m_killCount = nullptr;
 
-	Image* m_boomImg;
-	Image* m_img;
-	MoveDir m_moveDir;
+	Image* m_boomImg = nullptr;
+	Image* m_img = nullptr;
+	MoveDir m_moveDir = MoveDir::End;
 
-	GameObject* m_owner;
+	GameObject* m_owner = nullptr;
 
-	EnemyManager* m_enemyMgr;
+	EnemyManager* m_enemyMgr = nullptr;
 	//vector<EnemyTank*> m_vecEnemys;
 
-	TileMap* m_tileMap;
+	TileMap* m_tileMap = nullptr;
 
-	Tank* m_playerTank;
+	Tank* m_playerTank = nullptr;
 
 
-	RECT m_tempRC;
+	RECT m_tempRC = {};
 
-	bool mb_isAlive;
+	bool mb_isAlive = false;
 
-	bool* mb_isGameOver;
+	bool* mb_isGameOver = nullptr;
 
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
 
 
-	int m_frameX; int m_frameY; int m_maxFrameX;
-	float m_elapsedCount;
-	float m_totElapsedCount;
+	int m_frameX = 0;
+	int m_frameY = 0;
+	int m_maxFrameX = 0;
+	float m_elapsedCount = 0.0f;
+	float m_totElapsedCount = 0.0f;
 
 public:
 	virtual ~Ammo() {}

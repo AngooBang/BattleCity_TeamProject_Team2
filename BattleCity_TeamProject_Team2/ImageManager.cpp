@@ -81,15 +81,11 @@ void ImageManager::Init()
 
 void ImageManager::Release()
 {
-	map<string, Image*>::iterator it;
-	for (it = mapImages.begin(); it != mapImages.end();)
+	for (auto& elem : mapImages)
 	{
-		SAFE_RELEASE(it->second);
-		// erase에서 리턴값으로 it의 다음 iterator를 돌려주게됨. 계속 대입해서 반복시킴
-		it = mapImages.erase(it);
-
+		SAFE_RELEASE(elem.second)
 	}
-
+	mapImages.clear();
 }
 
 Image* ImageManager::AddImage(const char* fileName, int width, int height, bool isTrans, COLORREF transColor)

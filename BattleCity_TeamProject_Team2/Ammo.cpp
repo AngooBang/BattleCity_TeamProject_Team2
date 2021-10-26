@@ -101,10 +101,18 @@ void Ammo::Render(HDC hdc)
 
 void Ammo::Release()
 {
-	m_enemyMgr = nullptr;
-	m_playerTank = nullptr;
-	m_tileMap = nullptr;
+	m_killCount = nullptr;
+
+	m_boomImg = nullptr;
+	m_img = nullptr;
+
 	m_owner = nullptr;
+
+	m_enemyMgr = nullptr;
+
+	m_tileMap = nullptr;
+
+	mb_isGameOver = nullptr;
 }
 
 void Ammo::SetShape()

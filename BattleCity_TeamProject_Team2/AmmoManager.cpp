@@ -26,6 +26,7 @@ void AmmoManager::Update()
          (*m_vecAmmoIter)->Update();
         else
         {
+            //(*m_vecAmmoIter)->Release();
             m_vecAmmo.erase(m_vecAmmoIter);
             break;
         }
@@ -43,10 +44,10 @@ void AmmoManager::Render(HDC hdc)
 
 void AmmoManager::Release()
 {
-    for (m_vecAmmoIter = m_vecAmmo.begin(); m_vecAmmoIter != m_vecAmmo.end();
-        ++m_vecAmmoIter)
+    for (auto& ammo : m_vecAmmo)
     {
-        SAFE_RELEASE((*m_vecAmmoIter));
+        SAFE_RELEASE(ammo);
+        ammo = nullptr;
     }
     m_vecAmmo.clear();
 

@@ -31,10 +31,10 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
 #ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	//_CrtSetBreakAlloc(1043);
+	//_CrtSetBreakAlloc(523);
 	//_CrtSetBreakAlloc(999);
-
 #endif
+
 	// 윈도우를 생성하기 위한 기본 셋팅
 	g_hInstance = _hInstance;
 	WNDCLASS wndClass;
@@ -85,6 +85,8 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
+
+
 	HDC hdc;
 	PAINTSTRUCT ps;
 
@@ -125,4 +127,5 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	}
 
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
+
 }
