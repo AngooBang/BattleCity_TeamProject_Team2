@@ -6,6 +6,7 @@ class Ammo;
 class Tank;
 class EnemyTank;
 class TileMap;
+class EnemyManager;
 class AmmoManager : public GameObject
 {
 private:
@@ -15,7 +16,7 @@ private:
 	vector<Ammo*> m_vecAmmo;
 	vector<Ammo*>::iterator m_vecAmmoIter;
 
-	vector<EnemyTank*> m_vecEnemys;
+	EnemyManager* m_enemyMgr;
 
 	TileMap* m_tileMap;
 
@@ -34,7 +35,9 @@ public:
 
 	void AmmoCollision();
 
-	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
+	//inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
+
+	inline void SetEnemyMgr(EnemyManager* enemyMgr) { this->m_enemyMgr = enemyMgr; }
 
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 

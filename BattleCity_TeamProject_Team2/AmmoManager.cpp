@@ -21,7 +21,7 @@ void AmmoManager::Update()
         ++m_vecAmmoIter)
     {
         AmmoCollision();
-        (*m_vecAmmoIter)->SetVecEnemys(m_vecEnemys);
+        //(*m_vecAmmoIter)->SetVecEnemys(m_vecEnemys);
         if((*m_vecAmmoIter)->GetIsAlive() || (*m_vecAmmoIter)->GetTotElapsedCount() < 0.2f)
          (*m_vecAmmoIter)->Update();
         else
@@ -50,6 +50,7 @@ void AmmoManager::Release()
     }
     m_vecAmmo.clear();
 
+    m_enemyMgr = nullptr;
     m_tileMap = nullptr;
 }
 
@@ -57,6 +58,7 @@ void AmmoManager::AddAmmo(Ammo* Ammo, Tank* tank)
 {
     Ammo->Init(tank->GetPos(), tank->GetmoveDir(),tank->GetammoSpeed(), m_AmmoImage[tank->GetmoveDir()]);
     Ammo->SetOwner(tank);
+    Ammo->SetEnemyMgr(m_enemyMgr);
     Ammo->SetTileMap(m_tileMap);
     Ammo->SetIsGameOver(mb_isGameOver);
 
@@ -68,6 +70,7 @@ void AmmoManager::AddAmmo(Ammo* Ammo, EnemyTank* enemyTank, Tank* target)
 {
     Ammo->Init(enemyTank->GetPos(), enemyTank->GetmoveDir(), enemyTank->GetammoSpeed(), m_AmmoImage[enemyTank->GetmoveDir()]);
     Ammo->SetOwner(enemyTank);
+    Ammo->SetEnemyMgr(m_enemyMgr);
     Ammo->SetPlayerTank(target);
     Ammo->SetTileMap(m_tileMap);
     Ammo->SetIsGameOver(mb_isGameOver);

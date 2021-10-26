@@ -101,6 +101,7 @@ void Ammo::Render(HDC hdc)
 
 void Ammo::Release()
 {
+	m_enemyMgr = nullptr;
 	m_playerTank = nullptr;
 	m_tileMap = nullptr;
 	m_owner = nullptr;
@@ -122,6 +123,7 @@ void Ammo::PlayerAmmoCollider()
 
 void Ammo::EnemyCollider()
 {
+	vector<EnemyTank*> m_vecEnemys = m_enemyMgr->GetVecEnemys();
 	for (int i=0; i< m_vecEnemys.size();i++)
 	{
 		

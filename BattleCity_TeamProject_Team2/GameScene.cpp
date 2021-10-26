@@ -36,16 +36,18 @@ HRESULT GameScene::Init()
 
 	m_player->SetTileMap(m_tileMap);
 
-	m_ammoMgr = new AmmoManager;
-	m_ammoMgr->Init();
-	m_ammoMgr->SetTileMap(m_tileMap);
-	m_ammoMgr->SetIsGameOver(&mb_isGameOver);
-
 	m_enemyMgr = new EnemyManager;
 	m_enemyMgr->Init();
 	m_enemyMgr->SetGameScene(this);
 	m_enemyMgr->SetPlayerTank(m_player);
 	m_enemyMgr->SetAmmoMgr(m_ammoMgr);
+
+	m_ammoMgr = new AmmoManager;
+	m_ammoMgr->Init();
+	m_ammoMgr->SetEnemyMgr(m_enemyMgr);
+	m_ammoMgr->SetTileMap(m_tileMap);
+	m_ammoMgr->SetIsGameOver(&mb_isGameOver);
+
 
 	m_itemMgr = new ItemManager;
 	m_itemMgr->SetGameScene(this);
@@ -127,7 +129,7 @@ void GameScene::Update()
 	{
 		m_player->Update();
 	}
-	m_ammoMgr->SetVecEnemys(m_enemyMgr->GetVecEnemys());
+	//m_ammoMgr->SetVecEnemys(m_enemyMgr->GetVecEnemys());
 	m_ammoMgr->Update();
 
 	if (m_player->GetisFire())

@@ -5,6 +5,7 @@ class Tank;
 class Image;
 class TileMap;
 class EnemyTank;
+class EnemyManager;
 class Ammo : public GameObject
 {
 private:
@@ -16,7 +17,8 @@ private:
 
 	GameObject* m_owner;
 
-	vector<EnemyTank*> m_vecEnemys;
+	EnemyManager* m_enemyMgr;
+	//vector<EnemyTank*> m_vecEnemys;
 
 	TileMap* m_tileMap;
 
@@ -60,7 +62,8 @@ public:
 	inline void SetOwner(GameObject* owner) { this->m_owner = owner; }
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 
-	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
+	//inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
+	inline void SetEnemyMgr(EnemyManager* enemyMgr) { this->m_enemyMgr = enemyMgr; }
 
 	inline void SetIsGameOver(bool* isGameOver) { this->mb_isGameOver = isGameOver; }
 
