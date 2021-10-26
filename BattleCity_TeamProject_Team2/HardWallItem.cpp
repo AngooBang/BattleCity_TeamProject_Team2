@@ -20,6 +20,8 @@ HRESULT HardWallItem::Init()
 	mb_isActive = false;
 	m_hardWallCount = 0.0f;
 
+	mb_renderScore = false;
+	m_elapsedCount2 = 0.0f;
 
 	return S_OK;
 }
@@ -27,14 +29,21 @@ HRESULT HardWallItem::Init()
 void HardWallItem::Update()
 {
 	if (!mb_isAlive && !mb_isActive) return;
-	CountShow();
+	
+	if (mb_renderScore == false)
+	{
+		CountShow();
+	}
 
 	if (CheckCollision())
 	{
 		m_tileMap = m_gameScene->GetTileMap();
 		SetHardWall();
 		mb_isActive = true;
-		mb_isAlive = false;
+		//mb_isAlive = false;
+		mb_renderScore = true;
+		mb_isShow = false;
+		m_img = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Icon/Point.bmp");
 	}
 	if (mb_isActive)
 	{
@@ -44,6 +53,16 @@ void HardWallItem::Update()
 			ResetHardWall();
 			m_hardWallCount = 0.0f;
 			mb_isActive = false;
+			//mb_isAlive = false;
+		}
+	}
+	if (mb_renderScore == true)
+	{
+		m_elapsedCount2 += TimerManager::GetSingleton()->GetDeltaTime();
+		if (m_elapsedCount2 > 0.5f)
+		{
+			mb_renderScore = false;
+			m_elapsedCount2 = 0.0f;
 			mb_isAlive = false;
 		}
 	}
@@ -56,6 +75,9 @@ void HardWallItem::Render(HDC hdc)
 
 	if (mb_isShow)
 		m_img->Render(hdc, m_pos.x, m_pos.y);
+
+	if (mb_renderScore == true)
+		m_img->Render(hdc, m_pos.x, m_pos.y, 4, 0, 2.0f);
 }
 
 void HardWallItem::Release()

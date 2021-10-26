@@ -72,6 +72,8 @@ HRESULT GameScene::Init()
 	m_uiManager = new UIManager;
 	m_uiManager->Init(m_enemyTotNum);
 
+	m_itemTime = 0;
+
 	return S_OK;
 }
 
@@ -117,10 +119,13 @@ void GameScene::Update()
 
 	// 아이템 매니저 업데이트
 	m_itemMgr->Update();
-	if (KeyManager::GetSingleton()->IsOnceKeyDown('G'))
+	m_itemTime += TimerManager::GetSingleton()->GetDeltaTime();
+	if (m_itemTime > 10.0f)
 	{
 		m_itemMgr->AddItem();
+		m_itemTime = 0.0f;
 	}
+
 	// 플레이어, 플레이어 아모발사, 플레이어 아모 매니저 업데이트
 	if (m_player->GetAlive() == true)
 	{
@@ -146,7 +151,6 @@ void GameScene::Update()
 		GameManager::GetSingleton()->SetPlayerHp(m_player->GetHP());
 		GameManager::GetSingleton()->SetPlayerFrameY(m_player->GetFrameY());
 		SceneManager::GetSingleton()->ChangeScene("결과씬");
-
 	}
 }
 

@@ -149,21 +149,25 @@ void Ammo::EnemyCollider()
 				case EnemyType::Basic:
 					m_killCount->basicTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(100);
 					break;
 
 				case EnemyType::Speed:
 					m_killCount->speedTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(200);
 					break;
 
 				case EnemyType::Power:
 					m_killCount->powerTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(300);
 					break;
 
 				case EnemyType::ArmorGray:
 					m_killCount->armorTankNr++;
 					m_killCount->totKillTankNr++;
+					GameManager::GetSingleton()->SetTotScore(400);
 					break;
 				}
 				//(*it)->SetIsAlive(false);

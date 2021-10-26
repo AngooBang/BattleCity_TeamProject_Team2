@@ -23,11 +23,16 @@ private:
 	int m_playerHP = 5;
 	int m_playerFrameY = 0;
 
+	int m_totScore = 0;
+
 public:
 	void Init();
 	void Update();
 	void Render();
 	void Release();
+
+	inline void SetTotScore(int num) { this->m_totScore += num; }
+	inline int GetTotScore() { return m_totScore; }
 
 	inline void SetStageNrPlus(int num) { this->m_stageNr += num; }
 	inline int GetStageNr() { return m_stageNr; }

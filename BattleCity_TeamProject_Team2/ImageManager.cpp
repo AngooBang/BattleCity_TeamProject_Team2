@@ -60,6 +60,7 @@ void ImageManager::Init()
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/player1Life.bmp", 60, 60, true, RGB(255, 0, 255));
 	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/StageFlag.bmp", 60, 60, true, RGB(255, 0, 255));
 
+	ImageManager::GetSingleton()->AddImage("Image/BattleCity/Icon/Point.bmp", 80, 16, 5, 1, true, RGB(255, 0, 255));
 
 	//ImageManager::GetSingleton()->AddImage("Image/BattleCity/Effect/Spawn_Effect2.bmp",
 	//	256, 64, 4, 1, true, RGB(255, 0, 255));

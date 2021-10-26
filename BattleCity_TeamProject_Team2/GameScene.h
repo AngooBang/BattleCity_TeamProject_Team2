@@ -12,7 +12,6 @@ class ItemManager;
 class GameScene : public GameEntity
 {
 private:
-
 	Image* m_backGround;
 
 	Image* m_gameOver;
@@ -49,6 +48,7 @@ private:
 	float m_goElapsedTime;
 
 	float m_fireTime = 0;
+	float m_itemTime = 0;
 
 public:
 	HRESULT Init();

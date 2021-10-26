@@ -14,6 +14,8 @@ void GameManager::Init()
 
 	m_playerHP = 1;
 	m_playerFrameY = 0;
+
+	m_totScore = 0;
 }
 
 void GameManager::Update()
@@ -47,5 +49,7 @@ void GameManager::ResetData()
 
 	m_playerHP = 5;
 	m_playerFrameY = 0;
+	
+	m_totScore = 0;
 }
 

@@ -57,8 +57,10 @@ protected:
 	Image* m_boomImage;
 
 	bool mb_isReady = true;
-	float m_boomElapsedCount;
-	float m_scale;
+	float m_boomElapsedCount = 0.0f;
+	bool m_renderScore = false;
+	bool m_hitByGranade = false;
+	float m_scale = 0.0f;
 
 public:
 	virtual HRESULT Init(POINTFLOAT pos, EnemyManager* manager);
@@ -112,6 +114,8 @@ public:
 
 	inline void SetMoveSpeed(int moveSpeed) { this->m_moveSpeed = moveSpeed; }
 	inline int GetMoveSpeed() { return m_moveSpeed; }
+
+	inline void SetHitByGranade(bool hitByGranade) { this->m_hitByGranade = hitByGranade; }
 
 	EnemyTank() {}
 	~EnemyTank() {};

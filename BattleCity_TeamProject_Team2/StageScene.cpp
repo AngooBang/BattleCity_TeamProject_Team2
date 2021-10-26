@@ -59,7 +59,7 @@ void StageScene::Render(HDC hdc)
 	{
 		m_stage->Render(hdc, WIN_SIZE_X / 2 - 20, WIN_SIZE_Y / 2);
 		m_stageNumber->Render(hdc, WIN_SIZE_X / 2 + 150, WIN_SIZE_Y / 2 + 10, 
-							m_stageNumX[m_stageNr % 10], m_stageNumY[m_stageNr % 10]);
+							m_stageNumX[m_stageNr % 10], m_stageNumY[m_stageNr / 5]);
 	}
 }
 
