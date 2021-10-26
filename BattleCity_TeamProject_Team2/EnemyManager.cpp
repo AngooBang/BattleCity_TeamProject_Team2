@@ -92,6 +92,7 @@ void EnemyManager::Update()
         else
         {
             delete vecEnemyTank[i];
+            vecEnemyTank.erase(vecEnemyTank.begin() + i);
             break;
         }
     }
@@ -111,8 +112,7 @@ void EnemyManager::Release()
 
     for (int i = 0; i < vecEnemyTank.size(); ++i)
     {
-        EnemyTank* temp = vecEnemyTank[i];
-        delete temp;
+        SAFE_RELEASE(vecEnemyTank[i]);
     }
     vecEnemyTank.clear();
 

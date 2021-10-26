@@ -11,14 +11,16 @@ class AmmoManager : public GameObject
 private:
 	Image* m_AmmoImage[MoveDir::End];
 
-	vector<EnemyTank*> m_vecEnemys;
 
 	vector<Ammo*> m_vecAmmo;
 	vector<Ammo*>::iterator m_vecAmmoIter;
 
+	vector<EnemyTank*> m_vecEnemys;
+
 	TileMap* m_tileMap;
 
 	bool* mb_isGameOver;
+
 
 public:
 	virtual ~AmmoManager() {}
@@ -28,7 +30,7 @@ public:
 	virtual void Release();
 
 	void AddAmmo(Ammo* Ammo, Tank* tank);
-	void AddAmmo(Ammo* Ammo, vector<EnemyTank*>::iterator it, Tank* target);
+	void AddAmmo(Ammo* Ammo, EnemyTank* enemyTank, Tank* target);
 
 	void AmmoCollision();
 
@@ -37,5 +39,6 @@ public:
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 
 	inline void SetIsGameOver(bool* isGameOver) { this->mb_isGameOver = isGameOver; }
+	
 
 };

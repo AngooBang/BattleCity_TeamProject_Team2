@@ -20,6 +20,9 @@ private:
 
 	TileMap* m_tileMap;
 
+	Tank* m_playerTank;
+
+
 	RECT m_tempRC;
 
 	bool mb_isAlive;
@@ -29,7 +32,6 @@ private:
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
 
-	Tank* m_playerTank;
 
 	int m_frameX; int m_frameY; int m_maxFrameX;
 	float m_elapsedCount;
@@ -57,11 +59,13 @@ public:
 
 	inline void SetOwner(GameObject* owner) { this->m_owner = owner; }
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
+
 	inline void SetVecEnemys(vector<EnemyTank*> vecEnemys) { this->m_vecEnemys = vecEnemys; }
 
 	inline void SetIsGameOver(bool* isGameOver) { this->mb_isGameOver = isGameOver; }
 
 	inline void SetPlayerTank(Tank* playerTank) { this->m_playerTank = playerTank; }
+
 
 
 };

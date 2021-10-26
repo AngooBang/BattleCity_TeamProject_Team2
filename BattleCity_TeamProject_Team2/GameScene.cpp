@@ -127,7 +127,6 @@ void GameScene::Update()
 	{
 		m_player->Update();
 	}
-
 	m_ammoMgr->SetVecEnemys(m_enemyMgr->GetVecEnemys());
 	m_ammoMgr->Update();
 

@@ -64,15 +64,14 @@ void AmmoManager::AddAmmo(Ammo* Ammo, Tank* tank)
     m_vecAmmo.push_back(Ammo);
 }
 
-void AmmoManager::AddAmmo(Ammo* Ammo, vector<EnemyTank*>::iterator it, Tank* target)
+void AmmoManager::AddAmmo(Ammo* Ammo, EnemyTank* enemyTank, Tank* target)
 {
-    Ammo->Init((*it)->GetPos(), (*it)->GetmoveDir(), (*it)->GetammoSpeed(), m_AmmoImage[(*it)->GetmoveDir()]);
-    Ammo->SetOwner((*it));
-    Ammo->SetTileMap(m_tileMap);
+    Ammo->Init(enemyTank->GetPos(), enemyTank->GetmoveDir(), enemyTank->GetammoSpeed(), m_AmmoImage[enemyTank->GetmoveDir()]);
+    Ammo->SetOwner(enemyTank);
     Ammo->SetPlayerTank(target);
+    Ammo->SetTileMap(m_tileMap);
     Ammo->SetIsGameOver(mb_isGameOver);
 
-    //Ammo->Init(tank->GetBarrelend(),  tank->GetmoveDir(), tank->GetammoSpeed(), m_AmmoImage);
     m_vecAmmo.push_back(Ammo);
 }
 

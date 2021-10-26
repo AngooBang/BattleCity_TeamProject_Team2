@@ -3,6 +3,8 @@
 #include "Tank.h"
 #include "TileMap.h"
 #include "EnemyTank.h"
+#include "GameScene.h"
+#include "EnemyManager.h"
 
 HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage)
 {
@@ -99,7 +101,6 @@ void Ammo::Render(HDC hdc)
 
 void Ammo::Release()
 {
-
 	m_playerTank = nullptr;
 	m_tileMap = nullptr;
 	m_owner = nullptr;
@@ -121,32 +122,31 @@ void Ammo::PlayerAmmoCollider()
 
 void Ammo::EnemyCollider()
 {
-	vector<EnemyTank*>::iterator it;
-	for (it = m_vecEnemys.begin(); it != m_vecEnemys.end();
-		++it)
+	for (int i=0; i< m_vecEnemys.size();i++)
 	{
-		RECT enemyRC = (*it)->GetShape();
+		
+		RECT enemyRC = m_vecEnemys[i]->GetShape();
 		if (IntersectRect(&m_tempRC, &m_shape, &enemyRC))
 		{
-			(*it)->SetHP(-1); // 피격시 Hp 감소
+			m_vecEnemys[i]->SetHP(-1); // 피격시 Hp 감소
 			// 적 Armor탱크 Hp감소에 따른 색깔 변화(이미지 프레임 변화)
-			if ((*it)->GetEnemyType() == EnemyType::ArmorGreen) 
+			if (m_vecEnemys[i]->GetEnemyType() == EnemyType::ArmorGreen)
 			{ 
-				(*it)->SetEnemyType(EnemyType::ArmorYellow);
-				(*it)->SetFrameY((int)EnemyType::ArmorYellow); 
+				m_vecEnemys[i]->SetEnemyType(EnemyType::ArmorYellow);
+				m_vecEnemys[i]->SetFrameY((int)EnemyType::ArmorYellow);
 			}
-			else if ((*it)->GetEnemyType() == EnemyType::ArmorYellow) 
+			else if (m_vecEnemys[i]->GetEnemyType() == EnemyType::ArmorYellow)
 			{ 
-				(*it)->SetEnemyType(EnemyType::ArmorGray);
-				(*it)->SetFrameY((int)EnemyType::ArmorGray); 
+				m_vecEnemys[i]->SetEnemyType(EnemyType::ArmorGray);
+				m_vecEnemys[i]->SetFrameY((int)EnemyType::ArmorGray);
 			}
 
 			// Hp가 0일시
-			if ((*it)->GetHP() == 0)
+			if (m_vecEnemys[i]->GetHP() == 0)
 			{
-				(*it)->SetEnemyStatus(EnemyStatus::Dead);
+				m_vecEnemys[i]->SetEnemyStatus(EnemyStatus::Dead);
 				
-				switch ((*it)->GetEnemyType())
+				switch (m_vecEnemys[i]->GetEnemyType())
 				{
 				case EnemyType::Basic:
 					m_killCount->basicTankNr++;
@@ -168,7 +168,6 @@ void Ammo::EnemyCollider()
 					m_killCount->totKillTankNr++;
 					break;
 				}
-				//(*it)->SetIsAlive(false);
 			}
 			mb_isAlive = false;
 			break;
