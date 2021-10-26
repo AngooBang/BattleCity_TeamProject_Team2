@@ -1,5 +1,6 @@
 #include "ResultScene.h"
 #include "Image.h"
+#include "Ammo.h"
 
 HRESULT ResultScene::Init()
 {
@@ -14,6 +15,10 @@ HRESULT ResultScene::Init()
 	m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
 
 	//이미지 불러오기 
+
+	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
+	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+
 
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 
@@ -88,7 +93,7 @@ void ResultScene::Update()
 	else
 	{
 		if (GameManager::GetSingleton()->GetStageNr() != GameManager::GetSingleton()->GetMaxStageNr() &&
-			GameManager::GetSingleton()->GetPlayerHp() != 0)
+			GameManager::GetSingleton()->GetPlayerHp() != 0 )
 		{
 			GameManager::GetSingleton()->SetStageNrPlus(1);
 			GameManager::GetSingleton()->ResetKillCount();

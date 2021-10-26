@@ -21,7 +21,7 @@ HRESULT TileMap::Init()
 
 	m_fp = nullptr;
 
-	m_stageNum = 1;
+	m_stageNum = GameManager::GetSingleton()->GetStageNr();
 
 	m_elapsedCount = 0;
 	testY = 0;
@@ -80,7 +80,7 @@ void TileMap::Update()
 			{
 				if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::Water)
 				{
-					m_tileInfo[i * TILE_COUNT_X + j].frameY == 2 ? m_tileInfo[i * TILE_COUNT_X + j].frameY = 3 : m_tileInfo[i * TILE_COUNT_X + j].frameY = 2;
+					m_tileInfo[i * TILE_COUNT_X + j].frameX == 0 ? m_tileInfo[i * TILE_COUNT_X + j].frameX = 2 : m_tileInfo[i * TILE_COUNT_X + j].frameX = 0;
 				}
 			}
 		}
