@@ -13,20 +13,20 @@ class ResultScene : public GameEntity
 {
 
 private:
-	Image* m_backGround;
-	Image* m_HIScore;
-	Image* m_ScoreNumber;
-	Image* m_Player1;
-	Image* m_PTS;
-	Image* m_TotalScore;
-	Image* m_Stage;
-	Image* m_NumberImg;
-	Image* m_OrangeNumberImg;
-	Image* m_EnemyImg;
-	Image* m_ArrowImg;
+	Image* m_backGround = nullptr;
+	Image* m_HIScore = nullptr;
+	Image* m_ScoreNumber = nullptr;
+	Image* m_Player1 = nullptr;
+	Image* m_PTS = nullptr;
+	Image* m_TotalScore = nullptr;
+	Image* m_Stage = nullptr;
+	Image* m_NumberImg = nullptr;
+	Image* m_OrangeNumberImg = nullptr;
+	Image* m_EnemyImg = nullptr;
+	Image* m_ArrowImg = nullptr;
 
-	int StageNum;
-	int m_countofEnemy[4];
+	int StageNum{};
+	int m_countofEnemy[4]{};
 
 	int m_enemyScore[4] = { 100, 200, 300, 400 };
 	int m_scoreSum[4];
@@ -36,23 +36,17 @@ private:
 	// 테스트용 변수(추후 지울예정)
 	// (추후엔 에너미 타입을 인트형으로 형변환시킨 값을 가져올예정)
 	// (현재는 스트럭트 자료형에 일반변수형으로 적들의 정보가 저장됨)
-	int m_Enemytype[4]{};/* = { 10, 5, 8, 14 };*/
-	int m_totScore;/* = 12030;*/
-	int m_totTankCount;
-	//int m_Enemytype[4];
+	int m_Enemytype[4]{};
+	int m_totScore{};
+	int m_totTankCount{};
 
-	int m_Temp;
-	int m_Digit;
-	int m_TempCount;
-
-	int m_elapseCount;
-	int m_CalculateEnemytypeNum;
-	bool mb_Calculate;
+	int m_elapseCount{};
+	int m_CalculateEnemytypeNum{};
+	bool mb_Calculate{};
 	bool mb_EnemyCalculateDone = false;
 
-	EnemyManager* m_enemyMgr;
+	EnemyManager* m_enemyMgr = nullptr;
 	
-
 public:
 	virtual HRESULT Init();
 	virtual void Update();
