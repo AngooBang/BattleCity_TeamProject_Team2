@@ -122,16 +122,16 @@ void ResultScene::Render(HDC hdc)
 {
 	m_backGround->Render(hdc, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
 	m_HIScore->Render(hdc, HISCORE_POS_X, HISCORE_POS_Y);
-	m_Stage->Render(hdc, WIN_SIZE_X / 2.6, WIN_SIZE_Y / 5);
+	m_Stage->Render(hdc, (int)(WIN_SIZE_X / 2.6), WIN_SIZE_Y / 5);
 	m_NumberImg->Render(hdc, STAGENUM_POS_X, STAGENUM_POS_Y, StageNum % 5, StageNum / 5);
 
 	for (int k = 0; k < 4; k++)
 	{
-		m_PTS->Render(hdc, WIN_SIZE_X / 4, WIN_SIZE_Y * 0.4 + k * 70);
+		m_PTS->Render(hdc, WIN_SIZE_X / 4, (int)(WIN_SIZE_Y * 0.4f + k * 70.0f));
 		m_EnemyImg->Render(hdc, WIN_SIZE_X / 3 + 120, WIN_SIZE_Y - 540 + (70 * k), 0, k);
 	}
 	m_Player1->Render(hdc, WIN_SIZE_X / 4 - 55, WIN_SIZE_Y / 4);
-	m_TotalScore->Render(hdc, WIN_SIZE_X / 3 - 10, WIN_SIZE_Y * 0.7);
+	m_TotalScore->Render(hdc, WIN_SIZE_X / 3 - 10, (int)(WIN_SIZE_Y * 0.7));
 
 	for (int i = 0; i <= m_CalculateEnemytypeNum; i++)
 	{

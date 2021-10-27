@@ -6,7 +6,7 @@
 #include "GameScene.h"
 #include "EnemyManager.h"
 
-HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage)
+HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, float ammoSpeed, Image* m_AmmoImage)
 {
 	m_boomImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Boom_Effect.bmp");
 
@@ -20,10 +20,10 @@ HRESULT Ammo::Init(POINTFLOAT tankPos, MoveDir moveDir, int ammoSpeed, Image* m_
 	
 	mb_isAlive = true;
 
-	m_shape.left = m_pos.x - m_img->GetWidth() / 2;
-	m_shape.right = m_pos.x + m_img->GetWidth() / 2;
-	m_shape.top = m_pos.y - m_img->GetHeight() / 2;
-	m_shape.bottom = m_pos.y + m_img->GetHeight() / 2;
+	m_shape.left = (long)m_pos.x - m_img->GetWidth() / 2;
+	m_shape.right = (long)m_pos.x + m_img->GetWidth() / 2;
+	m_shape.top = (long)m_pos.y - m_img->GetHeight() / 2;
+	m_shape.bottom = (long)m_pos.y + m_img->GetHeight() / 2;
 
 	m_frameX = 0; 
 	m_frameY = 0; 
@@ -88,13 +88,13 @@ void Ammo::Render(HDC hdc)
 	{
 		if (m_totElapsedCount < 0.2f)
 		{
-			m_boomImg->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 3.0);
+			m_boomImg->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY, 3.0f);
 		}
 	}
 	else
 	{
 		//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
-		m_img->Render(hdc, m_pos.x, m_pos.y);
+		m_img->Render(hdc, (int)m_pos.x, (int)m_pos.y);
 	}
 	
 }
@@ -117,10 +117,10 @@ void Ammo::Release()
 
 void Ammo::SetShape()
 {
-	m_shape.left = m_pos.x - m_img->GetWidth() / 2;
-	m_shape.right = m_pos.x + m_img->GetWidth() / 2;
-	m_shape.top = m_pos.y - m_img->GetHeight() / 2;
-	m_shape.bottom = m_pos.y + m_img->GetHeight() / 2;
+	m_shape.left = (long)m_pos.x - m_img->GetWidth() / 2;
+	m_shape.right = (long)m_pos.x + m_img->GetWidth() / 2;
+	m_shape.top = (long)m_pos.y - m_img->GetHeight() / 2;
+	m_shape.bottom = (long)m_pos.y + m_img->GetHeight() / 2;
 }
 
 void Ammo::PlayerAmmoCollider()

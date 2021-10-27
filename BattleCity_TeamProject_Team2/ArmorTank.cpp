@@ -35,8 +35,8 @@ HRESULT ArmorTank::Init(POINTFLOAT pos)
 
     m_bodySize = 0;
 
-    m_shape.left = m_pos.x - (m_bodySize / 2);
-    m_shape.top = m_pos.y - (m_bodySize / 2);
+    m_shape.left = (long)m_pos.x - (m_bodySize / 2);
+    m_shape.top = (long)m_pos.y - (m_bodySize / 2);
     m_shape.right = m_shape.left + m_bodySize;
     m_shape.bottom = m_shape.top + m_bodySize;
 
@@ -155,8 +155,8 @@ void ArmorTank::Update()
         {
             m_boomImage = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Boom_Effect2_Tank.bmp");
             m_bodySize = 0;
-            m_shape.left = m_pos.x - (m_bodySize / 2);
-            m_shape.top = m_pos.y - (m_bodySize / 2);
+            m_shape.left = (long)m_pos.x - (m_bodySize / 2);
+            m_shape.top = (long)m_pos.y - (m_bodySize / 2);
             m_shape.right = m_shape.left + m_bodySize;
             m_shape.bottom = m_shape.top + m_bodySize;
             m_frameX = 0;
@@ -221,21 +221,21 @@ void ArmorTank::Render(HDC hdc)
 
     if (m_img && m_enemyStatus == EnemyStatus::Create)
     {
-        m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY);
+        m_img->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY);
     }
     else if (m_img && m_enemyStatus == EnemyStatus::Alive)
     {
-        m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY);
+        m_img->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY);
     }
     else if (m_boomImage && m_enemyStatus == EnemyStatus::Dead)
     {
-        if (m_frameX == 3 || m_frameX == 4) { m_scale = 2.5f; }
-        else { m_scale = 1.5f; }
-        m_boomImage->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, m_scale);
+        if (m_frameX == 3 || m_frameX == 4) { m_scale = 3.0f; }
+        else { m_scale = 2.0f; }
+        m_boomImage->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY, m_scale);
     }
     else if (m_img && m_renderScore == true && m_hitByGranade == false)
     {
-        m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 2.0f);
+        m_img->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY, 2.0f);
     }
 }
 

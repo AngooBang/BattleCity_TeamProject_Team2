@@ -35,8 +35,8 @@ void EnemyTank::AutoMove()
     case MoveDir::Down:	    m_pos.y += m_moveSpeed; break;
     }
 
-    m_shape.left = m_pos.x - (m_bodySize / 2);
-    m_shape.top = m_pos.y - (m_bodySize / 2);
+    m_shape.left = (long)m_pos.x - (m_bodySize / 2);
+    m_shape.top = (long)m_pos.y - (m_bodySize / 2);
     m_shape.right = m_shape.left + m_bodySize;
     m_shape.bottom = m_shape.top + m_bodySize;
 }

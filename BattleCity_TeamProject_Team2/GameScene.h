@@ -12,44 +12,43 @@ class ItemManager;
 class GameScene : public GameEntity
 {
 private:
-	Image* m_backGround;
+	Image* m_backGround = nullptr;
 
-	Image* m_gameOver;
+	Image* m_gameOver = nullptr;
 
-	POINTFLOAT m_gameOverPos;
+	POINTFLOAT m_gameOverPos{};
 
-	TileMap* m_tileMap;
+	TileMap* m_tileMap = nullptr;
 
-	UIManager* m_uiManager;
+	UIManager* m_uiManager = nullptr;
 
-	AmmoManager* m_ammoMgr;
+	AmmoManager* m_ammoMgr = nullptr;
 
-	Tank* m_player;
+	Tank* m_player = nullptr;
 
-	EnemyManager* m_enemyMgr;
+	EnemyManager* m_enemyMgr = nullptr;
 
-	ItemManager* m_itemMgr;
+	ItemManager* m_itemMgr = nullptr;
 
-	bool mb_isGameOver;
+	bool mb_isGameOver{};
 
-	bool mb_isTimeStop;
+	bool mb_isTimeStop{};
 
-
-	float m_enemySpawnPlaceX = 0;
-	float m_spawnPlaceX1 = 0;
-	float m_spawnPlaceX2 = 0;
-	float m_spawnPlaceX3 = 0;
-	float m_spawnPlaceY = 0;
+	float m_enemySpawnPlaceX = 0.0f;
+	float m_spawnPlaceX1 = 0.0f;
+	float m_spawnPlaceX2 = 0.0f;
+	float m_spawnPlaceX3 = 0.0f;
+	float m_spawnPlaceY = 0.0f;
 
 	int m_enemyNumCount = 0;
 	int m_enemyTotNum = 0;
 
-	float m_elapsedTime2 = 0;
-	float m_elapsedTime = 0;
-	float m_goElapsedTime;
+	float m_elapsedTime2 = 0.0f;
+	float m_elapsedTime = 0.0f;
+	float m_goElapsedTime = 0.0f;
 
-	float m_fireTime = 0;
-	float m_itemTime = 0;
+	float m_fireTime = 0.0f;
+	float m_itemTime = 0.0f;
 
 public:
 	virtual ~GameScene() {}

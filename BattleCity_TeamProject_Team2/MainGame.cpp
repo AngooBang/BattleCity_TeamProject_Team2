@@ -54,10 +54,10 @@ void MainGame::Render(HDC hdc)
 	
 	char text[200];
 	wsprintf(text, "MousePosX : %d", g_ptMouse.x);
-	TextOut(hBackBufferDC, 200, 10, text, strlen(text));
+	TextOut(hBackBufferDC, 200, 10, text, (int)strlen(text));
 
 	wsprintf(text, "MousePosY : %d", g_ptMouse.y);
-	TextOut(hBackBufferDC, 200, 40, text, strlen(text));
+	TextOut(hBackBufferDC, 200, 40, text, (int)strlen(text));
 
 	backBuffer->Render(hdc);
 }

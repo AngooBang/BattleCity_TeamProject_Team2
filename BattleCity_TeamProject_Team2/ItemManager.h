@@ -7,11 +7,9 @@ class GameScene;
 class ItemManager : public GameEntity
 {
 private:
-	vector<Item*> m_vecItems;
-	Item* m_item;
-
-
-	GameScene* m_gameScene;
+	vector<Item*> m_vecItems{};
+	Item* m_item = nullptr;
+	GameScene* m_gameScene = nullptr;
 
 public:
 	virtual ~ItemManager() {}

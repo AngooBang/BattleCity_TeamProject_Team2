@@ -61,9 +61,9 @@ public:
 	//LPIMAGE_INFO imageInfo3;
 
 private:
-	LPIMAGE_INFO imageInfo;
-	bool isTransparent;
-	COLORREF transColor;
+	LPIMAGE_INFO imageInfo = nullptr;
+	bool isTransparent = false;
+	COLORREF transColor = 0;
 
 public:
 	Image() {}

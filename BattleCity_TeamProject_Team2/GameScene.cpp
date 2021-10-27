@@ -55,15 +55,15 @@ HRESULT GameScene::Init()
 	m_itemMgr = new ItemManager;
 	m_itemMgr->SetGameScene(this);
 
-	m_enemySpawnPlaceX = 0;
+	m_enemySpawnPlaceX = 0.0f;
 	m_enemyNumCount = 0;
-	m_elapsedTime = 0;
-	m_fireTime = 0;
+	m_elapsedTime = 0.0f;
+	m_fireTime = 0.0f;
 
-	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2;
-	m_spawnPlaceX2 = m_tileMap->GetShape().right - 32;
-	m_spawnPlaceX3 = m_tileMap->GetShape().left + 32;
-	m_spawnPlaceY = m_tileMap->GetShape().top + 32;
+	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2.0f;
+	m_spawnPlaceX2 = m_tileMap->GetShape().right - 32.0f;
+	m_spawnPlaceX3 = m_tileMap->GetShape().left + 32.0f;
+	m_spawnPlaceY = m_tileMap->GetShape().top + 32.0f;
 	
 	switch (GameManager::GetSingleton()->GetStageNr())
 	{
@@ -82,7 +82,7 @@ HRESULT GameScene::Init()
 	m_uiManager = new UIManager;
 	m_uiManager->Init(m_enemyTotNum);
 
-	m_itemTime = 0;
+	m_itemTime = 0.0f;
 
 	return S_OK;
 }
@@ -98,7 +98,7 @@ void GameScene::Update()
 	{
 		if (m_gameOverPos.y > TILE_MAP_START_POS_Y + TILE_MAP_SIZE_Y / 2)
 		{
-			m_gameOverPos.y -= 2;
+			m_gameOverPos.y -= 2.0f;
 		}
 		else
 		{
@@ -123,7 +123,7 @@ void GameScene::Update()
 		if (m_elapsedTime > 3.0f && m_enemyNumCount < m_enemyTotNum)
 		{
 			SpawnEnemy();
-			m_elapsedTime = 0;
+			m_elapsedTime = 0.0f;
 		}
 	}
 
@@ -202,7 +202,7 @@ void GameScene::Render(HDC hdc)
 
 	if (mb_isGameOver)
 	{
-		m_gameOver->Render(hdc, m_gameOverPos.x, m_gameOverPos.y);
+		m_gameOver->Render(hdc, (int)m_gameOverPos.x, (int)m_gameOverPos.y);
 	}
 }
 

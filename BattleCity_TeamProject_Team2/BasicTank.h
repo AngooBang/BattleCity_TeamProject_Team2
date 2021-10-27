@@ -5,7 +5,6 @@ class BasicTank : public EnemyTank
 {
 private:
 
-
 public:
 	virtual ~BasicTank() {}
 	virtual HRESULT Init(POINTFLOAT pos) override;

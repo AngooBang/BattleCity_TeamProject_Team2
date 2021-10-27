@@ -5,10 +5,10 @@ class TileMap;
 class HardWallItem : public Item
 {
 private:
-	TileMap* m_tileMap;
+	TileMap* m_tileMap = nullptr;
 
-	bool mb_isActive;
-	float m_hardWallCount;
+	bool mb_isActive = false;
+	float m_hardWallCount{};
 
 public:
 	virtual ~HardWallItem() {}

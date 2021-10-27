@@ -26,7 +26,7 @@ void EnemyManager::Update()
                RECT r1 = vecEnemyTank[j]->GetShape();
                POINTFLOAT p1 = vecEnemyTank[j]->GetPos();
                int b1 = vecEnemyTank[j]->GetBodySize();
-               int s1 = vecEnemyTank[j]->GetMoveSpeed();
+               float s1 = vecEnemyTank[j]->GetMoveSpeed();
                MoveDir m1 = vecEnemyTank[j]->GetmoveDir();
 
                bool* arr;
@@ -34,7 +34,7 @@ void EnemyManager::Update()
                RECT r2 = vecEnemyTank[i]->GetShape();
                POINTFLOAT p2 = vecEnemyTank[i]->GetPos();
                int b2 = vecEnemyTank[i]->GetBodySize();
-               int s2 = vecEnemyTank[i]->GetMoveSpeed();
+               float s2 = vecEnemyTank[i]->GetMoveSpeed();
                MoveDir m2 = vecEnemyTank[i]->GetmoveDir();
 
                if (IntersectRect(&tempRC, &r1, &r2))
@@ -61,15 +61,15 @@ void EnemyManager::Update()
                    vecEnemyTank[j]->SetPos(p1);
                    vecEnemyTank[i]->SetPos(p2);
 
-                   r1.left = p1.x - (b1 / 2);
-                   r1.top = p1.y - (b1 / 2);
-                   r1.right = r1.left + b1;
-                   r1.bottom = r1.top + b1;
+                   r1.left = (long)p1.x - (b1 / 2);
+                   r1.top = (long)p1.y - (b1 / 2);
+                   r1.right = (long)r1.left + b1;
+                   r1.bottom = (long)r1.top + b1;
 
-                   r2.left = p2.x - (b2 / 2);
-                   r2.top = p2.y - (b2 / 2);
-                   r2.right = r2.left + b2;
-                   r2.bottom = r2.top + b2;
+                   r2.left = (long)p2.x - (b2 / 2);
+                   r2.top = (long)p2.y - (b2 / 2);
+                   r2.right = (long)r2.left + b2;
+                   r2.bottom = (long)r2.top + b2;
 
                    vecEnemyTank[j]->SetShape(r1);
                    vecEnemyTank[i]->SetShape(r2);

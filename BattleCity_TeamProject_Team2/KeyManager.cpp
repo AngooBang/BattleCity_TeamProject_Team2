@@ -6,7 +6,6 @@ void KeyManager::Init()
 	{
 		keyUp[i] = true;
 		keyDown[i] = false;
-
 	}
 }
 
@@ -52,7 +51,6 @@ bool KeyManager::IsOnceKeyUp(int key)
 
 bool KeyManager::IsStayKeyDown(int key)
 {
-
 	static time_t currTime;
 	if (GetAsyncKeyState(key) & 0x8001)
 	{

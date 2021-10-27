@@ -5,9 +5,9 @@ class Image;
 class GameOverScene : public GameEntity
 {
 private:
-	Image* m_gameOver;
-	Image* m_backGround;
-	float m_elapsedTime = 0;
+	Image* m_gameOver = nullptr;
+	Image* m_backGround = nullptr;
+	float m_elapsedTime{};
 
 public:
 	virtual ~GameOverScene() {}

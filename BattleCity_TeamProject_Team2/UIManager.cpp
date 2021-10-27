@@ -23,10 +23,6 @@ void UIManager::Update(int m_enemyTotNum, int m_enemyNumCount, int m_playerHp)
 	m_enemyLeftNum -= m_enemyNumCount;
 
 	m_playerLife = m_playerHp;
-
-
-
-	
 }
 
 void UIManager::Render(HDC hdc)
@@ -43,10 +39,8 @@ void UIManager::Render(HDC hdc)
 
 void UIManager::Release()
 {
-
 	//SAFE_RELEASE(m_enemyLeft);
 	//SAFE_RELEASE(m_p1LifeUI);
 	//SAFE_RELEASE(m_numberUI);
 	//SAFE_RELEASE(m_stageFlag);
-
 }

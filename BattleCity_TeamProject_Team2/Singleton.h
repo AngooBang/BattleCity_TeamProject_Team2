@@ -1,6 +1,5 @@
 #pragma once
 
-
 //template <typename T>
 ///*static*/ class Singleton
 //{

@@ -11,8 +11,6 @@ using namespace std;
 class KeyManager : public Singleton<KeyManager>
 {
 private:
-
-
 	bitset<KEY_MAX_COUNT>	keyUp;	// 키가 안 눌린 상태인지 아닌지
 	bitset<KEY_MAX_COUNT>	keyDown;// 키가 눌린 상태인지 아닌지
 

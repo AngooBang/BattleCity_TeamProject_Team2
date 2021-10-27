@@ -6,7 +6,7 @@ class Timer;
 class TimerManager : public Singleton<TimerManager>
 {
 private:
-	Timer* timer;
+	Timer* timer = nullptr;
 	char szText[256];
 
 public:

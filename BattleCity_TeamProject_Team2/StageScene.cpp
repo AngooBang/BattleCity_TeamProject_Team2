@@ -53,8 +53,8 @@ void StageScene::Update()
 void StageScene::Render(HDC hdc)
 {
 	m_backGround2->Render(hdc);
-	m_backGround->Render(hdc, m_pos.x, m_pos.y);
-	m_backGround->Render(hdc, m_pos.x, m_pos2.y);
+	m_backGround->Render(hdc, (int)m_pos.x, (int)m_pos.y);
+	m_backGround->Render(hdc, (int)m_pos.x, (int)m_pos2.y);
 	if (m_moveSpeed == 0) 
 	{
 		m_stage->Render(hdc, WIN_SIZE_X / 2 - 20, WIN_SIZE_Y / 2);

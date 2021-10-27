@@ -12,12 +12,11 @@ HRESULT Tank::Init()
 
 	m_shieldImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Effect/Shield.bmp");
 
-
 	SpawnPlayer();
 
 	m_bodySize = 64;
 
-	m_moveSpeed = 3;
+	m_moveSpeed = 3.0f;
 	m_moveDir = MoveDir::Up;
 
 	m_elapsedCount = 0;
@@ -27,8 +26,7 @@ HRESULT Tank::Init()
 	mb_Move = false;
 	mb_isDead = false;
 
-	m_ammoSpeed = 10;
-
+	m_ammoSpeed = 10.0f;
 
 	for (int i = 0; i < MoveDir::End; i++)
 	{
@@ -290,18 +288,18 @@ void Tank::Render(HDC hdc)
 {
 	//Rectangle(hdc, m_shape.left, m_shape.top, m_shape.right, m_shape.bottom);
 	if (mb_isAlive)
-		m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY);
+		m_img->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY);
 
 	if (mb_isDead)
 	{
 		if( m_frameX >= 3)
-			m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 2.5f);
+			m_img->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY, 2.5f);
 		else
-			m_img->Render(hdc, m_pos.x, m_pos.y, m_frameX, m_frameY, 1.5f);
+			m_img->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_frameX, m_frameY, 1.5f);
 	}
 
 	if (mb_isShield)
-		m_shieldImg->Render(hdc, m_pos.x, m_pos.y, m_shieldframeX, 0);
+		m_shieldImg->Render(hdc, (int)m_pos.x, (int)m_pos.y, m_shieldframeX, 0);
 
 }
 
@@ -335,10 +333,10 @@ void Tank::SetMoveDir(MoveDir moveDir)
 
 void Tank::SetShape()
 {
-	m_shape.left = m_pos.x - m_bodySize / 2;
-	m_shape.right = m_pos.x + m_bodySize / 2 - 4;
-	m_shape.top = m_pos.y - m_bodySize / 2;
-	m_shape.bottom = m_pos.y + m_bodySize / 2;
+	m_shape.left = (long)m_pos.x - m_bodySize / 2;
+	m_shape.right = (long)m_pos.x + m_bodySize / 2 - 4;
+	m_shape.top = (long)m_pos.y - m_bodySize / 2;
+	m_shape.bottom = (long)m_pos.y + m_bodySize / 2;
 }
 
 void Tank::MoveCorrection()

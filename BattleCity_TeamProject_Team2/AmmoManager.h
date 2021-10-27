@@ -10,18 +10,16 @@ class EnemyManager;
 class AmmoManager : public GameObject
 {
 private:
-	Image* m_AmmoImage[MoveDir::End];
-
+	Image* m_AmmoImage[MoveDir::End]{};
 
 	vector<Ammo*> m_vecAmmo;
 	vector<Ammo*>::iterator m_vecAmmoIter;
 
-	EnemyManager* m_enemyMgr;
+	EnemyManager* m_enemyMgr = nullptr;
 
-	TileMap* m_tileMap;
+	TileMap* m_tileMap = nullptr;
 
-	bool* mb_isGameOver;
-
+	bool* mb_isGameOver = nullptr;
 
 public:
 	virtual ~AmmoManager() {}

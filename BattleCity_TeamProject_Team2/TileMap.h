@@ -12,10 +12,7 @@
 #define INSIDE_TILE_COUNT_X 2
 #define INSIDE_TILE_COUNT_Y 2
 
-
-
 enum class Terrain { None, Wall, HardWall, Water, Grass, Base, DestroyBase, End };
-
 
 typedef struct InsideTile
 {
@@ -40,22 +37,23 @@ class TileMap : public GameObject
 private:
 	TILE_INFO m_tileInfo[TILE_COUNT_Y * TILE_COUNT_X];
 
-	Image* m_backGround;
-	Image* m_tileImage;		
+	Image* m_backGround = nullptr;
+	Image* m_tileImage = nullptr;
 
-	Image* m_smallTileImage;
-	Image* m_boomImg;
+	Image* m_smallTileImage = nullptr;
+	Image* m_boomImg = nullptr;
 
-	FILE* m_fp;
-	int m_stageNum;
+	FILE* m_fp = nullptr;
+	int m_stageNum{};
 
 
-	int m_frameX, m_maxFrameX;
-	bool mb_destroyBase;
+	int m_frameX{}; 
+	int m_maxFrameX{};
+	bool mb_destroyBase = false;
 
-	float m_elapsedCount;
+	float m_elapsedCount{};
 
-	int testY;
+	int testY{};
 
 public:
 	virtual ~TileMap() {}

@@ -16,44 +16,41 @@ protected:
 	//const POINTFLOAT DirBottom{ 0, 1 };
 
 	//POINTFLOAT mDir;
-	Image* m_img;
-	Image* m_shieldImg;
-	Image* m_boomImg;
+	Image* m_img = nullptr;
+	Image* m_shieldImg = nullptr;
+	Image* m_boomImg = nullptr;
 
-	TileMap* m_tileMap;
+	TileMap* m_tileMap = nullptr;
 
+	int m_frameX = 0;
+	int m_maxFrameX = 0;
 
-	int m_frameX;
-	int m_maxFrameX;
+	int m_shieldframeX = 0;
 
-	int m_shieldframeX;
+	int m_frameY = 0;
 
-	int m_frameY;
+	int m_elapsedCount = 0;
 
-	int m_elapsedCount;
+	RECT m_tempRC = {};
 
-	RECT m_tempRC;
+	POINTFLOAT m_Barrelend = {};
+	int m_tempHP = 0;
+	int m_HP = 0;
+	float m_ammoSpeed = 0.0f;
 
-	POINTFLOAT m_Barrelend;
-	int m_tempHP;
-	int m_HP;
-	int m_ammoSpeed;
+	bool mb_isAlive = false;
+	bool mb_Move = false;
+	bool mb_isSpawn = false;
+	bool mb_isFire = false;
+	bool mb_isShield = false;
+	bool mb_isDead = false;
 
-	bool mb_isAlive;
-	bool mb_Move;
-	bool mb_isSpawn;
-	bool mb_isFire;
-	bool mb_isShield;
-	bool mb_isDead;
-
-	float m_spawnTimer;
-	float m_shieldTimer;
+	float m_spawnTimer = 0.0f;
+	float m_shieldTimer = 0.0f;
 
 	bool m_isCollide[MoveDir::End];
 		
-	MoveDir m_moveDir;
-
-	//RECT m_tileMapShape;
+	MoveDir m_moveDir = {};
 	
 	int m_BarrelPosX[4] = { -32,32,0,0 };
 	int m_BarrelPosY[4] = { 0,0,-32,32 };
@@ -61,7 +58,7 @@ protected:
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
 
-	AmmoManager* m_ammoMgr;
+	AmmoManager* m_ammoMgr = nullptr;
 
 public:
 	virtual ~Tank() {}
@@ -69,7 +66,6 @@ public:
 	void Update();
 	void Render(HDC hdc);
 	void Release();
-
 
 	void SetBarrel(int x, int y);
 	void SetImage();
@@ -85,9 +81,6 @@ public:
 	void ShieldPlayer();
 	void UpgradeTank();
 
-	//inline void SetTileMapShape(RECT shape) { this->m_tileMapShape = shape; }
-	//inline RECT GetTileMapShape() { return this->m_tileMapShape; }
-
 	inline void SetTileMap(TileMap* tileMap) { this->m_tileMap = tileMap; }
 
 	void CheckCollisionDir(RECT a, RECT b);
@@ -98,7 +91,7 @@ public:
 	inline POINTFLOAT GetPos() { return m_pos; }
 	inline POINTFLOAT GetBarrelend() { return m_Barrelend; }
 	inline MoveDir GetmoveDir() { return m_moveDir; }
-	inline int GetammoSpeed() { return m_ammoSpeed; }
+	inline float GetammoSpeed() { return m_ammoSpeed; }
 
 	inline void SetAmmoMgr(AmmoManager* ammoMgr) { this->m_ammoMgr = ammoMgr; }
 

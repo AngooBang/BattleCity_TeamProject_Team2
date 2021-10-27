@@ -20,7 +20,7 @@ protected:
 	GameScene* m_gameScene = nullptr;
 
 	MoveDir m_moveDir = MoveDir::Down;
-	int m_enemyFrame[MoveDir::End];
+	int m_enemyFrame[MoveDir::End] = {0};
 	
 	int m_elapsedCount = 0;
 	int m_moveDelay = 70;
@@ -34,19 +34,19 @@ protected:
 	EnemyStatus m_enemyStatus = EnemyStatus::End;
 
 	MoveDir m_beforeMoveDir = MoveDir::End;
-	bool mb_dirCheck[4];
+	bool mb_dirCheck[4] = {0};
 
 	TileMap* m_tileMap = nullptr;
 
-	RECT m_tempRC;
+	RECT m_tempRC = {};
 	bool m_isCollide[MoveDir::End];
 
 	int m_HP = 0;
-	int m_ammoSpeed = 0;
+	float m_ammoSpeed = 0.0f;
 
 	bool mb_isAlive = true;
 	bool mb_isFire = true;
-	float m_fireElapsedCount = 0;
+	float m_fireElapsedCount = 0.0f;
 
 	EnemyType m_enemyTankType = EnemyType::End;
 
@@ -85,7 +85,7 @@ public:
 	inline MoveDir GetmoveDir() { return m_moveDir; }
 	inline void SetmoveDir(MoveDir moveDir) { this->m_moveDir = moveDir; }
 
-	inline int GetammoSpeed() { return m_ammoSpeed; }
+	inline float GetammoSpeed() { return m_ammoSpeed; }
 
 	inline int GetHP() { return m_HP; }
 	inline void SetHP(int num) { this->m_HP += num; }
@@ -107,8 +107,8 @@ public:
 
 	inline void SetBeforeMoveDir(MoveDir beforeMoveDir) { this->m_beforeMoveDir = beforeMoveDir; }
 
-	inline void SetMoveSpeed(int moveSpeed) { this->m_moveSpeed = moveSpeed; }
-	inline int GetMoveSpeed() { return m_moveSpeed; }
+	inline void SetMoveSpeed(float moveSpeed) { this->m_moveSpeed = moveSpeed; }
+	inline float GetMoveSpeed() { return m_moveSpeed; }
 
 	inline void SetHitByGranade(bool hitByGranade) { this->m_hitByGranade = hitByGranade; }
 

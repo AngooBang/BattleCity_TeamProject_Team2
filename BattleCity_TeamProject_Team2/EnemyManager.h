@@ -11,20 +11,16 @@ class GameScene;
 class EnemyManager : public GameObject
 {
 private:
-	vector<EnemyTank*> vecEnemyTank;
+	vector<EnemyTank*> vecEnemyTank{};
 
 	// 탱크 테스트용
-	Tank* m_player;
-	RECT m_tempRect;
+	Tank* m_player = nullptr;
+	RECT m_tempRect = {};
 
-	GameScene* m_gameScene;
-	//
-	AmmoManager* m_ammoMgr;
+	GameScene* m_gameScene = nullptr;
+	AmmoManager* m_ammoMgr = nullptr;
 
-	//RECT m_mapShape;
-	TileMap* m_tileMap;
-	//TILE_INFO *map;
-	//Temp p;
+	TileMap* m_tileMap = nullptr;
 
 public:
 	virtual ~EnemyManager() {}

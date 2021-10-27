@@ -166,10 +166,10 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY, float 
 	{
 		GdiTransparentBlt(
 			hdc,
-			destX - (imageInfo->frameWidth * scale / 2),
-			destY - (imageInfo->frameHeight * scale / 2),
-			imageInfo->frameWidth * scale,
-			imageInfo->frameHeight * scale,	// 전체 프레임 수
+			destX - (int)(imageInfo->frameWidth * scale / 2),
+			destY - (int)(imageInfo->frameHeight * scale / 2),
+			imageInfo->frameWidth * (int)scale,
+			imageInfo->frameHeight * (int)scale,	// 전체 프레임 수
 
 			imageInfo->hMemDc,
 			imageInfo->frameWidth * frameX,
@@ -183,8 +183,8 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY, float 
 		BitBlt(hdc,											// 복사 목적지 DC
 			destX - (imageInfo->width / 2),					// 복사될 비트맵의 시작 위치 x
 			destY - (imageInfo->height / 2),				// 복사될 비트맵의 시작 위치 y
-			imageInfo->frameWidth * scale,							// 원본 복사할 가로 크기
-			imageInfo->frameHeight * scale,							// 원본 복사할 세로 크기
+			imageInfo->frameWidth * (int)scale,							// 원본 복사할 가로 크기
+			imageInfo->frameHeight * (int)scale,							// 원본 복사할 세로 크기
 			imageInfo->hMemDc,								// 원본 DC
 			imageInfo->frameWidth * frameX,					// 원본 비트맵 복사 시작 위치 x
 			imageInfo->frameHeight * frameY,				// 원본 비트맵 복사 시작 위치 y

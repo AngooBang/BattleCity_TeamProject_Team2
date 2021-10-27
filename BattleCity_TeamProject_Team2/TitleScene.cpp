@@ -3,8 +3,8 @@
 
 HRESULT TitleScene::Init()
 {
-	m_pos.x = 500;
-	m_pos.y = 1350;
+	m_pos.x = 500.0f;
+	m_pos.y = 1350.0f;
 	m_moveSpeed = 5;
 
 	m_title = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Title.bmp");
@@ -41,7 +41,7 @@ void TitleScene::Update()
 void TitleScene::Render(HDC hdc)
 {
 	m_backGround2->Render(hdc);
-	m_title->Render(hdc, m_pos.x, m_pos.y);
+	m_title->Render(hdc, (int)m_pos.x, (int)m_pos.y);
 	if (m_moveSpeed == 0)
 	{
 		m_enemyType->Render(hdc, 250, 530, 6, 5);

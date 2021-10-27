@@ -79,7 +79,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
 	// 메인게임 해제
 	g_mainGame.Release();
 
-	return message.wParam;
+	return (int)message.wParam;
 }
 
 

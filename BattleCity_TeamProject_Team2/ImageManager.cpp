@@ -164,7 +164,4 @@ void ImageManager::DeleteImage(const char* fileName)
 
 	SAFE_RELEASE(it->second);		// Image* // Image 동적할당 해제
 	mapImages.erase(it);			// 맵에서 노드 삭제
-
-
-
 }

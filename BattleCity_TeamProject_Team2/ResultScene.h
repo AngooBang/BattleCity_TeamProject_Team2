@@ -11,27 +11,26 @@ class EnemyManager;
 class Image;
 class ResultScene : public GameEntity
 {
-
 private:
-	Image* m_backGround;
-	Image* m_HIScore;
-	Image* m_ScoreNumber;
-	Image* m_Player1;
-	Image* m_PTS;
-	Image* m_TotalScore;
-	Image* m_Stage;
-	Image* m_NumberImg;
-	Image* m_EnemyImg;
+	Image* m_backGround = nullptr;
+	Image* m_HIScore = nullptr;
+	Image* m_ScoreNumber = nullptr;
+	Image* m_Player1 = nullptr;
+	Image* m_PTS = nullptr;
+	Image* m_TotalScore = nullptr;
+	Image* m_Stage = nullptr;
+	Image* m_NumberImg = nullptr;
+	Image* m_EnemyImg = nullptr;
 
-	int StageNum;
-	int m_countofEnemy[4];
-	int m_countOneofDigits[4];
-	int m_countTenofDigits[4];
+	int StageNum{};
+	int m_countofEnemy[4]{};
+	int m_countOneofDigits[4]{};
+	int m_countTenofDigits[4]{};
 
 	int m_enemyScore[4] = { 100, 200, 300, 400 };
-	int m_scoreSum[4];
-	int m_scoreThousandofDigits[4];
-	int m_scoreHundredsofDigits[4];
+	int m_scoreSum[4]{};
+	int m_scoreThousandofDigits[4]{};
+	int m_scoreHundredsofDigits[4]{};
 	int m_numFrameX[10] = { 0,1,2,3,4,0,1,2,3,4 };
 	int m_numFrameY[10] = { 0,0,0,0,0,1,1,1,1,1 };
 
@@ -40,17 +39,16 @@ private:
 	// (현재는 스트럭트 자료형에 일반변수형으로 적들의 정보가 저장됨)
 	int m_Enemytype[4] = { 10, 5, 8, 14 };
 	//int m_Enemytype[4];// = { 1,1,1,1 };
-	int m_ScoreTemp;
-	int m_ScoreDigit;
-	int m_ScoreTempCount;
+	int m_ScoreTemp{};
+	int m_ScoreDigit{};
+	int m_ScoreTempCount{};
 
-	int m_elapseCount;
-	int m_CalculateEnemytypeNum;
-	bool mb_Calculate;
+	int m_elapseCount{};
+	int m_CalculateEnemytypeNum{};
+	bool mb_Calculate{};
 
-	EnemyManager* m_enemyMgr;
+	EnemyManager* m_enemyMgr = nullptr;
 	
-
 public:
 	virtual ~ResultScene() {}
 	virtual HRESULT Init();

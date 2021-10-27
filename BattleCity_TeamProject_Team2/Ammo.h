@@ -34,7 +34,6 @@ private:
 	float m_movePosX[4] = { 0, -1,0,1 };
 	float m_movePosY[4] = { -1, 0 ,1, 0 };
 
-
 	int m_frameX = 0;
 	int m_frameY = 0;
 	int m_maxFrameX = 0;
@@ -43,7 +42,7 @@ private:
 
 public:
 	virtual ~Ammo() {}
-	HRESULT Init(POINTFLOAT Barrelend, MoveDir moveDir, int ammoSpeed, Image* m_AmmoImage);
+	HRESULT Init(POINTFLOAT Barrelend, MoveDir moveDir, float ammoSpeed, Image* m_AmmoImage);
 	void Update();
 	void Render(HDC hdc);
 	void Release();

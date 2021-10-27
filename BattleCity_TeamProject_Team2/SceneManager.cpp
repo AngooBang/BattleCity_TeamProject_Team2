@@ -55,7 +55,6 @@ void SceneManager::AddScene(string key, GameEntity* scene)
 	}
 
 	mapScenes.insert(pair<string, GameEntity*>(key, scene));
-
 }
 
 void SceneManager::AddLoadingScene(string key, GameEntity* scene)
@@ -68,7 +67,6 @@ void SceneManager::AddLoadingScene(string key, GameEntity* scene)
 	}
 
 	mapLoadingScenes.insert(pair<string, GameEntity*>(key, scene));
-
 }
 
 HRESULT SceneManager::ChangeScene(string sceneName)
@@ -88,7 +86,6 @@ HRESULT SceneManager::ChangeScene(string sceneName)
 	}
 
 	return E_FAIL;
-
 }
 
 //HRESULT SceneManager::ChangeScene(string sceneName, string loadingSceneName)

@@ -7,17 +7,17 @@ class GameScene;
 class Item : public GameObject
 {
 protected:
-	Image* m_img;
-	float m_elapsedCount;
-	int m_showTimeCount;
+	Image* m_img = nullptr;
+	float m_elapsedCount{};
+	float m_showTimeCount{};
 	
-	bool mb_isAlive;
-	bool mb_isShow;
+	bool mb_isAlive = false;
+	bool mb_isShow = false;
 
 	bool mb_renderScore = false;
 	float m_elapsedCount2 = 0.0f;
 
-	GameScene* m_gameScene;
+	GameScene* m_gameScene = nullptr;
 
 public:
 	virtual ~Item() {}

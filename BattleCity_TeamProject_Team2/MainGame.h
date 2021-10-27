@@ -9,16 +9,14 @@ class Image;
 class MainGame : public GameEntity
 {
 private:
-
 	// 타이머
-	HANDLE hTimer;
+	HANDLE hTimer = nullptr;
 
-	int clickedMousePosX;
-	int clickedMousePosY;
+	int clickedMousePosX = 0;
+	int clickedMousePosY = 0;
 
 	// 백버퍼
-	Image* backBuffer;
-
+	Image* backBuffer = nullptr;
 
 public:
 	virtual ~MainGame() {}

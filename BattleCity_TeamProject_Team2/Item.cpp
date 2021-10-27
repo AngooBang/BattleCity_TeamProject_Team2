@@ -46,10 +46,10 @@ bool Item::CheckCollision()
 	{
 		GameManager::GetSingleton()->SetTotScore(500);
 		m_bodySize = 0;
-		m_shape.left = m_pos.x - m_bodySize / 2;
-		m_shape.top = m_pos.y - m_bodySize / 2;
-		m_shape.right = m_pos.x + m_bodySize / 2;
-		m_shape.bottom = m_pos.y + m_bodySize / 2;
+		m_shape.left = (long)m_pos.x - m_bodySize / 2;
+		m_shape.top = (long)m_pos.y - m_bodySize / 2;
+		m_shape.right = (long)m_pos.x + m_bodySize / 2;
+		m_shape.bottom = (long)m_pos.y + m_bodySize / 2;
 		return true;
 	}
 	else

@@ -3,9 +3,8 @@
 class TimeItem : public Item
 {
 private:
-	bool mb_isActive;
-	float m_timeStopCount;
-
+	bool mb_isActive = false;
+	float m_timeStopCount{};
 
 public:
 	virtual ~TimeItem() {}

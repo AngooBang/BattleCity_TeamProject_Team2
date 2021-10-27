@@ -8,8 +8,6 @@ class ImageManager : public Singleton<ImageManager>
 private:
 	map<string, Image*> mapImages;
 
-
-
 public:
 	virtual ~ImageManager() {}
 	void Init();
