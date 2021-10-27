@@ -34,8 +34,12 @@ HRESULT ResultScene::Init()
 
 	m_NumberImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Number_w.bmp");
 	/*ImageManager::GetSingleton()->AddImage("Image/BattleCity/Text/ScoreNumber.bmp", 40, 14, true, RGB(255, 0, 255));*/
+	m_ArrowImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Icon/Arrow.bmp");
+
+	m_OrangeNumberImg = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/ScoreNumber.bmp");
 
 	m_EnemyImg = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
+
 
 	m_elapseCount = -100;
 	m_CalculateEnemytypeNum = 0;
@@ -53,6 +57,7 @@ void ResultScene::Update()
 		if (StageNum > 9)
 			StageNum = 0;
 	}*/
+
 	// 탱크 종류 마다 점수 갱신 (탱크 킬할떄마다 스코어 프레임 증가하는 방식)
 	if (mb_Calculate == true)
 	{
@@ -62,7 +67,7 @@ void ResultScene::Update()
 			if (m_countofEnemy[m_CalculateEnemytypeNum] != m_Enemytype[m_CalculateEnemytypeNum])
 			{
 				m_countofEnemy[m_CalculateEnemytypeNum]++;
-				Calculate(m_CalculateEnemytypeNum);
+				m_scoreSum[m_CalculateEnemytypeNum] = m_countofEnemy[m_CalculateEnemytypeNum] * m_enemyScore[m_CalculateEnemytypeNum];
 				m_elapseCount = 0;
 			}
 			else
@@ -71,7 +76,7 @@ void ResultScene::Update()
 				{
 					m_CalculateEnemytypeNum++;
 				}
-				else
+				else if (m_CalculateEnemytypeNum == 3)
 				{
 					mb_Calculate = false;
 				}
@@ -129,10 +134,15 @@ void ResultScene::Render(HDC hdc)
 	{
 		m_PTS->Render(hdc, WIN_SIZE_X / 4, (int)(WIN_SIZE_Y * 0.4f + k * 70.0f));
 		m_EnemyImg->Render(hdc, WIN_SIZE_X / 3 + 120, WIN_SIZE_Y - 540 + (70 * k), 0, k);
+		m_ArrowImg->Render(hdc, WIN_SIZE_X / 3 + 67, WIN_SIZE_Y - 540 + (70 * k));
 	}
 	m_Player1->Render(hdc, WIN_SIZE_X / 4 - 55, WIN_SIZE_Y / 4);
 	m_TotalScore->Render(hdc, WIN_SIZE_X / 3 - 10, (int)(WIN_SIZE_Y * 0.7));
 
+	// 스테이지 종료 후 얻은 최종점수 출력
+	RenderCalculate(hdc, m_totScore, WIN_SIZE_X / 5 + 75, WIN_SIZE_Y - 625);
+
+	// 각 탱크별 점수 출력
 	for (int i = 0; i <= m_CalculateEnemytypeNum; i++)
 	{
 		//m_NumberImg->Render(hdc, WIN_SIZE_X / 3 + 30, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_countofEnemy[i]], m_numFrameY[m_countofEnemy[i]]);
@@ -146,17 +156,13 @@ void ResultScene::Render(HDC hdc)
 		//		m_NumberImg->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_scoreThousandofDigits[i]], m_numFrameY[m_scoreThousandofDigits[i]]);
 		//	}
 		//}
-		m_ScoreTemp = m_scoreSum[i];
-		while (m_ScoreTemp != 0)
-		{
-			m_ScoreDigit = m_ScoreTemp % 10;
-			m_NumberImg->Render(hdc, WIN_SIZE_X / 5 - 10 - (25 * m_ScoreTempCount), WIN_SIZE_Y - 540 + (70 * i), m_numFrameX[m_ScoreDigit], m_numFrameY[m_ScoreDigit]);
-			m_ScoreTemp /= 10;
-			m_ScoreTempCount++;
-		}
-		m_ScoreTempCount = 0;
-	}
+		
+		// 탱크 갯수에 따른 점수계산 출력
+		RenderCalculate(hdc, m_scoreSum[i], WIN_SIZE_X / 5 - 10, WIN_SIZE_Y - 540, i);
 
+		// 탱크 갯수 출력
+		RenderCalculate(hdc, m_countofEnemy[i], WIN_SIZE_X / 3 + 30, WIN_SIZE_Y - 540, i);
+	}
 	//m_enemySumScoreThousandNumImg[1]->Render(hdc, WIN_SIZE_X / 5 - 85, WIN_SIZE_Y - 470, m_numFrameX[m_scoreThousandofDigits[1]], m_numFrameY[m_scoreThousandofDigits[1]]);
 	//m_enemySumScoreHundredsNumImg[1]->Render(hdc, WIN_SIZE_X / 5 - 60, WIN_SIZE_Y - 470, m_numFrameX[m_scoreHundredsofDigits[1]], m_numFrameY[m_scoreHundredsofDigits[1]]);
 	//m_enemySumScoreZero1NumImg[1]->Render(hdc, WIN_SIZE_X / 5 - 35, WIN_SIZE_Y - 470, 0, 0);
@@ -173,10 +179,11 @@ void ResultScene::Render(HDC hdc)
 	//m_enemySumScoreZero2NumImg[3]->Render(hdc, WIN_SIZE_X / 5 - 10, WIN_SIZE_Y - 330, 0, 0);
 
 	// 탱크 총 갯수 렌더
-	//if (m_Rendering[0] * m_Rendering[1] * m_Rendering[2] * m_Rendering[3])
-	//{
 
-	//}
+	if (mb_EnemyCalculateDone == true)
+	{
+		RenderCalculate(hdc, m_countofEnemy[0]+ m_countofEnemy[1]+ m_countofEnemy[2]+ m_countofEnemy[3], WIN_SIZE_X / 3 + 30, WIN_SIZE_Y - 540);
+	}
 
 }
 
@@ -185,9 +192,15 @@ void ResultScene::Release()
 	m_enemyMgr = nullptr;
 }
 
-void ResultScene::Calculate(int num)
+void ResultScene::RenderCalculate(HDC hdc, int num, int posX, int posY, int CalculateEnemytypeNum)
 {
-	m_scoreSum[num] = m_countofEnemy[num] * m_enemyScore[num];
-	m_scoreThousandofDigits[num] = m_scoreSum[num] / 1000;
-	m_scoreHundredsofDigits[num] = (m_scoreSum[num] - (1000 * m_scoreThousandofDigits[num])) / 100;
+	m_Temp = num;
+	while (m_Temp != 0)
+	{
+		m_Digit = m_Temp % 10;
+		m_NumberImg->Render(hdc, posX - (25 * m_TempCount), posY + (70 * CalculateEnemytypeNum), m_numFrameX[m_Digit], m_numFrameY[m_Digit]);
+		m_Temp /= 10;
+		m_TempCount++;
+	}
+	m_TempCount = 0;
 }
