@@ -53,8 +53,6 @@ private:
 
 	float m_elapsedCount{};
 
-	int testY{};
-
 public:
 	virtual ~TileMap() {}
 	virtual HRESULT Init();

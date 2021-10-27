@@ -17,7 +17,6 @@
 
 HRESULT GameScene::Init()
 {
-	SetWindowSize(WIN_START_POS_X, WIN_START_POS_Y, WIN_SIZE_X, WIN_SIZE_Y);
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/BattleCity/mapImage.bmp");
 
 	m_gameOver = ImageManager::GetSingleton()->FindImage("Image/BattleCity/Text/Game_Over.bmp");
@@ -60,7 +59,7 @@ HRESULT GameScene::Init()
 	m_elapsedTime = 0.0f;
 	m_fireTime = 0.0f;
 
-	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2.0f;
+	m_spawnPlaceX1 = (m_tileMap->GetShape().right - m_tileMap->GetShape().left) / 2.0f + 16;
 	m_spawnPlaceX2 = m_tileMap->GetShape().right - 32.0f;
 	m_spawnPlaceX3 = m_tileMap->GetShape().left + 32.0f;
 	m_spawnPlaceY = m_tileMap->GetShape().top + 32.0f;
@@ -132,7 +131,7 @@ void GameScene::Update()
 	// 아이템 매니저 업데이트
 	m_itemMgr->Update();
 	m_itemTime += TimerManager::GetSingleton()->GetDeltaTime();
-	if (m_itemTime > 10.0f)
+	if (m_itemTime > 10.0f || KeyManager::GetSingleton()->IsOnceKeyDown('G'))
 	{
 		m_itemMgr->AddItem();
 		m_itemTime = 0.0f;

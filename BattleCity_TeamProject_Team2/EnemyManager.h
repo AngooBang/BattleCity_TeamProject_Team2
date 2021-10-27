@@ -42,5 +42,5 @@ public:
 
 	inline void SetAmmoMgr(AmmoManager* ammoMgr) { this->m_ammoMgr = ammoMgr; }
 
-	
+	void CollisionEnemyTank(int i, int j);
 };

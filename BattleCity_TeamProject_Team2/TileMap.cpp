@@ -29,7 +29,6 @@ HRESULT TileMap::Init()
 	m_stageNum = GameManager::GetSingleton()->GetStageNr();
 
 	m_elapsedCount = 0.0f;
-	testY = 0;
 
 	for (int i = 0; i < TILE_COUNT_Y; i++)
 	{

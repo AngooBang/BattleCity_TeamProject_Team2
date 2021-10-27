@@ -13,7 +13,7 @@ HRESULT UIManager::Init(int m_enemyTotNum)
 	
 	m_enemyLeftNum = m_enemyTotNum;
 
-	m_stageNum = 1;
+	m_stageNum = GameManager::GetSingleton()->GetStageNr();
 	return S_OK;
 }
 
