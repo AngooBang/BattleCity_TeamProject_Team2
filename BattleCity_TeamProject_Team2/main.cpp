@@ -25,8 +25,10 @@ void SetWindowSize(int startX, int startY, int sizeX, int sizeY);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage,
 	WPARAM wParam, LPARAM lParam);
 
-int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
-	LPSTR _lpszCmdParam, int nCmdShow)
+int APIENTRY WinMain(
+	_In_ HINSTANCE _hInstance,
+	_In_opt_ HINSTANCE _hPrevInstance,
+	_In_ LPSTR _lpszCmdParam, _In_ int nCmdShow)
 {
 #ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
