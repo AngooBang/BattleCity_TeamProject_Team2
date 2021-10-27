@@ -27,7 +27,6 @@ void AmmoManager::Update()
         {
             SAFE_RELEASE((*m_vecAmmoIter));
             m_vecAmmo.erase(m_vecAmmoIter);
-            cout << endl << m_vecAmmo.size() << endl;
             break;
         }
     }
