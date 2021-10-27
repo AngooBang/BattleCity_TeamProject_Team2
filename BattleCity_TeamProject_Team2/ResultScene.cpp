@@ -5,20 +5,20 @@
 HRESULT ResultScene::Init()
 {
 	//스테이지 넘버 
-	//int StageNum = 1;
 	StageNum = GameManager::GetSingleton()->GetStageNr();
 
 	//적 숫자 받아오기
-	//m_Enemytype[0] = GameManager::GetSingleton()->GetKillCount()->basicTankNr;
-	//m_Enemytype[1] = GameManager::GetSingleton()->GetKillCount()->speedTankNr;
-	//m_Enemytype[2] = GameManager::GetSingleton()->GetKillCount()->powerTankNr;
-	//m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
+	m_Enemytype[0] = GameManager::GetSingleton()->GetKillCount()->basicTankNr;
+	m_Enemytype[1] = GameManager::GetSingleton()->GetKillCount()->speedTankNr;
+	m_Enemytype[2] = GameManager::GetSingleton()->GetKillCount()->powerTankNr;
+	m_Enemytype[3] = GameManager::GetSingleton()->GetKillCount()->armorTankNr;
+
+	m_totScore = GameManager::GetSingleton()->GetTotScore();;
 
 	//이미지 불러오기 
 
 	ImageManager::GetSingleton()->DeleteImage("Image/backGround2.bmp");
 	ImageManager::GetSingleton()->AddImage("Image/backGround2.bmp", WIN_SIZE_X, WIN_SIZE_Y);
-
 
 	m_backGround = ImageManager::GetSingleton()->FindImage("Image/backGround2.bmp");
 
@@ -40,7 +40,6 @@ HRESULT ResultScene::Init()
 
 	m_EnemyImg = ImageManager::GetSingleton()->FindImage("Image/Enemy.bmp");
 
-
 	m_elapseCount = -100;
 	m_CalculateEnemytypeNum = 0;
 	mb_Calculate = true;
@@ -51,12 +50,6 @@ HRESULT ResultScene::Init()
 void ResultScene::Update()
 {
 	// 스테이지 숫자 갱신
-	/*if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F4))
-	{
-		StageNum++;
-		if (StageNum > 9)
-			StageNum = 0;
-	}*/
 
 	// 탱크 종류 마다 점수 갱신 (탱크 킬할떄마다 스코어 프레임 증가하는 방식)
 	if (mb_Calculate == true)
@@ -101,26 +94,6 @@ void ResultScene::Update()
 			SceneManager::GetSingleton()->ChangeScene("게임오버씬");
 		}
 	}
-	//if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F5))
-	//{
-	//	m_countofEnemy[0]++;
-	//	Calculate(0);
-	//}
-	//if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F6))
-	//{
-	//	m_countofEnemy[1]++;
-	//	Calculate(1);
-	//}
-	//if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F7))
-	//{
-	//	m_countofEnemy[2]++;
-	//	Calculate(2);
-	//}
-	//if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_F8))
-	//{
-	//	m_countofEnemy[3]++;
-	//	Calculate(3);
-	//}
 }
 
 void ResultScene::Render(HDC hdc)

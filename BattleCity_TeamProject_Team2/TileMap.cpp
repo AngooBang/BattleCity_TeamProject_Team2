@@ -159,7 +159,7 @@ void TileMap::Render(HDC hdc)
 					else
 						m_boomImg->Render(hdc, m_tileInfo[i * TILE_COUNT_X + j].rc.right, m_tileInfo[i * TILE_COUNT_X + j].rc.bottom, m_frameX, 0, 1.5f);
 				}
-				break;
+				return;
 			}
 		}
 	}
@@ -225,25 +225,28 @@ void TileMap::SetBaseData()
 	{
 		for (int j = 0; j < TILE_COUNT_X; j++)
 		{
-			if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::Base)
-			{
-				// 베이스 시작타일
-				m_tileInfo[i * TILE_COUNT_X + j].frameX = 6;
-				m_tileInfo[i * TILE_COUNT_X + j].frameY = 4;
-				// 베이스 시작타일 기준 우측타일
-				m_tileInfo[i * TILE_COUNT_X + j + 1].frameX = 7;
-				m_tileInfo[i * TILE_COUNT_X + j + 1].frameY = 4;
-				// 베이스 시작타일 기준 아래타일
-				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameX = 6;
-				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameY = 5;
-				// 베이스 시작타일 기준 아래타일에서 우측타일
-				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameX = 7;
-				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameY = 5;
-
-				return;
-			}
 			if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::DestroyBase)
 			{
+				if (m_tileInfo[i * TILE_COUNT_X + j - 1].terrain == Terrain::Base)
+				{
+					// 베이스 시작타일
+					m_tileInfo[i * TILE_COUNT_X + j - 1].frameX = 8;
+					m_tileInfo[i * TILE_COUNT_X + j - 1].frameY = 4;
+					// 베이스 시작타일 기준 우측타일
+					m_tileInfo[i * TILE_COUNT_X + j].frameX = 9;
+					m_tileInfo[i * TILE_COUNT_X + j].frameY = 4;
+					// 베이스 시작타일 기준 아래타일
+					m_tileInfo[i * TILE_COUNT_X + j - 1 + TILE_COUNT_X].frameX = 8;
+					m_tileInfo[i * TILE_COUNT_X + j - 1 + TILE_COUNT_X].frameY = 5;
+					// 베이스 시작타일 기준 아래타일에서 우측타일
+					m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameX = 9;
+					m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameY = 5;
+					m_tileInfo[i * TILE_COUNT_X + j - 1].terrain =
+						m_tileInfo[i * TILE_COUNT_X + j].terrain =
+						m_tileInfo[i * TILE_COUNT_X + j - 1 + TILE_COUNT_X].terrain =
+						m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].terrain = Terrain::DestroyBase;
+					return;
+				}
 				// 베이스 시작타일
 				m_tileInfo[i * TILE_COUNT_X + j].frameX = 8;
 				m_tileInfo[i * TILE_COUNT_X + j].frameY = 4;
@@ -256,12 +259,31 @@ void TileMap::SetBaseData()
 				// 베이스 시작타일 기준 아래타일에서 우측타일
 				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameX = 9;
 				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameY = 5;
-
+				m_tileInfo[i * TILE_COUNT_X + j].terrain =
+					m_tileInfo[i * TILE_COUNT_X + j + 1].terrain =
+					m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].terrain =
+					m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].terrain = Terrain::DestroyBase;
 				return;
+			}
+			if (m_tileInfo[i * TILE_COUNT_X + j].terrain == Terrain::Base)
+			{
+				if (m_tileInfo[i * TILE_COUNT_X + j - 1].terrain == Terrain::Base) continue;
+				if (m_tileInfo[i * TILE_COUNT_X + j - TILE_COUNT_X].terrain == Terrain::Base) continue;
+				// 베이스 시작타일
+				m_tileInfo[i * TILE_COUNT_X + j].frameX = 6;
+				m_tileInfo[i * TILE_COUNT_X + j].frameY = 4;
+				// 베이스 시작타일 기준 우측타일
+				m_tileInfo[i * TILE_COUNT_X + j + 1].frameX = 7;
+				m_tileInfo[i * TILE_COUNT_X + j + 1].frameY = 4;
+				// 베이스 시작타일 기준 아래타일
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameX = 6;
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X].frameY = 5;
+				// 베이스 시작타일 기준 아래타일에서 우측타일
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameX = 7;
+				m_tileInfo[i * TILE_COUNT_X + j + TILE_COUNT_X + 1].frameY = 5;
 			}
 		}
 	}
-
 }
 
 void TileMap::LoadMapData()
