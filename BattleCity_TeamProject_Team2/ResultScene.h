@@ -41,7 +41,7 @@ private:
 
 	int m_Temp{};
 	int m_Digit{};
-	int m_TempCount{];
+	int m_TempCount{};
 
 	int m_elapseCount{};
 	int m_CalculateEnemytypeNum{};
